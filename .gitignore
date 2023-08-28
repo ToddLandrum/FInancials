@@ -47,6 +47,8 @@
 *.app
 *.exe
 
+*.fll 
+
 *.err
 *.log
 *.zip
