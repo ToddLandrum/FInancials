@@ -1,0 +1,1 @@
+BUILD EXE ..\rpts\statereports\tx\txstatereports FROM txstatereports

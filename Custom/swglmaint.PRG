@@ -1,0 +1,4284 @@
+**************************************************
+*-- Class:        swglmaint 
+*-- ParentClass:  custom
+*-- BaseClass:    custom
+*-- Time Stamp:   02/05/20 01:51:12 PM
+*
+DEFINE CLASS swglmaint AS custom
+
+
+	Height = 45
+	Width = 77
+	cyear = .F.
+	*-- XML Metadata for customizable properties
+	_memberdata = [<VFPData><memberdata name="isyeararchived" display="IsYearArchived"/><memberdata name="calcconbalcomp" display="CalcConBalComp"/></VFPData>]
+	cafeno = ""
+	Name = "swglmaint"
+
+	*-- The current batch number being processed.
+	cbatch = .F.
+	csource = .F.
+	creference = .F.
+	dgldate = .F.
+	cdesc = .F.
+	cacctno = .F.
+	cunitno = .F.
+	cdeptno = .F.
+	namount = .F.
+	dmbatch = .F.
+	cbunch = .F.
+	cid = .F.
+	cuser = .F.
+	oregistry = .F.
+	osecurity = .F.
+	cperiod = .F.
+	ndebits = .F.
+	ncredits = .F.
+	ccheckno = .F.
+	cidtype = .F.
+	dcheckdate = .F.
+	cmemo = .F.
+	lvoid = .F.
+	cgroup = .F.
+	centrytype = .F.
+	dpostdate = .F.
+	cpayee = .F.
+	drecdate = .F.
+	cidchec = .F.
+
+	*-- Transaction Status
+	ltranstatus = .F.
+
+	*-- Expense/AFE Category Code
+	ccatcode = .F.
+
+	*-- Name of table field that has the notes in it.
+	mnotes = .F.
+	lprinted = .F.
+	lcleared = .F.
+	omessage = .F.
+
+	*-- .T. if running the standalone disb mgr
+	ldisbmgr = .F.
+	altcompany = .F.
+	altcidcomp = .F.
+	altdatapath = .F.
+	ndebits_c = .F.
+	ncredits_c = .F.
+
+
+	*-- Deleted a G/L transaction batch from GLmaster
+	PROCEDURE delbatch
+		LPARA tcBatch, tcJournal
+		LOCAL ldDate, lcAcctNo, lnDebits, lnCredits
+
+		IF NOT m.goApp.lAMVersion
+		   RETURN
+		ENDIF   
+
+		if type('tcJournal') <> 'C'
+		   tcJournal = 'xx'
+		endif
+		   
+		ASSERT TYPE('tcBatch') = 'C' MESSAGE 'Bad batch number passed to delbatch method'
+
+		*
+		*  Delete any entries tied to the batch number passed
+		*
+		SWSELECT('glmaster',.T.)
+		SET ORDER TO glbatch
+		IF SEEK(tcBatch)
+		   ldDate   = dDate
+		   lcYear   = this.getperiod(ldDate,.T.)
+		   lcPeriod = this.getperiod(ldDate,.F.)
+		   this.cYear   = lcYear
+		   this.cPeriod = lcPeriod
+		ELSE
+		   STORE 0 TO this.nDebits, this.nCredits
+		   STORE '' TO this.cYear, this.cPeriod
+		   RETURN   
+		ENDIF   
+
+		swselect('glmaster')
+		DELETE FROM glmaster WHERE cBatch == tcBatch
+
+		*!*	SCAN FOR cBatch == tcBatch
+		*!*	   *  If it's not the right entry, don't delete it.
+		*!*	   if tcJournal <> 'xx' and csource # tcJournal
+		*!*	      loop
+		*!*	   endif   
+		*!*	   DELETE NEXT 1
+		*!*	ENDSCAN           
+
+		swSELECT('glbatches')
+		DELETE FROM glbatches WHERE cbatch == tcBatch
+
+		*
+		*  Reset properties
+		*
+		STORE 0 TO this.nDebits, this.nCredits, this.nAmount
+		STORE '' TO this.cYear, this.cPeriod, this.cBatch, this.cID, this.cReference, ;
+		            this.dmbatch, this.cbunch, this.cdesc, this.csource
+		STORE {} TO this.dgldate            
+		   
+	ENDPROC
+
+
+	*-- Updates a G/L transaction batch
+	PROCEDURE updatebatch
+		LOCAL m.cBatch, m.cBunch, m.cRef, m.cDesc, m.dDate, m.cUnitNo, m.cDeptNo, m.cId
+		LOCAL m.csource, m.cdmBatch, m.nAmount, oRegistry, oSecurity, m.cidchec
+		LOCAL m.cref, m.dDate, m.cUnitNo, m.cDeptNo, m.cBunch, m.cDesc, m.cID
+		 
+		* Don't execute this procedure if running the stand-alone disb mgr
+		IF NOT m.goApp.lAMVersion
+		   RETURN
+		ENDIF   
+
+		*
+		*  Set defaults for properties not setup
+		*
+		IF VARTYPE(this.namount) <> 'N'
+		   this.namount = 0
+		   RETURN .f.
+		ENDIF 
+
+		IF TYPE('this.cUnitNo') <> 'C'
+		   this.cUnitNo = ' '
+		ENDIF
+		IF TYPE('this.cDeptNo') <> 'C'
+		   this.cDeptNo = ' '
+		ENDIF
+		IF TYPE('this.cBunch') <> 'C'
+		   this.cBunch = ' '
+		ENDIF      
+		IF TYPE('this.dmbatch') <> 'C'
+		   this.dmbatch = ' '
+		ENDIF      
+		IF TYPE('this.cCatCode') <> 'C'
+		   this.cCatCode = ' '
+		ENDIF
+		IF TYPE('this.cidchec') <> 'C'
+		   this.cidChec = ''
+		ENDIF  
+		IF VARTYPE(this.dgldate) <> 'D'
+		   this.dgldate = DATE()
+		ENDIF
+		IF vartype(this.cbatch) <> 'C'
+		   this.cbatch = '' 
+		ENDIF    
+		IF VARTYPE(this.csource) <> 'C'
+		   this.csource='XX'
+		ENDIF 
+		IF VARTYPE(this.creference) <> 'C'
+		   this.creference = ''
+		ENDIF 
+		IF VARTYPE(this.cacctno) <> 'C'
+		   this.cacctno = '000000'
+		ENDIF
+		IF VARTYPE(this.cid) <> 'C'
+		   this.cid = ''
+		ENDIF
+		IF VARTYPE(this.ccatcode) <> 'C'
+		   this.ccatcode = ''
+		ENDIF 
+		IF VARTYPE(this.cidchec) <> 'C'
+		   this.cidchec = ''
+		ENDIF
+		IF VARTYPE(this.mnotes) <> 'C'
+		   this.mnotes = ''
+		ENDIF 
+		IF VARTYPE(this.cafeno) <> 'C'
+		   this.cafeno = ''
+		ENDIF 
+		*
+		*  Set up the memory variables so that the insert will have
+		*  the data it needs.
+		*
+
+		swselect('glmaster')
+		SCATTER MEMVAR blank 
+
+		m.cBatch     = this.cBatch
+		m.cSource    = this.cSource
+		m.cRef       = this.cReference
+		IF LEFT(m.cref,2) = ': '
+		   m.cRef = SUBSTR(m.cref,3)
+		ENDIF 
+		m.dDate      = this.dGLDate
+		m.cUnitNo    = this.cUnitNo
+		m.cDeptNo    = this.cDeptNo
+		m.cAcctNo    = this.cAcctNo
+		m.cDmBatch   = this.DMBatch
+		m.cBunch     = this.cBunch
+		m.cDesc      = this.cDesc
+		m.cId        = this.cId
+		m.cCatCode   = this.cCatCode
+		m.cidchec    = this.cidchec
+		lcNotes      = this.mNotes
+		m.cafeno     = this.cafeno
+		IF NOT EMPTY(lcNotes)
+		   m.mNotes     = EVAL(lcNotes)
+		ELSE
+		   m.mNotes = ''
+		ENDIF      
+
+		*
+		*  Get the fiscal year and period the date falls in
+		   m.cYear       = this.getperiod(m.dDate,.T.)
+		   m.cPeriod     = this.getperiod(m.dDate,.F.)
+		   this.cYear    = m.cYear
+		   this.cPeriod  = m.cPeriod
+
+		*
+		*  Figure out whether we're debiting or crediting
+		*  the given account
+		*
+		DO CASE
+		   CASE this.nAmount > 0
+		      m.nDebits  = this.nAmount
+		      m.nCredits = 0
+		   CASE this.nAmount < 0   
+		      m.nCredits = ABS(this.nAmount)
+		      m.nDebits  = 0
+		   OTHERWISE
+		      *  Don't save a zero entry
+		      RETURN .T.
+		ENDCASE         
+
+		m.cidglma    = this.oRegistry.IncrementCounter('%Shared.Counters.glmaster')
+		SET DELETED OFF
+		SWSELECT('glmaster',.T.)
+		SET ORDER TO cidglma
+		DO WHILE SEEK(m.cidglma)
+		   m.cidglma    = this.oRegistry.IncrementCounter('%Shared.Counters.glmaster')
+		ENDDO   
+		SET DELETED ON
+
+		this.nDebits  = this.nDebits + m.nDebits
+		this.nCredits = this.nCredits + m.nCredits
+
+		*
+		*  Fill in the current date and time        
+		m.dLastModified   = DATETIME()
+		m.cUser           = m.goapp.cUser        
+
+		*
+		*  Recycle deleted records
+		*
+		SWSELECT('glmaster',.T.)
+		INSERT INTO glmaster FROM MEMVAR   
+
+		* Maintain the glbatches tables
+		TRY 
+		* This was getting an error "variable cref not found"
+		* The try/catch is to trap it. There's no way it should
+		* ever get that error because m.cref is initialized above.
+		* pws - 2/27/19
+		swselect('glbatches')
+		SET ORDER to cbatch
+		IF SEEK(m.cbatch)
+		   IF RLOCK()
+		      REPLACE cref WITH m.cref
+		      UNLOCK 
+		   ENDIF    
+		ELSE
+		   INSERT INTO glbatches FROM memvar
+		ENDIF 
+		CATCH
+		ENDTRY 
+
+		swselect('glmaster')
+		SET ORDER TO glbatch
+	ENDPROC
+
+
+	*-- Check for out of balance batches
+	PROCEDURE chkbalance
+		*
+		*  Checks to make sure the batch is in balance
+		*  Returns .T. if it is in balance
+		*  Returns .F. if is is not in balance
+		*
+
+		*
+		*  Check the value in the nDebits and nCredits properties
+		*
+		IF TYPE('this.nDebits') <> 'N'
+		   RETURN .F.
+		ENDIF
+		IF TYPE('this.nCredits') <> 'N'
+		   RETURN .F.
+		ENDIF
+		   
+		*
+		*  Reset the cYear and cPeriod properties
+		*
+		this.cYear     = ''
+		this.cPeriod   = ''
+
+		IF this.nDebits = this.nCredits
+		   STORE 0 TO this.nDebits, this.nCredits
+		   RETURN .T.
+		ELSE
+		   STORE 0 TO this.nDebits, this.nCredits
+		   RETURN .F.
+		ENDIF      
+	ENDPROC
+
+
+	*-- Returns the fiscal year and period the passed date is in.
+	PROCEDURE getperiod
+		*=================================================================================
+		*  Program....: GETPERIOD
+		*  Version....: 1.0
+		*  Author.....: Phil W. Sherwood
+		*  Date.......: April 23, 1999
+		*  Notice.....: Copyright (c) 1994-1999 SherWare, Inc., All Rights Reserved.
+		*  Compiler...: Visual FoxPro 6.0
+		*) Description: Returns Either the Year or the Period that the passed date falls into.
+		*  Parameters.: tdDate   - The date to check.
+		*               tlYear   - .T. = looking for year, .F. = looking for period.
+		*  Changes....: 05/17/03 - Changed to recall a deleted glopt record and validate
+		*                          the beginning month. - pws
+		*=================================================================================
+		LPARA tdDate, tlYear
+		LOCAL laPeriods[13,2]
+		LOCAL lcYear, lcPeriod, lnX, lcSelect
+
+
+		ASSERT TYPE('tdDate') = 'D'  ;
+		   MESSAGE 'A blank date was passed to the getperiod method.  Fix it!!!!'
+
+		IF VARTYPE(tdDate) <> 'D'
+		   MESSAGEBOX('An Invalid date was passed to glmaint.getperiod',0,'Invalid Date')
+		   IF tlyear
+		      RETURN (TRANSFORM(YEAR(DATE())))
+		   ELSE
+		      RETURN (PADL(TRANSFORM(MONTH(DATE())),2,'0'))
+		   ENDIF
+		ENDIF 
+		   
+		lcSelect = SELECT()
+
+		IF NOT m.goApp.lAMVersion
+		   IF tdDate = {}  &&  Should never get here, but it blows up if it somehow gets passed a blank date - BH 06/25/2008
+		      tdDate = DATE()
+		   ENDIF 
+		   IF tlYear
+		      RETURN(ALLT(STR(YEAR(tdDate),4)))
+		   ELSE
+		      RETURN(PADL(ALLT(STR(MONTH(tdDate),2)),2,'0'))
+		   ENDIF
+		ENDIF
+		         
+		SWSELECT('glopt')
+		GO TOP
+		*  If the glopt record is deleted, recall it
+		IF DELETED()
+		   LOCATE FOR NOT DELETED()
+		   IF NOT FOUND()
+		      GO top
+		      RECALL
+		   ENDIF 
+		ENDIF   
+		SCATTER MEMVAR
+
+		* If the begining month of the fiscal year is not valid, make it January.
+		IF NOT INLIST(m.cFYBegin,'01','02','03','04','05','06','07','08','09','10','11','12')
+		   m.cFYBegin = '01'
+		ENDIF
+		   
+		SELECT (lcSelect)
+
+		m.cFYEnd = PADL(TRANSFORM(VAL(m.cFYBegin)-1),2,'0')
+		IF m.cFYEnd = '00'
+		    m.cFYEnd = '12'
+		ENDIF
+
+		SELECT (lcSelect)
+		lcFYBegYr = TRANSFORM(YEAR(tdDate))
+
+		*
+		*  Get the beginning date of the fiscal year.
+		*
+		ldBegDate = CTOD(m.cFYBegin + '/' + '01' + '/' + STR(VAL(lcFYBegYr),4))
+
+		if tdDate < ldBegDate
+		   ldBegDate = gomonth(ldbegdate,-12)
+		endif 
+		lcFYBegYr = transform(year(ldbegdate))
+		ldEndDate = gomonth(ldBegDate,11)
+		ldEndDate = this.goendmonth(ldEndDate,0,.t.)
+
+
+		*
+		*  Just asking for fiscal year
+		*
+		IF tlYear
+		   IF tdDate >= ldBegDate
+		      *
+		      * The date is after the beginning FY date.
+		      * Calculate what FY the date is in by calculating the number
+		      * of years the given date is past the beginning date.
+		      *
+		      lnDays = tdDate - ldBegDate
+		      IF MOD(YEAR(DATE()),4) = 0
+		         lnDays = lnDays - 1
+		      ENDIF   
+		      lnYrs  = INT(lnDays/365.4)
+		      IF m.lFYEnd
+		         lcYear = STR(VAL(lcFYBegYr) + lnYrs+1,4)
+		      ELSE
+		         lcYear = STR(VAL(lcFYBegYr) + lnYrs,4)
+		      ENDIF   
+		      RETURN(lcYear)
+		   ELSE
+		      *
+		      * The date is before the beginning date.
+		      * Calculate what FY the date is in by calculating the number
+		      * of years the given date is before the beginning date.
+		      * 
+		      lnDays = ldBegDate - tdDate
+		      IF m.lFYEnd
+		         lnYrs  = INT(lnDays/365) 
+		      ELSE
+		         lnYrs  = INT(lnDays/365) + 1
+		      ENDIF   
+		      lcYear = STR(VAL(lcFYBegYr) - lnYrs,4)
+		      RETURN(lcYear)
+		   ENDIF      
+		ENDIF
+
+		*
+		*  If we get this far we can safely assume the period
+		*  was requested
+		*
+
+		* Force the fiscal period count to be 12 per year --pws 3/24/97
+		m.nfyprds = 12
+
+		DO CASE
+		   CASE m.nfyprds = 13
+		      *
+		      * If there are 13 periods in a FY, each period is 28 days long.
+		      * Put the month and ending day of each period in the laPeriods
+		      * array.
+		      *
+		      ldWrkDate = ldBegDate + 28
+		      FOR lnX = 1 TO m.nfyprds
+		          laPeriods[lnX,1] = PADL(ALLTRIM(STR(MONTH(ldWrkDate),2)),2,'0')
+		          laPeriods[lnX,2] = PADL(ALLTRIM(STR(DAY(ldWrkDate),2)),2,'0')
+		          ldWrkDate = ldWrkDate + 28
+		      ENDFOR
+		   CASE m.nfyprds = 12
+		      *
+		      * If there are 12 periods in a FY, each period coincides with a given
+		      * month. Put the month and ending day of each period in the laPeriods
+		      * array.
+		      *
+		      ldWrkDate = this.goendmonth(ldBegDate,0,.T.)
+		      laPeriods[1,1] = PADL(ALLTRIM(STR(MONTH(ldWrkDate),2)),2,'0')
+		      laPeriods[1,2] = PADL(ALLTRIM(STR(DAY(ldWrkDate),2)),2,'0')
+		      ldWrkDate = this.goendmonth(ldBegDate,1)
+		      FOR lnX = 2 TO m.nfyprds
+		          laPeriods[lnX,1] = PADL(ALLTRIM(STR(MONTH(ldWrkDate),2)),2,'0')
+		          laPeriods[lnX,2] = PADL(ALLTRIM(STR(DAY(ldWrkDate),2)),2,'0')
+		          ldWrkDate = this.goendmonth(ldBegDate, lnX)
+		      ENDFOR
+		ENDCASE      
+
+		*
+		* Set the period as 'XX'. If the period is still 'XX' after we've
+		* looked it up in the laPeriods array, the date is invalid.
+		*
+		lcPeriod = '12'
+
+		*
+		* Look for the period in the laPeriods array.  Return the period
+		* by formatting the index of the given element as the period the
+		* given date falls into.
+		*
+		FOR lnX = 1 TO m.nFYPrds
+		    lcMonth = PADL(ALLTRIM(STR(MONTH(tdDate))),2,'0')
+		    lcDay   = PADL(ALLTRIM(STR(DAY(tdDate))),2,'0')
+		    IF lcMonth = laPeriods[lnX,1] AND lcDay <= laPeriods[lnX,2]
+		       lcPeriod = (PADL(ALLTRIM(STR(lnX)),2,'0'))
+		       EXIT   
+		    ENDIF
+		ENDFOR
+
+		SELECT (lcSelect)
+
+		RETURN (lcPeriod)     
+	ENDPROC
+
+
+	PROCEDURE goendmonth
+		*=================================================================================
+		*  Program....: GOENDMON.PRG
+		*  Version....: 1.0
+		*  Author.....: Phil W. Sherwood
+		*  Modified By: Vertex Software - Jon Ziegler
+		*  Date.......: January 10, 1995
+		*  Modified On: December 09, 1996
+		*  Notice.....: Copyright (c) 1994-1996 SherWare, Inc., All Rights Reserved.
+		*  Compiler...: FoxPro 2.6a
+		*) Description: Returns the end day of the month that is n months ahead.
+		*  Parameters.: tdDate    - The current date.
+		*               tnMonths  - The number of months to jump ahead.
+		*               tlCurrent - Dont add tnMonths to the month.
+		*  Changes....:
+		*      9/4/96   pws - Added check for leap year.
+		*     11/14/96  jmz - Added "ELSE...ldDate = tdDate" line.
+		*     12/09/96  jmz - Added SET CENTURY saving/restoration.
+		*                   - Added ldretval to avert 02/29/00 problem (see comments below)
+		*     04/23/99  pws - Moved to Visual FoxPro
+		*=================================================================================
+		LPARA tdDate, tnMonths, tlCurrent
+
+		LOCAL lddate, lcmonth, lcyear, lcday, lcprvcent, ldretval
+
+		* save century setting  12/09/96 jmz
+		lcprvcent = SET("CENTURY")
+		SET CENTURY ON
+
+		IF NOT tlCurrent
+		   ldDate = GOMONTH(tdDate,tnMonths)
+		ELSE		&& 11/14/96 jmz
+		   ldDate = tdDate
+		ENDIF
+
+		lcDay   = PADL(ALLTRIM(STR(DAY(ldDate),2)),2,'0')
+		lcMonth = PADL(ALLTRIM(STR(MONTH(ldDate),2)),2,'0')
+		lcYear  = STR(YEAR(ldDate),4)   && removed SUBSTR( ..., 3, 2) to preserve century
+		                                && 12/09/96 jmz
+
+		*
+		*  Get Last Day of Month
+		*
+		DO CASE
+		   CASE lcMonth='01' OR lcMonth='03' OR lcMonth='05' OR lcMonth='07' OR ;
+		        lcMonth='08' OR lcMonth='10' OR lcMonth='12'
+		      lcEnd = '31'
+		   CASE lcMonth='02'
+		      *
+		      *  Check for leap year
+		      *
+		      IF MOD(VAL(lcYear),4) = 0
+		         lcEnd = '29'
+		      ELSE   
+		         lcEnd = '28'
+		      ENDIF   
+		   CASE lcMonth='04' OR lcMonth='06' OR lcMonth='09' OR lcMonth='11'
+		      lcEnd = '30'
+		   OTHERWISE
+		      lcEnd = '31'   
+		ENDCASE       
+
+		* CTOD(lcMonth+'/'+lcEnd+'/'+lcYear) will return {  /  /  } if
+		* SET CENTURY OFF and lcMonth = "02", lcEnd = "29", lcYear = "00"
+		* since 1900 did not have a Feb. 29th.  "ldretval" and SET CENTURY are
+		* the work-around to this  12/09/96 JMZ
+		ldretval = CTOD(lcMonth+'/'+lcEnd+'/'+lcYear)
+
+		* restore previous century setting  12/09/96 JMZ
+		IF NOT EMPTY(lcprvcent)
+			SET CENTURY &lcprvcent
+		ENDIF
+
+		RETURN ldretval
+	ENDPROC
+
+
+	PROCEDURE updbalance
+		*=================================================================================
+		*  Description: Updates the balances for G/L accounts.
+		*  Parameters.: tdDate    - The date of the transaction.
+		*               tcAccount - The account number of the account to update.
+		*               tnDr      - The debit amount.
+		*               tnCr      - The credit amount.
+		*=================================================================================
+		PARA tcAccount, tnDr, tnCr
+		LOCAL lcPeriod, lcYear, lcSelect
+
+		* Coabal isn't used anymore so don't update it
+		RETURN
+
+		*  Don't execute this method if running the stand-alone disb mgr.
+		IF NOT m.goApp.lAMVersion
+		   RETURN
+		ENDIF   
+
+		lcSelect = SELECT()
+
+		lcYear   = this.cYear
+		lcPeriod = this.cPeriod
+
+		SET DELETED OFF
+		SWSELECT('coabal',.T.)
+		SET ORDER TO acctprd
+		IF SEEK(tcAccount+lcYear+lcPeriod)
+		   IF DELETED()
+		      RECALL
+		   ENDIF   
+		   REPLACE nDebits  WITH (nDebits + tnDr), ;
+		           nCredits WITH (nCredits + tnCr)
+		ELSE
+		   m.cAcctNo    = tcAccount
+		   m.cFiscalYr  = lcYear
+		   m.cFiscalPrd = lcPeriod
+		   m.nDebits    = tnDr
+		   m.nCredits   = tnCr
+		   INSERT INTO coabal FROM MEMVAR
+		ENDIF         
+
+		SET DELETED ON
+		SELECT (lcSelect)
+	ENDPROC
+
+
+	*-- Calculates the balances for each account and period in the chart of accounts.
+	PROCEDURE calcbalance
+		LPARA tlFinancial
+		*
+		*  Calculates the balances for each account in the chart of accounts
+		*  for each fiscal period that data exists.
+		*
+		LOCAL lcPeriod, lcYear, lnDebits, lnCredits, lnAccttype
+
+		STORE 0 TO lnCredits, lnDebits, lnAcctType
+
+		IF tlFinancial
+		   SELECT glmaster.cAcctNo,          ;
+		          glmaster.cYear,                     ;
+		          glmaster.cPeriod,                   ;
+		          SUM(glmaster.nDebits) AS nDebits,   ;
+		          SUM(glmaster.nCredits) AS nCredits ;
+		     FROM glmaster ;
+		       WHERE glmaster.csource <> 'YE' ;
+		     INTO CURSOR coabalnew readwrite;
+		     ORDER BY glmaster.cAcctNo, cYear, cPeriod ;
+		     GROUP BY glmaster.cAcctNo, cYear, cPeriod
+		ELSE
+		   SELECT cAcctNo,          ;
+		          cYear,                     ;
+		          cPeriod,                   ;
+		          SUM(nDebits) AS nDebits,   ;
+		          SUM(nCredits) AS nCredits ;
+		     FROM glmaster ;
+		     INTO CURSOR coabalnew readwrite;
+		     ORDER BY glmaster.cAcctNo, cYear, cPeriod ;
+		     GROUP BY glmaster.cAcctNo, cYear, cPeriod
+		ENDIF         
+		SELECT coabalnew
+		INDEX on cacctno TAG cacctno
+		INDEX on cyear+cperiod TAG cyearprd
+
+		RETURN 
+
+		*********************************************************************************
+		*  CHANGED TO CREATE COABAL EVERYTIME - pws 12/09/08
+		*********************************************************************************
+	ENDPROC
+
+
+	PROCEDURE addcheck
+		LPARA tlNoGetPeriod
+		*
+		*  Adds a check to the check register  (checks)
+		*
+		LOCAL m.cId, m.cPayee, m.cIdType, m.nAmount, m.cSource, m.dCheckDate
+		LOCAL m.cGroup, m.cAcctNo, m.cCheckNo, m.cidchec, m.cPeriod, m.cYear, m.lDeleted
+		LOCAL m.cMemo, m.lVoid, m.nVoidAmt, m.lManual, m.lHist, m.dRecDate, m.lDeposited
+		LOCAL m.lCleared, m.dPostDate, lcSelect, m.cBatch, m.lPrinted, m.cEntryType
+
+		lcSelect = SELECT()
+
+		m.cId        = this.cId
+		m.cPayee     = this.cPayee
+		m.cIdType    = this.cIdType
+		m.nAmount    = this.nAmount
+		m.cSource    = this.cSource
+		m.dCheckDate = this.dCheckDate
+		m.cGroup     = this.cGroup
+		m.cMemo      = this.cMemo
+		m.dPostDate  = this.dPostDate
+		m.cAcctNo    = this.cAcctNo
+		m.cEntryType = this.cEntryType
+		m.cBatch     = this.cBatch
+		m.cCheckNo   = this.cCheckNo
+		m.lCleared   = this.lCleared
+		m.lPrinted   = this.lPrinted
+		m.dRecDate   = this.dRecDate
+		m.cYear      = this.cYear
+		m.cPeriod    = this.cPeriod
+		m.lVoid      = this.lvoid
+
+		IF TYPE('m.dRecDate') <> 'D'
+		   m.dRecDate = {}
+		ENDIF   
+
+		*
+		*  Check to make sure the required properties were set
+		*
+		ASSERT TYPE('m.cId')        = 'C' MESSAGE 'The cId property must be set before calling glmaint'
+		ASSERT TYPE('m.cPayee')     = 'C' MESSAGE 'The cPayee property must be set before calling glmaint'
+		ASSERT TYPE('m.nAmount')    = 'N' MESSAGE 'The nAmount property must be set before calling glmaint'
+		ASSERT TYPE('m.cSource')    = 'C' MESSAGE 'The cSource property must be set before calling glmaint'
+		ASSERT TYPE('m.cAcctNo')    = 'C' MESSAGE 'The cAcctNo property must be set before calling glmaint'
+		ASSERT TYPE('m.cEntryType') = 'C' MESSAGE 'The cEntryType property must be set before calling glmaint'
+		ASSERT TYPE('m.cBatch')     = 'C' MESSAGE 'The cBatch property must be set before calling glmaint'
+		ASSERT TYPE('m.cIdType')    = 'C' MESSAGE 'The cIdType property must be set before calling glmaint'
+		ASSERT TYPE('m.dCheckDate') = 'D' MESSAGE 'The dCheckDate property must be set before calling glmaint'
+		ASSERT TYPE('m.dPostDate')  = 'D' MESSAGE 'The dPostDate property must be set before calling glmaint'
+
+		*
+		*  Set default properties if they weren't set
+		*
+		IF TYPE('m.cGroup') <> 'C'
+		   m.cGroup = '00'
+		ENDIF
+
+		IF TYPE('m.cMemo') <> 'C'
+		   m.cMemo = ''
+		ENDIF
+
+		STORE .F. TO m.lManual, m.lHist, m.lDeleted, m.lDeposited
+		STORE 0   TO m.nVoidAmt
+
+		*
+		*  Don't save zero amount checks
+		*
+		IF this.nAmount = 0
+		   RETURN
+		ENDIF   
+
+
+		*  Get the fiscal year and period the date falls in
+		IF m.goApp.lAMVersion or tlNoGetPeriod = .F.
+		   m.cYear       = this.getperiod(m.dPostDate,.T.)
+		   m.cPeriod     = this.getperiod(m.dPostDate,.F.)
+		   this.cYear    = m.cYear
+		   this.cPeriod  = m.cPeriod
+		ENDIF   
+
+		*
+		*  Get the next available check key
+		*
+		if not used('checks')
+		   use checks in 0
+		   cursorsetprop('Buffering',5,'Checks')
+		endif   
+		SET DELETED OFF
+		this.cidchec = this.oRegistry.IncrementCounter('%Shared.Counters.Checks')
+		m.cidchec    = this.cidchec 
+		SWSELECT('checks',.T.)
+		SET ORDER TO cidchec
+		DO WHILE SEEK(m.cidchec)
+		   this.cidchec = this.oRegistry.IncrementCounter('%Shared.Counters.Checks')
+		   m.cidchec    = this.cidchec 
+		ENDDO   
+		SET DELETED ON
+
+		*
+		*  Add the entry to the checks table
+		*
+		*
+		*  Recycle deleted records
+		*
+		lcDeleted = SET('DELETED')
+
+		SWSELECT('checks',.T.)
+
+		INSERT INTO checks FROM MEMVAR   
+
+		SELECT (lcSelect)
+	ENDPROC
+
+
+	*-- Returns key or index corresponding to passed value.
+	PROCEDURE getkey
+		RETURN (this.cidchec)
+	ENDPROC
+
+
+	PROCEDURE delcheck
+		LPARA tcidchec, tlBatch
+		*
+		*  Deletes the given check from the register
+		*
+		IF EMPTY(tcidchec)
+		   RETURN
+		ENDIF 
+		IF NOT tlBatch
+		   SWSELECT('checks',.T.)
+		   SET ORDER to cidchec
+		   IF SEEK(tcidchec)
+		      DELETE NEXT 1
+		   ENDIF 
+		ELSE
+		   SWSELECT('checks',.T.)
+		   SET ORDER to CBATCH   && CBATCH 
+		   llFound = SEEK(tcidchec)
+		   DO WHILE (llFound)
+		      DELETE NEXT 1
+		      llFound = SEEK(tcidchec)
+		   ENDDO 
+		   
+		ENDIF   
+	ENDPROC
+
+
+	PROCEDURE voidcheck
+		LPARAMETERS tcidchec, tlNoConfirm
+		LOCAL lcAcct, lcPayee, lcidchec, llFound, ldNewDate, lnRecNo, lcID, lcBatch
+		LOCAL llPrepay
+
+		llPrepay  = .F.
+		ldNewDate = DATE()
+
+		SWSELECT('checks')
+		SET ORDER TO cidchec
+		IF SEEK(tcidchec)
+		    SCATTER MEMVAR
+		    lcBatch    = m.cBatch
+		    lcPayee    = m.cPayee
+		    lcID       = m.cID
+		    lcAcct     = m.cAcctNo
+		    lnRecNo    = RECNO()
+		    lcidchec   = m.cidchec
+		    lcidtype   = cidtype
+		    ldOrigDate = dCheckDate
+		ELSE
+		    RETURN .F.
+		ENDIF
+
+		IF checks.cidtype = 'I' AND THIS.IsYearArchived(checks.dCheckDate)
+		    IF MESSAGEBOX('The year this check was posted to has been archived. ' + ;
+		              'The amount of this check will need to be put into suspense using the Suspense Beg Bal/Adjustements screen', 36, 'Confirm Void') = 7
+		        RETURN .F.
+		    ENDIF
+		ENDIF
+
+		* Make sure we have references to the global objects
+		IF VARTYPE(THIS.omessage) <> 'O'
+		    THIS.omessage = findglobalobject('cmmessage')
+		ENDIF
+		IF VARTYPE(THIS.oregistry) <> 'O'
+		    THIS.oregistry = findglobalobject('cmregistry')
+		ENDIF
+
+		SWSELECT('glopt')
+		lcRevClear = cRevClear
+
+		IF checks.lvoid
+		    THIS.omessage.warning('This check has already been voided. It cannot be voided again.')
+		    RETURN .F.
+		ENDIF
+
+		IF checks.lcleared
+		    THIS.omessage.warning('This check has been cleared. It cannot be voided.')
+		    RETURN .F.
+		ENDIF
+
+		* Don't try to void deposits
+		IF m.cEntryType <> 'C'
+		    THIS.omessage.warning('You cannot void deposits...')
+		    RETURN .F.
+		ENDIF
+
+		* pws - 2011/05/18  Commented out. Think you should be able to void cash disbursement checks but not delete them.
+		*!*	IF checks.csource = 'CS'
+		*!*	   this.omessage.warning('Checks from Cash Disbursements cannot be voided here. Go to the Cash Disbursement and delete the disbursement. That will remove the check.')
+		*!*	   RETURN
+		*!*	ENDIF
+
+		IF NOT tlNoConfirm
+		    IF NOT THIS.omessage.CONFIRM('Are you sure you want to void this check?')
+		        RETURN .F.
+		    ENDIF
+		ENDIF
+
+		* Moved outside of the IF stmt below so everyone gets asked. - pws 1/19/12
+		DO FORM csgetdate WITH 'CHK' TO ldNewDate
+
+		* Check to see what type of check it is
+		IF lcidtype = 'I'
+		    llPrepay = .F.
+		    SWSELECT('sysctl')
+		    LOCATE FOR cdmbatch = lcBatch
+		    IF NOT FOUND()
+		        SWSELECT('prepayh')
+		        LOCATE FOR cBatch == lcBatch
+		        IF FOUND()
+		            llPrepay = .T.
+		        ENDIF
+		    ENDIF
+		ENDIF
+
+		IF m.goApp.lAMVersion
+		    DO CASE
+		        CASE m.cSource = 'AP' OR (m.cSource = 'DM' AND m.cidtype = 'V')
+		* Get the A/P Account Number
+		            SWSELECT('apopt')
+		            lcAPAcct = apopt.capacct
+		*
+		*  Create a journal entry to void the original check
+		*
+		            THIS.cBatch     = THIS.oregistry.incrementcounter('%Shared.Counters.Batch')
+		            THIS.dgldate    = ldNewDate
+		            THIS.cSource    = 'AP'
+		            THIS.cReference = 'VOID: ' + m.cCheckno
+		            THIS.cID        = m.cID
+		            THIS.dCheckDate = ldNewDate
+		            THIS.dpostdate  = ldNewDate
+		            THIS.cdesc      = m.cPayee
+		            THIS.cPayee     = m.cPayee
+		            THIS.cunitno    = ''
+		            THIS.cdeptno    = ''
+
+		* Create the deposit entry to add the amount back to the register
+		            THIS.cEntryType = 'D'
+		            THIS.cidtype    = 'D'
+		            THIS.cAcctNo    = lcAcct
+		            THIS.nAmount    = m.nAmount
+		            THIS.cCheckno   = m.cCheckno
+		            THIS.cMemo      = 'Void of Check ' + m.cCheckno
+		            THIS.cPayee     = lcPayee
+		            THIS.lprinted   = .T.
+		            THIS.lcleared   = .T.
+		            THIS.lvoid      = .T.
+		            THIS.drecdate   = ldNewDate
+		            THIS.addcheck()
+		            THIS.cidchec    = THIS.GETKEY()
+
+		*  Add the amount back to cash
+		            THIS.cAcctNo = m.cAcctNo
+		            THIS.nAmount = m.nAmount
+		            IF NOT m.lManual
+		                THIS.updatebatch()
+		            ENDIF
+
+		*  Credit accounts payable
+		            THIS.cAcctNo = lcAPAcct
+		            THIS.nAmount = m.nAmount * -1
+		            IF NOT m.lManual
+		                THIS.updatebatch()
+		            ENDIF
+
+		*
+		*  Mark the invoices as not being paid by this check
+		*
+		            SWSELECT('appmtdet')
+		            SCAN FOR cidchec = lcidchec AND NOT EMPTY(lcidchec)
+		                SCATTER MEMVAR
+		                m.cBillToken  = cBillToken
+		                DELE NEXT 1
+		                SWSELECT('appurchh')
+		                LOCATE FOR cBatch = m.cBillToken
+		                IF FOUND()
+		                    REPL nPayments WITH nPayments - m.nAmtPaid - m.nDiscTaken, ;
+		                        nInvBal   WITH nInvBal   + m.nAmtPaid + m.nDiscTaken
+		                ENDIF
+		            ENDSCAN
+
+		        CASE INLIST(m.cSource, 'CS', 'CD', 'CJ', 'LM', 'PD')
+
+		            IF m.cSource = 'CS'  &&  If it came from a cash disbursement, make sure it deletes the expenses created by that CD.
+		                SWSELECT('expense')    &&  Make sure the expenses haven't been processed during a rev or JIB run before doing the void, though. - BH 5/2/06
+		                LOCATE FOR cBatch == m.cBatch AND (nRunnoRev <> 0 OR nRunnoJIB <> 0)
+		                IF FOUND()  &&  Already closed expenses, so they can't void this entry
+		                    THIS.omessage.warning('There were expenses paid by this check, and those expenses have been processed during a revenur or JIB closing.  This check cannot be voided.')
+		                    RETURN
+		                ENDIF
+		                SCAN FOR cBatch == m.cBatch  &&  Once we're sure the expenses haven't been processed during a closing, delete them.
+		                    DELETE NEXT 1
+		                ENDSCAN
+		                SWSELECT('expsusp')  &&  Delete from allocation file, too
+		                SCAN FOR cBatch == m.cBatch
+		                    DELETE NEXT 1
+		                ENDSCAN
+		            ENDIF
+
+		* Remove any landhist records associated with this check
+		            IF m.cSource = 'LM'
+		                SWSELECT('landhist')
+		                LOCATE FOR cidchec == lcidchec
+		                IF FOUND()
+		                    lcLeaseID = cLeaseID
+		                    DELETE NEXT 1
+		                ELSE
+		                    lcLeaseID = '**'
+		                ENDIF
+
+		                llFound = .F.
+
+		                SWSELECT('expense')
+		                SCAN FOR cpaidbyck = lcidchec  &&  See if the entries paid by this check have been processed
+		                    lnRecNo = RECNO()
+		                    IF nRunnoRev <> 0 OR nRunnoJIB <> 0  &&  It's been processed, so add it back to the new run as a credit
+		                        llFound = .T.
+		                        SCATTER MEMVAR
+		                        m.nAmount = m.nAmount * -1  &&  Reverse the charge
+		                        STORE 0 TO m.nRunnoRev, m.nRunnoJIB
+		                        STORE '' TO m.cRunYearRev, m.cRunYearJIB, m.cpaidbyck
+
+		                        m.cidexpe = THIS.oregistry.incrementcounter('%Shared.Counters.Expense')
+		                        SET DELETED OFF
+		                        SWSELECT('expense')
+		                        SET ORDER TO cidexpe
+		                        DO WHILE SEEK(m.cidexpe)
+		                            m.cidexpe = THIS.oregistry.incrementcounter('%Shared.Counters.Expense')
+		                        ENDDO
+		                        SET DELETED ON
+		                        INSERT INTO expense FROM MEMVAR
+
+		                        GOTO lnRecNo
+		                    ELSE  &&  Not processed, so just delete it
+		                        DELETE NEXT 1
+		                    ENDIF
+		                ENDSCAN
+
+		                SWSELECT('expsusp')
+		                SCAN FOR cpaidbyck = lcidchec  &&  Always delete it from expsusp if it exists
+		                    DELETE NEXT 1
+		                ENDSCAN
+
+		                IF llFound  &&  One or more entries were found that have been processed in a closing, so tell them how it's getting handled
+		                    THIS.omessage.DISPLAY('One or more expense entries related to this payment were processed during a revenue or JIB run closing. ' + ;
+		                          'Those expenses have been charged back to the well as a credit in the New Run.')
+		                ENDIF
+		* Update the next payment date back to the previous payment date if we can
+		                IF lcLeaseID # '**'
+		                    SWSELECT('landowner')
+		                    LOCATE FOR cownerid == m.cID AND cLeaseID == lcLeaseID
+		                    IF FOUND()
+		                        REPLACE dNextPmt WITH GOMONTH(landowner.dNextPmt, landowner.nPmtFreq * - 1)
+		                    ELSE
+		                        THIS.omessage.warning('The next payment date on this lease obligation has not been changed. ' + ;
+		                              'Any changes to the next payment date will have to be done manually.')
+
+		                    ENDIF
+		                ENDIF
+		            ENDIF
+
+		* Create the deposit or check entry to add the amount back to the register
+		            THIS.cBatch     = THIS.oregistry.incrementcounter('%Shared.Counters.Batch')
+		            THIS.dgldate    = ldNewDate
+		            THIS.cSource    = m.cSource  &&  Make it have the same source as the original entry being voided - BH 08/11/2008
+		            THIS.cReference = 'VOID: ' + m.cCheckno
+		            THIS.cID        = m.cID
+		            THIS.dCheckDate = ldNewDate
+		            THIS.dpostdate  = ldNewDate
+		            THIS.cPayee     = m.cPayee
+		            THIS.cMemo      = 'Void of Check ' + m.cCheckno
+
+		            IF m.cEntryType = 'C'
+		* Check entry
+		                THIS.cEntryType = 'D'
+		                THIS.cidtype    = 'D'
+		            ELSE
+		* Deposit entry
+		                THIS.cEntryType = 'C'
+		                THIS.cidtype    = m.cidtype
+		*
+		*  Return the receipts to undeposited funds
+		*
+		                SWSELECT('glopt')
+		                lcUnDepFund = cUnDepFund
+		                SWSELECT('deposits')
+		                SET ORDER TO cBatch
+		                IF SEEK(lcBatch)
+		                    SWSELECT('depositd')
+		                    SCAN FOR cBatch = lcBatch
+		                        m.cidchec = cidchec
+		                        SWSELECT('checks')
+		                        LOCATE FOR cidchec = m.cidchec
+		                        IF FOUND()
+		                            REPLACE lDeposited WITH .F.
+		                        ENDIF
+		                        SWSELECT('depositd')
+		                        DELETE NEXT 1
+		                    ENDSCAN
+		                    SWSELECT('deposits')
+		                    DELETE NEXT 1
+		                ENDIF
+		                SWSELECT('checks')
+		                DELE FOR cAcctNo = lcUnDepFund AND cEntryType = 'C' AND cBatch = lcBatch
+		            ENDIF
+		            THIS.cAcctNo  = lcAcct
+		            THIS.cCheckno = m.cCheckno
+		            THIS.nAmount  = m.nAmount
+		            THIS.cPayee   = lcPayee
+		            THIS.lprinted = .T.
+		            THIS.lcleared = .T.
+		            THIS.lvoid    = .T.
+		            THIS.drecdate = ldNewDate
+		            THIS.addcheck()
+		            THIS.cidchec    = THIS.GETKEY()
+
+		*
+		*  Scan through Glmaster to get the journal entry for this entry
+		*  so that the debits and credits can be reversed
+		*
+		            SELECT glmaster1
+		            SCAN FOR cBatch = lcBatch AND cID == lcID
+		*
+		*  Create a journal entry to void the original check
+		*
+		                THIS.cdesc   = glmaster1.cdesc
+		                THIS.cunitno = glmaster1.cunitno
+		                THIS.cdeptno = glmaster1.cdeptno
+		                THIS.cAcctNo = glmaster1.cAcctNo
+		                IF glmaster1.nDebits > 0
+		                    THIS.nAmount = glmaster1.nDebits * -1
+		                ELSE
+		                    THIS.nAmount = glmaster1.nCredits
+		                ENDIF
+		                IF NOT m.lManual
+		                    THIS.updatebatch()
+		                ENDIF
+		            ENDSCAN
+
+		        CASE m.cSource = 'DM'
+
+		            IF NOT llPrepay
+		* Get the legal suspense account
+		                SWSELECT('options')
+		                lcSuspAcct = options.cMinAcct
+		                IF EMPTY(lcSuspAcct)
+		                    SWSELECT('glopt')
+		                    lcSuspAcct = cSuspense
+		                ENDIF
+		*
+		*  Get the production period associated with this check
+		*
+		                SWSELECT('sysctl')
+		                LOCATE FOR cBatch = lcBatch
+		                IF FOUND()
+		                    lcYear     = cYear
+		                    lcPeriod   = cPeriod
+		                    ldSuspDate = dAcctDate
+		                    lcDMBatch  = cdmbatch
+		                ELSE
+		* Should never get here - unless it's a DM check created by clearing suspense, which is handled later.
+		                    lcYear     = ''
+		                    lcPeriod   = ''
+		                    ldSuspDate = {}
+		                    lcDMBatch  = ''
+		                ENDIF
+		            ELSE
+		                SWSELECT('prepayd')
+		                LOCATE FOR cBatch == lcBatch AND (crectype = 'P' OR crectype = 'U' AND lmanual)
+		                IF FOUND()
+		                    lcSuspAcct = cAcctNo
+		                ELSE
+		                    lcSuspAcct = lcCatchAll
+		                ENDIF
+		            ENDIF
+
+		*
+		*  Create a journal entry to void the original check
+		*
+		            THIS.cBatch     = THIS.oregistry.incrementcounter('%Shared.Counters.Batch')
+		            THIS.dgldate    = ldNewDate
+		            THIS.cSource    = 'DM'
+		            THIS.cReference = 'VOID: ' + m.cCheckno
+		            THIS.cID        = m.cID
+		            THIS.dCheckDate = ldNewDate
+		            THIS.dpostdate  = ldNewDate
+		            THIS.cdesc      = m.cPayee
+		            THIS.cPayee     = m.cPayee
+		            THIS.cunitno    = ''
+		            THIS.cdeptno    = ''
+
+		* Create the deposit entry to add the amount back to the register
+		            THIS.cEntryType = 'D'
+		            THIS.cidtype    = 'D'
+		            THIS.cAcctNo    = lcAcct
+		            THIS.cPayee     = lcPayee
+		            THIS.cCheckno   = m.cCheckno
+		            THIS.nAmount    = m.nAmount
+		            THIS.cMemo      = IIF(EMPTY(m.cCheckno), 'Void of Unprinted Check', 'Void of Check ' + m.cCheckno)
+		            THIS.lprinted   = .T.
+		            THIS.lcleared   = .T.
+		            THIS.lvoid      = .T.
+		            THIS.drecdate   = ldNewDate
+		            THIS.addcheck()
+		            THIS.cidchec    = THIS.GETKEY()
+
+		*  Add the amount back to cash
+		            THIS.cAcctNo = m.cAcctNo
+		            THIS.nAmount = m.nAmount
+		            THIS.cMemo   = ''
+		            IF NOT m.lManual
+		                THIS.updatebatch()
+		            ENDIF
+
+		*  Credit the legal suspense account
+		            THIS.cAcctNo = lcSuspAcct
+		            THIS.nAmount = m.nAmount * -1
+		            IF NOT m.lManual
+		                THIS.updatebatch()
+		            ENDIF
+
+		            IF NOT llPrepay
+		*  Add the amount to the suspense file
+		                SWSELECT('sysctl')
+		                LOCATE FOR cdmbatch == lcBatch
+		                IF FOUND()
+		                    m.nrunno   = nrunno
+		                    m.crunyear = crunyear
+		                    SWSELECT('disbhist')
+		                    SCAN FOR nrunno = m.nrunno AND crunyear = m.crunyear AND cownerid == m.cID AND INLIST(cRectype,'R','P')
+		                        SCATTER MEMVAR
+		                        SWSELECT('ownpcts')
+		                        SET ORDER TO ciddisb
+		                        IF SEEK(m.ciddisb)
+		                            SCATTER MEMVAR
+		                            IF EMPTY(m.cSuspType)
+		* Fill in the suspense type as a minimum
+		                                m.cSuspType = 'M'
+		* Make the run year in and runno in be the run that they were closed in
+		                                m.cRunYear_In = m.crunyear
+		                                m.nRunNo_In   = m.nrunno
+		                            ENDIF
+		                            m.ciddisb   = THIS.oregistry.incrementcounter('%Shared.Counters.Owner History')
+		                            SET DELETED OFF
+		                            SWSELECT('suspense')
+		                            SET ORDER TO ciddisb
+		                            DO WHILE SEEK(m.ciddisb)
+		                                m.ciddisb   = THIS.oregistry.incrementcounter('%Shared.Counters.Owner History')
+		                            ENDDO
+		                            SET DELETED ON
+		                            IF EMPTY(sysctl.cVersion)  &&  If it came from the old version, we don't want it to flow through normally the second time
+		                                m.lManual = .T.
+		                            ENDIF
+		                            INSERT INTO suspense FROM MEMVAR
+		                            IF NOT EMPTY(sysctl.cVersion)  &&  This was not closed in the old version, so remove the ownpcts record
+		                                SWSELECT('ownpcts')
+		                                DELETE NEXT 1
+		                            ENDIF
+		                        ENDIF
+		                        IF NOT EMPTY(sysctl.cVersion)  &&  This was not closed in the old version, so remove the disbhist record
+		                            SWSELECT('disbhist')
+		                            DELETE NEXT 1
+		                        ENDIF
+		                    ENDSCAN
+
+		                    IF EMPTY(sysctl.cVersion)  &&  This was closed in the old version, so it needs to check susaudit in addition to disbhist
+		                        SWSELECT('susaudit')
+		                        SCAN FOR cownerid == m.cID AND nrunno = m.nrunno AND crunyear = m.crunyear AND cAction = 'O'  &&  The out of suspense entries that would have been included on this check, too
+		                            SCATTER MEMVAR
+		                            m.lManual     = .T.  &&  So it's reported as a single-line item on the owner statements
+		                            m.cRunYear_In = m.crunyear
+		                            m.nRunNo_In   = m.nrunno
+		                            m.hDate       = m.dSuspDate
+		                            m.hYear       = m.cYear
+		                            m.hPeriod     = m.cPeriod
+		                            m.nNetCheck   = m.nAmount
+		                            m.nExpense    = m.nExpenses
+		                            m.nIncome     = m.nAmount + m.nExpenses  &&  Fudge the income to make it foot across, even if it's not right in susaudit
+
+		* Figure out if it's oil or gas income
+		                            SELECT SUM(ngasrev) AS ngas, SUM(noilrev) AS noil FROM disbhist WHERE cownerid = m.cID AND cwellid == m.cwellid INTO CURSOR temprev GROUP BY cownerid
+		                            SELECT temprev
+		                            DO CASE
+		                                CASE ngas = 0 AND noil <> 0
+		                                    m.noilrev = m.nIncome
+		                                    m.ngasrev = 0
+		                                CASE noil = 0 AND ngas <> 0
+		                                    m.ngasrev = m.nIncome
+		                                    m.noilrev = 0
+		                                OTHERWISE
+		                                    m.ngasrev = m.nIncome
+		                                    m.noilrev = 0
+		                            ENDCASE
+
+		*  Blank out hanging memvars from disbhist above, so it won't cause bogus reporting later on
+		                            STORE 0 TO m.nsevtaxes, m.ngastax1, m.ngastax2, m.ngastax3, m.ngastax4, m.noiltax1, m.noiltax2, m.noiltax3, m.noiltax4,  ;
+		                                m.nTotale1, m.nTotale2, m.nTotale3, m.nTotale4, m.nTotale5, m.ntotalea, m.ntotaleb, m.nflatrate, m.nOthRev, m.nTrpRev,   ;
+		                                m.nMiscRev1, m.nMiscRev2, m.nGather, m.nCompress, m.nOilExp, m.nGasExp, m.nOthTax1, m.nOthTax2, m.nOthTax3, m.nOthTax4,  ;
+		                                m.nTaxWith, m.nTaxPct, m.nBackWith
+
+		                            IF m.nNetCheck > 0
+		                                m.cSuspType = 'M'
+		                            ELSE
+		                                m.cSuspType = 'D'
+		                            ENDIF
+		                            m.ciddisb   = THIS.oregistry.incrementcounter('%Shared.Counters.Owner History')
+		                            SET DELETED OFF
+		                            SWSELECT('suspense')
+		                            SET ORDER TO ciddisb
+		                            DO WHILE SEEK(m.ciddisb)
+		                                m.ciddisb   = THIS.oregistry.incrementcounter('%Shared.Counters.Owner History')
+		                            ENDDO
+		                            SET DELETED ON
+
+		                            SWSELECT('wells')
+		                            LOCATE FOR cwellid == m.cwellid
+		                            IF NOT FOUND()  &&  We need to have a good well ID, so check suspense for another well that he has an interest in (in this group), and use that well ID
+		                                SWSELECT('suspense')
+		                                LOCATE FOR cownerid == m.cownerid AND cGroup == m.cGroup
+		                                IF FOUND()
+		                                    m.cwellid = suspense.cwellid
+		                                ELSE  &&  No records for them in suspense, so check wellinv for current interests
+		                                    SWSELECT('wellinv')
+		                                    LOCATE FOR cownerid == m.cownerid
+		                                    IF FOUND()
+		                                        m.cwellid = wellinv.cwellid
+		                                    ELSE  &&  This is getting a little ridiculous now, but if it can't find it in suspense or wellinv, check disbhist for any past history that we can use to get a well ID from
+		                                        SWSELECT('disbhist')
+		                                        LOCATE FOR cownerid == m.cownerid AND cGroup = m.cGroup
+		                                        IF FOUND()
+		                                            m.cwellid = disbhist.cwellid
+		                                        ELSE  &&  If not found, blank the well ID and give them a warning to go correct it
+		                                            m.cwellid = ''
+		                                            THIS.omessage.warning('A valid well ID could not be found to put on the suspense history created by voiding this check.  Edit the suspense entry to specify a valid well ID.')
+		                                        ENDIF
+		                                    ENDIF
+		                                ENDIF
+		                            ENDIF
+		                            INSERT INTO suspense FROM MEMVAR
+		                        ENDSCAN
+		                    ENDIF
+
+		                    SWSELECT('disbhist')
+		                    = TABLEUPDATE(.T.)
+		                    SWSELECT('ownpcts')
+		                    = TABLEUPDATE(.T.)
+		                    SWSELECT('suspense')
+		                    = TABLEUPDATE(.T.)
+
+		                ELSE  &&  It can't find a sysctl record for this check - most likely a check created by clearing a suspense balance
+
+		                    SWSELECT('disbhist')
+		                    SCAN FOR cBatch = lcBatch
+		                        SCATTER MEMVAR
+		                        m.ciddisb   = THIS.oregistry.incrementcounter('%Shared.Counters.Owner History')
+		                        SET DELETED OFF
+		                        SWSELECT('suspense')
+		                        SET ORDER TO ciddisb
+		                        DO WHILE SEEK(m.ciddisb)
+		                            m.ciddisb   = THIS.oregistry.incrementcounter('%Shared.Counters.Owner History')
+		                        ENDDO
+		                        SET DELETED ON
+
+		                        INSERT INTO suspense FROM MEMVAR
+
+		                        SWSELECT('ownpcts')
+		                        SCAN FOR ciddisb = disbhist.ciddisb
+		                            DELETE NEXT 1
+		                        ENDSCAN
+
+		                        SWSELECT('disbhist')
+		                        DELETE NEXT 1
+		                    ENDSCAN
+
+		                    SWSELECT('disbhist')
+		                    = TABLEUPDATE(.T.)
+		                    SWSELECT('ownpcts')
+		                    = TABLEUPDATE(.T.)
+		                    SWSELECT('suspense')
+		                    = TABLEUPDATE(.T.)
+		                ENDIF
+		            ELSE
+		                SWSELECT('prepayd')
+		                SCAN FOR cBatch == lcBatch AND dEffDate = ldOrigDate AND lManual AND crectype = 'U'
+		                    DELETE NEXT 1
+		                ENDSCAN
+		            ENDIF
+
+		        CASE m.cSource = 'PR'
+		* Delete the original payroll entry that created this check
+		            SWSELECT('prdata')
+		            LOCATE FOR cidchec = lcidchec
+		            DELETE NEXT 1
+
+		* Create the deposit entry to add the amount back to the register
+		            THIS.dgldate    = ldNewDate
+		            THIS.cSource    = 'PR'
+		            THIS.cPayee     = checks.cPayee
+		            THIS.cReference = 'VOID: ' + m.cCheckno
+		            THIS.cID        = m.cID
+		            THIS.dCheckDate = ldNewDate
+		            THIS.dpostdate  = ldNewDate
+		            THIS.cEntryType = 'D'
+		            THIS.cidtype    = 'D'
+		            THIS.cCheckno   = m.cCheckno
+		            THIS.cAcctNo    = m.cAcctNo
+		            THIS.nAmount    = m.nAmount
+		            THIS.cMemo      = 'Void of Check ' + m.cCheckno
+		            THIS.lprinted   = .T.
+		            THIS.lcleared   = .T.
+		            THIS.drecdate   = ldNewDate
+		            THIS.addcheck()
+		            THIS.cidchec    = THIS.GETKEY()
+
+		*
+		*  Scan through Glmaster to get the journal entry for this entry
+		*  so that the debits and credits can be reversed
+		*
+		            THIS.cBatch = THIS.oregistry.incrementcounter('%Shared.Counters.Batch')
+		            SELECT glmaster1
+		            SCAN FOR cBatch = lcBatch
+		*
+		*  Create a journal entry to void the original check
+		*
+		                THIS.cdesc   = glmaster1.cdesc
+		                THIS.cunitno = glmaster1.cunitno
+		                THIS.cdeptno = glmaster1.cdeptno
+		                THIS.cAcctNo = glmaster1.cAcctNo
+		                IF glmaster1.nDebits > 0
+		                    THIS.nAmount = glmaster1.nDebits * -1
+		                ELSE
+		                    THIS.nAmount = glmaster1.nCredits
+		                ENDIF
+		                IF NOT m.lManual
+		                    THIS.updatebatch()
+		                ENDIF
+		            ENDSCAN
+
+		        CASE m.cSource = 'GJ'
+		* Create the deposit or check entry to add the amount back to the register
+		            THIS.cBatch     = THIS.oregistry.incrementcounter('%Shared.Counters.Batch')
+		            THIS.dgldate    = ldNewDate
+		            THIS.cSource    = 'GJ'
+		            THIS.cReference = 'VOID: ' + m.cCheckno
+		            THIS.cID        = m.cID
+		            THIS.dCheckDate = ldNewDate
+		            THIS.dpostdate  = ldNewDate
+		            THIS.cPayee     = m.cPayee
+		            IF m.cEntryType = 'C'
+		                THIS.cEntryType = 'D'
+		                THIS.cidtype    = 'D'
+		            ELSE
+		                THIS.cEntryType = 'C'
+		                THIS.cidtype    = m.cidtype
+		*
+		*  Return the receipts to undeposited funds if it came from there
+		*
+		                SWSELECT('glopt')
+		                lcUnDepFund = cUnDepFund
+		                SWSELECT('deposits')
+		                SET ORDER TO cBatch
+		                IF SEEK(lcBatch)
+		                    SWSELECT('depositd')
+		                    SCAN FOR cBatch = lcBatch
+		                        m.cidchec = cidchec
+		                        SWSELECT('checks')
+		                        LOCATE FOR cidchec = m.cidchec
+		                        IF FOUND()
+		                            REPLACE lDeposited WITH .F.
+		                        ENDIF
+		                        SWSELECT('depositd')
+		                        DELETE NEXT 1
+		                    ENDSCAN
+		                    SWSELECT('deposits')
+		                    DELETE NEXT 1
+		                ENDIF
+		                SWSELECT('checks')
+		                DELE FOR cAcctNo = lcUnDepFund AND cEntryType = 'C' AND cBatch = lcBatch
+		            ENDIF
+		            THIS.cAcctNo  = m.cAcctNo
+		            THIS.cCheckno = m.cCheckno
+		            THIS.nAmount  = m.nAmount
+		            THIS.lprinted = .T.
+		            THIS.lcleared = .T.
+		            THIS.lvoid    = .T.
+		            THIS.drecdate = ldNewDate
+		            THIS.addcheck()
+		            THIS.cidchec    = THIS.GETKEY()
+
+		*
+		*  Scan through Glmaster to get the journal entry for this entry
+		*  so that the debits and credits can be reversed
+		*
+		            SELECT glmaster1
+		            SCAN FOR cBatch = lcBatch
+		*
+		*  Create a journal entry to void the original check
+		*
+		                THIS.cdesc   = glmaster1.cdesc
+		                THIS.cunitno = glmaster1.cunitno
+		                THIS.cdeptno = glmaster1.cdeptno
+		                THIS.cAcctNo = glmaster1.cAcctNo
+		                IF glmaster1.nDebits > 0
+		                    THIS.nAmount = glmaster1.nDebits * -1
+		                ELSE
+		                    THIS.nAmount = glmaster1.nCredits
+		                ENDIF
+		                IF NOT m.lManual
+		                    THIS.updatebatch()
+		                ENDIF
+		            ENDSCAN
+
+		    ENDCASE
+
+		    SWSELECT('checks')
+		    GOTO lnRecNo
+		    REPLACE lvoid WITH .T.
+		    REPLACE Nvoidamt WITH checks.nAmount
+		*   REPLACE Namount WITH 0
+		    REPLACE lprinted WITH .T.
+		    REPLACE lcleared WITH .T.
+		    REPLACE drecdate WITH ldNewDate
+		ELSE  &&  Disbursement Manager only
+		    IF m.cSource = 'AP'
+		*
+		*  Mark the invoices as not being paid by this check
+		*
+		        SWSELECT('appmtdet')
+		        SCAN FOR cidchec = lcidchec AND NOT EMPTY(lcidchec)
+		            SCATTER MEMVAR
+		            m.cBillToken  = cBillToken
+		            DELE NEXT 1
+		            SWSELECT('appurchh')
+		            LOCATE FOR cBatch = m.cBillToken
+		            IF FOUND()
+		                REPL nPayments WITH nPayments - m.nAmtPaid - m.nDiscTaken, ;
+		                    nInvBal   WITH nInvBal   + m.nAmtPaid + m.nDiscTaken
+		            ENDIF
+		        ENDSCAN
+		    ENDIF
+
+		    SWSELECT('checks')
+		    GOTO lnRecNo
+		    REPLACE lvoid WITH .T.
+		    REPLACE Nvoidamt WITH checks.nAmount
+		    REPLACE nAmount WITH 0
+		    REPLACE lprinted WITH .T.
+		    REPLACE lcleared WITH .T.
+		    REPLACE drecdate WITH ldNewDate
+
+		ENDIF
+	ENDPROC
+
+
+	*-- Prints a journal
+	PROCEDURE printjournal
+		LPARA tnType, tnSelect, tcYear, tcPeriod, tdDate1, tdDate2, tcBatch1, tcBatch2, tcAcct1, tcAcct2, tcJournal
+		LOCAL lcPath
+
+		IF TYPE('m.goApp') = 'O'
+		   lcPath = ALLTRIM(m.goApp.cDataFilePath)
+		ELSE
+		   lcPath = 'Data\'
+		ENDIF
+
+		IF NOT USED('checks')
+		   USE (lcPath+'checks') IN 0
+		ENDIF
+		IF NOT USED('emps')
+		   USE (lcPath+'emps') IN 0
+		ENDIF
+
+		IF TYPE('tcJournal') <> 'C'
+		   tcJournal = '**'
+		ENDIF
+
+		DO CASE
+		   CASE tnType = 1        && Journal Listing
+		      DO CASE
+		         CASE tnSelect = 1
+		            SELECT glmaster.cacctno, ;
+		               coa.cacctdesc,   ;
+		               glmaster.cbatch,  ;
+		               glmaster.ddate,   ;
+		               glmaster.dlastmodified, ;
+		               glmaster.cdesc,    ;
+		               glmaster.ndebits, ;
+		               glmaster.ncredits, ;
+		               glmaster.cref, ;
+		               glmaster.csource, ;
+		               glmaster.cunitno, ;
+		               IIF(EMPTY(glmaster.cdeptno),glmaster.ccatcode + SPACE(6),glmaster.cdeptno) AS cdeptno, ;
+		               glmaster.ccatcode, ;
+		               glmaster.cuser, ;
+		               glmaster.cbunch, ;
+		               glmaster.mnotes, ;
+		               glmaster.cid, ;
+		               glmaster.cidchec,  ;
+		               coa.lBankAcct, ;
+		               SPACE(40) AS cName, ;
+		               SPACE(10) AS ccheckno,  ;
+		               glmaster.cyear,   ;
+		               glmaster.cperiod  ;
+		               FROM glmaster, coa ;
+		               WHERE glmaster.cacctno = coa.cacctno    ;
+		               AND cyear+cperiod = tcYear+tcPeriod ;
+		               AND IIF(tcJournal <> '**',csource = tcJournal,.T.) ;
+		               INTO CURSOR gjtmp1 ;
+		               ORDER BY glmaster.cbatch, glmaster.cidchec, glmaster.cacctno
+		         CASE tnSelect = 2
+		            SELECT glmaster.cacctno, ;
+		               coa.cacctdesc,   ;
+		               glmaster.cbatch,  ;
+		               glmaster.ddate,   ;
+		               glmaster.dlastmodified, ;
+		               glmaster.cdesc,    ;
+		               glmaster.ndebits, ;
+		               glmaster.ncredits, ;
+		               glmaster.cref, ;
+		               glmaster.csource, ;
+		               glmaster.cunitno, ;
+		               IIF(EMPTY(glmaster.cdeptno),glmaster.ccatcode + SPACE(6),glmaster.cdeptno) AS cdeptno, ;
+		               glmaster.ccatcode, ;
+		               glmaster.cuser, ;
+		               glmaster.cbunch, ;
+		               glmaster.mnotes, ;
+		               glmaster.cid, ;
+		               glmaster.cidchec,  ;
+		               coa.lBankAcct, ;
+		               SPACE(40) AS cName, ;
+		               SPACE(10) AS ccheckno,  ;
+		               glmaster.cyear,   ;
+		               glmaster.cperiod  ;
+		               FROM glmaster, coa ;
+		               WHERE glmaster.cacctno = coa.cacctno    ;
+		               AND BETWEEN(ddate,tdDate1,tdDate2) ;
+		               AND IIF(tcJournal <> '**',csource = tcJournal,.T.) ;
+		               INTO CURSOR gjtmp1 ;
+		               ORDER BY glmaster.cbatch, glmaster.cidchec, glmaster.cacctno
+		         CASE tnSelect = 3
+		            SELECT glmaster.cacctno, ;
+		               coa.cacctdesc,   ;
+		               glmaster.cbatch,  ;
+		               glmaster.ddate,   ;
+		               glmaster.dlastmodified, ;
+		               glmaster.cdesc,    ;
+		               glmaster.ndebits, ;
+		               glmaster.ncredits, ;
+		               glmaster.cref, ;
+		               glmaster.csource, ;
+		               glmaster.cunitno, ;
+		               IIF(EMPTY(glmaster.cdeptno),glmaster.ccatcode + SPACE(6),glmaster.cdeptno) AS cdeptno, ;
+		               glmaster.ccatcode, ;
+		               glmaster.cuser, ;
+		               glmaster.cbunch, ;
+		               glmaster.mnotes, ;
+		               glmaster.cid, ;
+		               glmaster.cidchec,  ;
+		               coa.lBankAcct, ;
+		               SPACE(40) AS cName, ;
+		               SPACE(10) AS ccheckno,  ;
+		               glmaster.cyear,   ;
+		               glmaster.cperiod  ;
+		               FROM glmaster, coa ;
+		               WHERE glmaster.cacctno = coa.cacctno    ;
+		               AND BETWEEN(cbatch, tcBatch1, tcBatch2) ;
+		               AND IIF(tcJournal <> '**',csource = tcJournal,.T.) ;
+		               INTO CURSOR gjtmp1 ;
+		               ORDER BY glmaster.cbatch, glmaster.cidchec, glmaster.cacctno
+		      ENDCASE
+
+		      *
+		      *  Fill in the cname field
+		      *
+		      IF USED('gjtmp')
+		         USE IN gjtmp
+		      ENDIF
+		      USE DBF('gjtmp1') AGAIN IN 0 ALIAS gjtmp
+		      SELECT gjtmp
+		      SCAN FOR NOT EMPTY(cid)
+		         m.cid = cid
+		         **  Try and match to the right table first, based on the source, and if it can't find the name then it looks to other places - BH
+		         llFound = .F.
+		         DO CASE
+		            CASE csource = 'PR'
+		               SWSELECT('emps')
+		               SET ORDER TO cempid
+		               IF SEEK(m.cid)
+		                  m.cName = TRIM(cfirstname) + ' ' + cmidinit + ' ' + TRIM(clastname)
+		                  llFound = .T.
+		               ENDIF
+		            CASE csource = 'AR'
+		               SWSELECT('custs')
+		               SET ORDER TO ccustid
+		               IF SEEK(m.cid)
+		                  m.cName = ccustname
+		                  llFound = .T.
+		               ENDIF
+		            CASE csource = 'AP'
+		               SWSELECT('vendor')
+		               SET ORDER TO cvendorid
+		               IF SEEK(m.cid)
+		                  m.cName = csortfield
+		                  llFound = .T.
+		               ENDIF
+		            CASE csource = 'CS'
+		               SWSELECT('revsrc')
+		               SET ORDER TO crevkey
+		               IF SEEK(m.cid)
+		                  m.cName = crevname
+		                  llFound = .T.
+		               ENDIF
+		         ENDCASE
+
+		         IF NOT llFound  &&  Nothing found based on the source, so repeat the normal processing to find a name
+		            SWSELECT('investor')
+		            SET ORDER TO cownerid
+		            IF SEEK(m.cid)
+		               m.cName = csortfield
+		            ELSE
+		               SWSELECT('vendor')
+		               SET ORDER TO cvendorid
+		               IF SEEK(m.cid)
+		                  m.cName = csortfield
+		               ELSE
+		                  SWSELECT('custs')
+		                  SET ORDER TO ccustid
+		                  IF SEEK(m.cid)
+		                     m.cName = ccustname
+		                  ELSE
+		                     SWSELECT('revsrc')
+		                     SET ORDER TO crevkey
+		                     IF SEEK(m.cid)
+		                        m.cName = crevname
+		                     ELSE
+		                        m.cName = 'Unknown'
+		                     ENDIF
+		                  ENDIF
+		               ENDIF
+		            ENDIF
+		         ENDIF
+		         IF NOT EMPTY(m.cName)
+		            SELECT gjtmp
+		            REPLACE cName WITH m.cName
+		         ENDIF
+		      ENDSCAN
+		      *  Fill in a check number, if applicable
+		      SELECT gjtmp
+		      SCAN FOR NOT EMPTY(ALLT(cidchec))
+		         m.cidchec = cidchec
+		         SWSELECT('checks')
+		         SET ORDER TO cidchec
+		         IF SEEK(m.cidchec)
+		            IF lPrinted
+		               m.ccheckno = checks.ccheckno
+		            ELSE
+		               m.ccheckno = 'Un-Printed'
+		            ENDIF
+		         ELSE
+		            m.ccheckno = ''
+		         ENDIF
+		         IF NOT EMPTY(m.ccheckno)
+		            SELECT gjtmp
+		            REPLACE ccheckno WITH m.ccheckno
+		         ENDIF
+		      ENDSCAN
+		      SELECT glmaster.cacctno, ;
+		         coa.cacctdesc, ;
+		         glmaster.cyear, ;
+		         glmaster.cperiod, ;
+		         SPACE(10) AS cid, ;
+		         SPACE(40) AS cName, ;
+		         SUM(glmaster.ndebits)  AS ndebits, ;
+		         SUM(glmaster.ncredits) AS ncredits ;
+		         FROM glmaster, coa ;
+		         WHERE glmaster.cacctno = coa.cacctno ;
+		         AND IIF(tnSelect=1,cyear+cperiod = tcYear+tcPeriod, ;
+		         IIF(tnSelect=2,BETWEEN(ddate,tdDate1,tdDate2),.T.)) ;
+		         AND BETWEEN(cbatch, tcBatch1, tcBatch2) ;
+		         INTO CURSOR jrntemp ;
+		         ORDER BY glmaster.cacctno ;
+		         GROUP BY glmaster.cacctno
+
+		   CASE tnType = 2        && Account Listing
+		      SELECT glmaster.cacctno,  ;
+		         coa.cacctdesc,    ;
+		         glmaster.cbatch,   ;
+		         glmaster.cdesc,    ;
+		         glmaster.ddate,  ;
+		         glmaster.ndebits,  ;
+		         glmaster.ncredits, ;
+		         glmaster.cref,   ;
+		         glmaster.csource,  ;
+		         glmaster.cunitno,  ;
+		         IIF(EMPTY(glmaster.cdeptno),glmaster.ccatcode + SPACE(6),glmaster.cdeptno) AS cdeptno, ;
+		         glmaster.ccatcode, ;
+		         glmaster.mnotes, ;
+		         glmaster.cid,      ;
+		         glmaster.cidchec,  ;
+		         coa.lBankAcct, ;
+		         SPACE(40) AS cName, ;
+		         SPACE(10) AS ccheckno,  ;
+		         glmaster.cyear,    ;
+		         glmaster.cperiod   ;
+		         FROM glmaster, coa ;
+		         WHERE glmaster.cacctno = coa.cacctno  ;
+		         AND BETWEEN(glmaster.cacctno, tcAcct1, tcAcct2) ;
+		         AND IIF(tnSelect=1,cyear+cperiod = tcYear+tcPeriod, ;
+		         BETWEEN(ddate,tdDate1,tdDate2)) ;
+		         AND IIF(tcJournal <> '**',csource = tcJournal,.T.) ;
+		         INTO CURSOR gjtmp1 ;
+		         ORDER BY glmaster.cacctno, glmaster.cbatch, glmaster.cidchec
+
+		      *
+		      *  Fill in the cname field
+		      *
+		      IF USED('gjtmp')
+		         USE IN gjtmp
+		      ENDIF
+		      USE DBF('gjtmp1') AGAIN IN 0 ALIAS gjtmp
+		      SELECT gjtmp
+		      SCAN FOR NOT EMPTY(cid)
+		         m.cid = cid
+		         **  Try and match to the right table first, based on the source, and if it can't find the name then it looks to other places - BH
+		         llFound = .F.
+		         DO CASE
+		            CASE csource = 'PR'
+		               SWSELECT('emps')
+		               SET ORDER TO cempid
+		               IF SEEK(m.cid)
+		                  m.cName = TRIM(cfirstname) + ' ' + cmidinit + ' ' + TRIM(clastname)
+		                  llFound = .T.
+		               ENDIF
+		            CASE csource = 'AR'
+		               SWSELECT('custs')
+		               SET ORDER TO ccustid
+		               IF SEEK(m.cid)
+		                  m.cName = ccustname
+		                  llFound = .T.
+		               ENDIF
+		            CASE csource = 'AP'
+		               SWSELECT('vendor')
+		               SET ORDER TO cvendorid
+		               IF SEEK(m.cid)
+		                  m.cName = csortfield
+		                  llFound = .T.
+		               ENDIF
+		            CASE csource = 'CS'
+		               SWSELECT('revsrc')
+		               SET ORDER TO crevkey
+		               IF SEEK(m.cid)
+		                  m.cName = crevname
+		                  llFound = .T.
+		               ENDIF
+		         ENDCASE
+
+		         IF NOT llFound  &&  Nothing found based on the source, so repeat the normal processing to find a name
+		            SWSELECT('investor')
+		            SET ORDER TO cownerid
+		            IF SEEK(m.cid)
+		               m.cName = csortfield
+		            ELSE
+		               SWSELECT('vendor')
+		               SET ORDER TO cvendorid
+		               IF SEEK(m.cid)
+		                  m.cName = csortfield
+		               ELSE
+		                  SWSELECT('custs')
+		                  SET ORDER TO ccustid
+		                  IF SEEK(m.cid)
+		                     m.cName = ccustname
+		                  ELSE
+		                     SWSELECT('revsrc')
+		                     SET ORDER TO crevkey
+		                     IF SEEK(m.cid)
+		                        m.cName = crevname
+		                     ELSE
+		                        m.cName = 'Unknown'
+		                     ENDIF
+		                  ENDIF
+		               ENDIF
+		            ENDIF
+		         ENDIF
+		         IF NOT EMPTY(m.cName)
+		            SELECT gjtmp
+		            REPLACE cName WITH m.cName
+		         ENDIF
+		      ENDSCAN
+
+		      *  Fill in a check number, if applicable
+		      SELECT gjtmp
+		      SCAN FOR NOT EMPTY(ALLT(cidchec))
+		         m.cidchec = cidchec
+		         SWSELECT('checks')
+		         SET ORDER TO cidchec
+		         IF SEEK(m.cidchec)
+		            IF lPrinted
+		               m.ccheckno = checks.ccheckno
+		            ELSE
+		               m.ccheckno = 'Un-Printed'
+		            ENDIF
+		         ELSE
+		            m.ccheckno = ''
+		         ENDIF
+		         IF NOT EMPTY(m.ccheckno)
+		            SELECT gjtmp
+		            REPLACE ccheckno WITH m.ccheckno
+		         ENDIF
+		      ENDSCAN
+
+		   CASE tnType = 9        && Transaction group Journal Listing
+		      SELECT glmaster.cacctno, ;
+		         coa.cacctdesc,   ;
+		         glmaster.cbatch,  ;
+		         glmaster.ddate,   ;
+		         glmaster.dlastmodified, ;
+		         glmaster.cdesc,    ;
+		         glmaster.ndebits, ;
+		         glmaster.ncredits, ;
+		         glmaster.cref, ;
+		         glmaster.csource, ;
+		         glmaster.cunitno, ;
+		         IIF(EMPTY(glmaster.cdeptno),glmaster.ccatcode + SPACE(6),glmaster.cdeptno) AS cdeptno, ;
+		         glmaster.ccatcode, ;
+		         glmaster.cuser, ;
+		         glmaster.cbunch, ;
+		         glmaster.mnotes, ;
+		         glmaster.cid, ;
+		         glmaster.cidchec,  ;
+		         coa.lBankAcct, ;
+		         SPACE(40) AS cName, ;
+		         SPACE(10) AS ccheckno,  ;
+		         glmaster.cyear,   ;
+		         glmaster.cperiod  ;
+		         FROM glmaster, coa ;
+		         WHERE glmaster.cbunch == tcBatch1 ;
+		         AND coa.cacctno == glmaster.cacctno ;
+		         INTO CURSOR gjtmp1 ;
+		         ORDER BY glmaster.cbatch, glmaster.cidchec, glmaster.cidglma
+
+		      *
+		      *  Fill in the cname field
+		      *
+		      IF USED('gjtmp')
+		         USE IN gjtmp
+		      ENDIF
+		      USE DBF('gjtmp1') AGAIN IN 0 ALIAS gjtmp
+		      SELECT gjtmp
+		      SCAN FOR NOT EMPTY(cid)
+		         m.cid = cid
+		         **  Try and match to the right table first, based on the source, and if it can't find the name then it looks to other places - BH
+		         llFound = .F.
+		         DO CASE
+		            CASE csource = 'PR'
+		               SWSELECT('emps')
+		               SET ORDER TO cempid
+		               IF SEEK(m.cid)
+		                  m.cName = TRIM(cfirstname) + ' ' + cmidinit + ' ' + TRIM(clastname)
+		                  llFound = .T.
+		               ENDIF
+		            CASE csource = 'AR'
+		               SWSELECT('custs')
+		               SET ORDER TO ccustid
+		               IF SEEK(m.cid)
+		                  m.cName = ccustname
+		                  llFound = .T.
+		               ENDIF
+		            CASE csource = 'AP'
+		               SWSELECT('vendor')
+		               SET ORDER TO cvendorid
+		               IF SEEK(m.cid)
+		                  m.cName = csortfield
+		                  llFound = .T.
+		               ENDIF
+		            CASE csource = 'CS'
+		               SWSELECT('revsrc')
+		               SET ORDER TO crevkey
+		               IF SEEK(m.cid)
+		                  m.cName = crevname
+		                  llFound = .T.
+		               ENDIF
+		         ENDCASE
+
+		         IF NOT llFound  &&  Nothing found based on the source, so repeat the normal processing to find a name
+		            SWSELECT('investor')
+		            SET ORDER TO cownerid
+		            IF SEEK(m.cid)
+		               m.cName = csortfield
+		            ELSE
+		               SWSELECT('vendor')
+		               SET ORDER TO cvendorid
+		               IF SEEK(m.cid)
+		                  m.cName = csortfield
+		               ELSE
+		                  SWSELECT('custs')
+		                  SET ORDER TO ccustid
+		                  IF SEEK(m.cid)
+		                     m.cName = ccustname
+		                  ELSE
+		                     SWSELECT('revsrc')
+		                     SET ORDER TO crevkey
+		                     IF SEEK(m.cid)
+		                        m.cName = crevname
+		                     ELSE
+		                        m.cName = 'Unknown'
+		                     ENDIF
+		                  ENDIF
+		               ENDIF
+		            ENDIF
+		         ENDIF
+		         IF NOT EMPTY(m.cName)
+		            SELECT gjtmp
+		            REPLACE cName WITH m.cName
+		         ENDIF
+		      ENDSCAN
+
+		      *  Fill in a check number, if applicable
+		      SELECT gjtmp
+		      SCAN FOR NOT EMPTY(ALLT(cidchec))
+		         m.cidchec = cidchec
+		         SWSELECT('checks')
+		         SET ORDER TO cidchec
+		         IF SEEK(m.cidchec)
+		            IF lPrinted
+		               m.ccheckno = checks.ccheckno
+		            ELSE
+		               m.ccheckno = 'Un-Printed'
+		            ENDIF
+		         ELSE
+		            m.ccheckno = ''
+		         ENDIF
+		         IF NOT EMPTY(m.ccheckno)
+		            SELECT gjtmp
+		            REPLACE ccheckno WITH m.ccheckno
+		         ENDIF
+		      ENDSCAN
+
+		      SELECT glmaster.cacctno, ;
+		         coa.cacctdesc, ;
+		         glmaster.cyear, ;
+		         glmaster.cperiod, ;
+		         SPACE(10) AS cid, ;
+		         SPACE(40) AS cName, ;
+		         SUM(glmaster.ndebits)  AS ndebits, ;
+		         SUM(glmaster.ncredits) AS ncredits ;
+		         FROM glmaster, coa ;
+		         WHERE glmaster.cbunch == tcBatch1;
+		         AND coa.cacctno == glmaster.cacctno ;
+		         INTO CURSOR jrntemp1 ;
+		         ORDER BY glmaster.cacctno ;
+		         GROUP BY glmaster.cacctno
+
+		ENDCASE
+	ENDPROC
+
+
+	*-- Creates the reconciliation report
+	PROCEDURE rptrecon
+		LPARA tdRecDate, tlOld, tcAcctNo
+		LOCAL lcAcctDesc, lcAcctno
+		LOCAL laclrchk[1], laclrdep[1], launcchk[1], launcdep[1], llAcctMgr, llReturn, loError
+		*:Global cProcessor, cProducer, dRecDate, nClrAmtC, nClrAmtD, nClrCntC, nClrCntD, nEndBal, nOpenBal
+		*:Global nUncAmtC, nUncAmtD, nUncCntC, nUncCntD, test
+		PRIV m.dRecDate
+
+		SET DELETED ON
+
+		llReturn = .T.
+
+		TRY
+		    IF tlOld
+		        SWSELECT('checkrec')
+		        m.nOpenBal = nOpenBal
+		        m.nEndBal  = nEndBal
+		    ENDIF
+
+		    SWSELECT('coa')
+		    SWSELECT('checks')
+		    SWSELECT('checkrec')
+
+		    IF TYPE('m.goApp') = 'O'
+		        m.cProducer = m.goApp.cCompanyName
+		        llAcctMgr   = m.goApp.lAMVersion
+		    ELSE
+		        m.cProducer = 'Development Company, Inc.'
+		        llAcctMgr   = .F.
+		    ENDIF
+
+		    IF TYPE('tcAcctNo') <> 'C'
+		        llAcctMgr = .F.
+		    ENDIF
+
+		    IF TYPE('m.cProcessor') <> 'C'
+		        m.cProcessor = ''
+		    ENDIF
+
+		    IF llAcctMgr
+		        SWSELECT('coa')
+		        SET ORDER TO acctno
+		        IF SEEK(tcAcctNo)
+		            lcAcctDesc = cAcctDesc
+		        ENDIF
+		    ENDIF
+
+		    lcAcctno = tcAcctNo
+
+		    CREATE CURSOR rptrecon ;
+		        (ccheckno   C(10), ;
+		          cacctno    C(6), ;
+		          cidchec    C(8), ;
+		          dCheckDate D, ;
+		          cid        C(10), ;
+		          centrytype C(1), ;
+		          cpayee     C(40), ;
+		          lCleared   L, ;
+		          cClear     C(1), ;
+		          dRecDate   D, ;
+		          namount    N(12, 2))
+		    INDEX ON cClear + centrytype + DTOS(dCheckDate) + ccheckno TAG idtype
+
+		    swselect('checks')
+		    SCAN FOR lCleared AND EMPTY(dRecDate)
+		        REPL dRecDate WITH {01/01/1980}
+		    ENDSCAN
+
+		    SELECT rptrecon
+		    IF llAcctMgr
+		        SWSELECT('checks')
+		        SCAN FOR (dRecDate = tdRecDate OR (dRecDate > tdRecDate AND dCheckDate <= tdRecDate) OR (EMPTY(dRecDate) AND dCheckDate <= tdRecDate)) ;
+		                AND cacctno = tcAcctNo
+		            SCATTER MEMVAR
+		            INSERT INTO rptrecon FROM MEMVAR
+		        ENDSCAN
+		    ELSE
+		        SWSELECT('checks')
+		        SCAN FOR (dRecDate = tdRecDate OR (dRecDate > tdRecDate AND dCheckDate <= tdRecDate) OR (EMPTY(dRecDate) AND dCheckDate <= tdRecDate))
+		            SCATTER MEMVAR
+		            INSERT INTO rptrecon FROM MEMVAR
+		        ENDSCAN
+		    ENDIF
+
+		    SELECT rptrecon
+		    SET ORDER TO
+		    SCAN
+		        DO CASE
+		            CASE dRecDate > tdRecDate
+		                REPLACE cClear WITH ' ', ;
+		                    lCleared WITH .F.
+
+		            CASE lCleared
+		                REPLACE cClear WITH '*'
+
+		        ENDCASE
+		        IF centrytype <> 'D' AND centrytype <> 'T'
+		            REPLACE namount WITH namount * -1
+		        ENDIF
+		    ENDSCAN
+
+		*
+		*  Get a total of cleared checks
+		*
+			SELECT  SUM(namount) AS clrcheck, COUNT(*) AS chkcnt ;
+			   FROM rptrecon ;
+			   WHERE cClear = '*' ;
+				   AND centrytype <> 'D' ;
+			   INTO ARRAY laclrchk
+
+		    IF _TALLY > 0
+		        m.nClrAmtC = laclrchk[1, 1]
+		        m.nClrCntC = laclrchk[1, 2]
+		    ELSE
+		        m.nClrAmtC = 0
+		        m.nClrCntC = 0
+		    ENDIF
+
+		*
+		*  Get a total of cleared deposits
+		*
+			SELECT  SUM(namount) AS clrcheck, COUNT(*) AS chkcnt ;
+			   FROM rptrecon ;
+			   WHERE cClear = '*' ;
+				   AND centrytype = 'D' ;
+			   INTO ARRAY laclrdep
+
+		    IF _TALLY > 0
+		        m.nClrAmtD = laclrdep[1, 1]
+		        m.nClrCntD = laclrdep[1, 2]
+		    ELSE
+		        m.nClrAmtD = 0
+		        m.nClrCntD = 0
+		    ENDIF
+
+		*
+		*  Get a total of uncleared checks
+		*
+			SELECT  SUM(namount), COUNT(*) ;
+			   FROM rptrecon ;
+			   WHERE cClear = ' ' ;
+				   AND centrytype <> 'D' ;
+				   AND dCheckDate <= tdRecDate ;
+			   INTO ARRAY launcchk
+
+		    IF _TALLY > 0
+		        m.nUncAmtC = launcchk[1, 1]
+		        m.nUncCntC = launcchk[1, 2]
+		    ELSE
+		        m.nUncAmtC = 0
+		        m.nUncCntC = 0
+		    ENDIF
+
+		*
+		*  Get a total of uncleared deposits
+		*
+			SELECT  SUM(namount), COUNT(*) ;
+			   FROM rptrecon ;
+			   WHERE cClear = ' ' ;
+				   AND centrytype = 'D' ;
+				   AND dCheckDate <= tdRecDate ;
+			   INTO ARRAY launcdep
+
+		    IF _TALLY > 0
+		        m.nUncAmtD = launcdep[1, 1]
+		        m.nUncCntD = launcdep[1, 2]
+		    ELSE
+		        m.nUncAmtD = 0
+		        m.nUncCntD = 0
+		    ENDIF
+
+		*
+		*  Make the cProducer variable a default value for development purposes
+		*
+		    IF TYPE('m.goApp') = 'O'
+		        m.cProducer = m.goApp.cCompanyName
+		    ELSE
+		        m.cProducer = 'Development Company, Inc.'
+		    ENDIF
+
+		    IF TYPE('m.cProcessor') <> 'C'
+		        m.cProcessor = ''
+		    ENDIF
+
+		    CREATE CURSOR temp ;
+		        (test  C(1), ;
+		          dRecDate D)
+
+		    m.dRecDate = tdRecDate
+
+		    SELECT temp
+		    m.test = ' '
+		    INSERT INTO temp FROM MEMVAR
+		    GO TOP
+
+		* Turn off help for reports
+		    ON KEY LABEL F1 *
+
+		    REPORT FORM csrecsum.frx PREVIEW
+
+		    SELECT rptrecon
+		    GO TOP
+		    SET ORDER TO idtype
+
+		    REPORT FORM csrecdet.frx PREVIEW
+
+		    IF THIS.oMessage.CONFIRM('Send the report to the printer now?')
+		        SELECT temp
+		        REPORT FORM csrecsum.frx TO PRINTER PROMPT NOCONSOLE NOEJECT
+		        SELECT rptrecon
+		        REPORT FORM csrecdet.frx TO PRINTER PROMPT NOCONSOLE NOEJECT
+		    ENDIF
+
+		CATCH TO loError
+		    llReturn = .F.
+		    DO errorlog WITH 'RptRecon', loError.LINENO, 'GlMaint', loError.ERRORNO, loError.MESSAGE, '', loError
+		    MESSAGEBOX('Unable to process the report at this time. Check the System Log found under Other Reports for more information.' + CHR(10) + CHR(10) + ;
+		          'Contact SherWare Support for help at support@sherware.com', 16, 'Problem Encountered')
+		ENDTRY
+
+		RETURN llReturn
+	ENDPROC
+
+
+	*-- Check to see if fiscal period is closed
+	PROCEDURE checkperiod
+		LPARA tdDate, tlValid
+		*
+		* tdDate  = the date to check
+		* tlValid = .t. means to return logical instead of displaying message
+		*
+
+		* Ignore blank dates - pws 5/13/08
+		IF EMPTY(tdDate)
+		   RETURN .t.
+		ENDIF 
+
+		swselect('sysctl')
+
+		*  Get the fiscal period and year the date is in
+		lcPeriod = THIS.getperiod(tdDate,.F.)
+		lcYear   = THIS.getperiod(tdDate,.T.)
+
+		SWSELECT('sysctl',.T.)
+		SET ORDER TO yrprdkey
+		IF SEEK(lcYear+lcPeriod+'NA')
+		   IF NOT tlValid
+		      THIS.oMessage.DISPLAY('%msgGLPrdClosed')
+		   ENDIF    
+		   RETURN .F.
+		ELSE
+		   SET ORDER TO yearclose
+		   IF SEEK(lcYear+'YA')
+		      IF NOT tlValid
+		         THIS.oMessage.DISPLAY('%msgGLYrClosed')
+		      ENDIF    
+		      RETURN .F.
+		   ELSE
+		      RETURN .T.   
+		   ENDIF
+		ENDIF
+	ENDPROC
+
+
+	*-- Calculate account balances by well
+	PROCEDURE calcbalancew
+		LPARA tlFinancial
+		*
+		*  Calculates the balances for each account in the chart of accounts
+		*  for each fiscal period that data exists.
+		*
+		LOCAL lcPeriod, lcYear, lnDebits, lnCredits, lnAccttype
+
+		STORE 0 TO lnCredits, lnDebits, lnAcctType
+
+		IF tlFinancial
+		   SELECT glmaster.cAcctNo,          ;
+		          glmaster.cYear,                     ;
+		          glmaster.cPeriod,                   ;
+		          glmaster.cunitno, ;
+		          SUM(glmaster.nDebits) AS nDebits,   ;
+		          SUM(glmaster.nCredits) AS nCredits ;
+		     FROM glmaster ;
+		       WHERE glmaster.csource <> 'YE' ;
+		     INTO CURSOR coabalnew readwrite;
+		     ORDER BY glmaster.cAcctNo, cYear, cPeriod, cunitno ;
+		     GROUP BY glmaster.cAcctNo, cYear, cPeriod, cunitno
+		ELSE
+		   SELECT cAcctNo,          ;
+		          cYear,                     ;
+		          cPeriod,                   ;
+		          cunitno, ;
+		          SUM(nDebits) AS nDebits,   ;
+		          SUM(nCredits) AS nCredits ;
+		     FROM glmaster ;
+		     INTO CURSOR coabalnew readwrite;
+		     ORDER BY glmaster.cAcctNo, cYear, cPeriod, cunitno ;
+		     GROUP BY glmaster.cAcctNo, cYear, cPeriod, cunitno
+		ENDIF         
+		SELECT coabalnew
+		INDEX on cacctno TAG cacctno
+		INDEX on cyear+cperiod TAG cyearprd
+
+		RETURN 
+
+		*********************************************************************************
+		*  CHANGED TO CREATE COABAL EVERYTIME - pws 12/09/08
+		*********************************************************************************
+	ENDPROC
+
+
+	*-- Returns the 1st day of the month for a given fiscal year and period
+	PROCEDURE getdate
+		LPARA lcYear, lcPeriod
+		LOCAL lcfperiod, llAddYear
+
+		lcfperiod = 1
+
+		SWSELECT('glopt',.T.)
+		lcFyBegin = cFyBegin
+		IF EMPTY(lcFYBegin)
+		   lcFYBegin = '01'
+		ENDIF 
+		llFyEnd   = lFyEnd
+
+		lcfperiod = (INT(VAL(lcFyBegin)-1)) + INT(VAL(lcPeriod))
+
+		IF lcfperiod > 12
+		   lcfperiod = lcfperiod - 12
+		   llAddYear = .T.
+		ENDIF
+
+		IF NOT llFyEnd
+		   lcfYear = INT(VAL(lcYear))
+		ELSE
+		   IF lcFyBegin <> '01'
+		      lcfYear = INT(VAL(lcYear) -1)
+		   ELSE
+		      lcfYear = INT(VAL(lcYear))
+		   ENDIF
+		ENDIF
+
+		IF llAddYear
+		   lcfYear = lcfYear + 1
+		ENDIF
+
+		RETURN CTOD(STR(lcfperiod) + '/01/' + STR(lcfYear))
+	ENDPROC
+
+
+	*-- Calculates a consolidated balance.
+	PROCEDURE calcconbalance
+		LPARA tlFinancial
+
+		*
+		*  Calculates the balances for each account in the chart of accounts
+		*  for each company that is to be consolidated
+		*
+		LOCAL lcPeriod, lcYear, lnDebits, lnCredits, lnAccttype
+
+		STORE 0 TO lnCredits, lnDebits, lnAccttype
+
+		IF USED('temp')
+		   SELECT temp
+		   USE
+		ENDIF
+
+		IF USED('coa')
+		   USE IN coa
+		ENDIF 
+
+		IF NOT USED('coabal')
+		   USE coabal IN 0
+		ENDIF
+
+		IF NOT USED('compmast')
+		   USE datafiles\compmast IN 0
+		ENDIF
+
+		SWSELECT('coabal',.T.)
+		lnFields = AFIELDS(laTemp)
+
+		FOR x = 1 TO lnFields
+		   laTemp[X,7] = ''
+		   laTemp[X,8] = ''
+		   laTemp[X,9] = ''
+		   laTemp[X,10] = ''
+		   laTemp[X,11] = ''
+		   laTemp[X,12] = ''
+		   laTemp[X,13] = ''
+		   laTemp[X,14] = ''
+		   laTemp[X,15] = ''
+		   laTemp[X,16] = ''
+		ENDFOR
+
+		IF lnFields > 0
+		   CREATE CURSOR consbal  FROM ARRAY laTemp
+		   SELE consbal
+		   INDEX ON cacctno+cfiscalyr+cfiscalprd TAG acctprd
+		   INDEX ON cacctno TAG cacctno
+		ELSE
+		   RETURN
+		ENDIF
+
+		 
+		CREATE CURSOR tempcoa ;
+		  (cacctno    C(6), ;
+		   cAcctdesc  C(30), ;
+		   nAccttype  I, ;
+		   cparent    c(6), ;
+		   lTitle     L, ;
+		   lTotalAcct L)
+		  
+
+		CREATE CURSOR tempbal ;
+		   (cacctno    C(6), ;
+		   nAcctType  N(2), ;
+		   cYear      C(4), ;
+		   cPeriod    C(2), ;
+		   nDebits    N(12,2), ;
+		   nCredits   N(12,2), ;
+		   lTitle     L, ;
+		   lTotalAcct L)
+		INDEX ON cYear+cPeriod+cacctno TAG acctprd
+
+		*
+		*  Scan through the consolidated companies and add their balances
+		*
+		SELE compmast
+		SCAN FOR RIGHT(xflag,1) = 'C'
+		   m.cDataPath = ALLT(cDataPath)
+		   WAIT WIND NOWAIT 'Adding balances for ' + ALLT(cproducer)
+
+		   * Close the tables if already in use
+		   IF USED('compcoa')
+		      USE IN compcoa
+		   ENDIF
+		   IF USED('compgl')
+		      USE IN compgl
+		   ENDIF 
+		   
+		   USE (m.cDataPath+'coa') IN 0 ALIAS compcoa
+		   USE (m.cDataPath+'glmaster') IN 0  ALIAS compgl
+
+		   SELE tempcoa
+		   APPEND FROM DBF('compcoa')
+		   
+		   IF tlFinancial
+		      SELECT compgl.cacctno,          ;
+		         cYear,                     ;
+		         cPeriod,                   ;
+		         SUM(nDebits) AS nDebits,   ;
+		         SUM(nCredits) AS nCredits ;
+		         FROM compgl ;
+		         WHERE compgl.csource <> 'YE' ;
+		         INTO CURSOR temp ;
+		         ORDER BY compgl.cacctno, cYear, cPeriod ;
+		         GROUP BY compgl.cacctno, cYear, cPeriod
+		   ELSE
+		      SELECT compgl.cacctno,          ;
+		         cYear,                     ;
+		         cPeriod,                   ;
+		         SUM(nDebits) AS nDebits,   ;
+		         SUM(nCredits) AS nCredits  ;
+		         FROM compgl ;
+		         INTO CURSOR temp ;
+		         ORDER BY compgl.cacctno, cYear, cPeriod ;
+		         GROUP BY compgl.cacctno, cYear, cPeriod
+		   ENDIF
+
+		   IF _TALLY > 0
+		      lnMax = _TALLY
+		      lnCount = 1
+
+		      SELECT tempbal
+		      APPEND FROM DBF('temp')
+		   ENDIF
+		ENDSCAN
+
+		*
+		*  Total by account and period
+		*
+		SELE cacctno, cyear, cPeriod, ;
+		   SUM(nDebits) AS nDebits, ;
+		   SUM(nCredits) AS nCredits ;
+		   FROM tempbal ;
+		   INTO CURSOR coabalnew readwrite  ;
+		   ORDER BY cacctno, cyear, cperiod ;
+		   GROUP BY cacctno, cyear, cperiod
+		SELECT coabalnew
+		INDEX on cacctno TAG cacctno
+		INDEX on cyear+cperiod TAG cyearprd
+		*
+		*  Combine chart of accounts
+		*
+		SELE * FROM tempcoa ;
+		  INTO CURSOR newcoa readwrite;
+		  ORDER BY cacctno ;
+		  GROUP BY cacctno
+		INDEX on cacctno TAG acctno
+	ENDPROC
+
+
+	*-- Calculates account balances by dept.
+	PROCEDURE calcbalanced
+		LPARA tlFinancial
+		*
+		*  Calculates the balances for each account in the chart of accounts
+		*  for each fiscal period that data exists.
+		*
+		LOCAL lcPeriod, lcYear, lnDebits, lnCredits, lnAccttype
+
+		STORE 0 TO lnCredits, lnDebits, lnAcctType
+
+		IF tlFinancial
+		   SELECT glmaster.cAcctNo,          ;
+		          glmaster.cYear,                     ;
+		          glmaster.cPeriod,                   ;
+		          glmaster.cdeptno, ;
+		          SUM(glmaster.nDebits) AS nDebits,   ;
+		          SUM(glmaster.nCredits) AS nCredits ;
+		     FROM glmaster ;
+		       WHERE glmaster.csource <> 'YE' ;
+		     INTO CURSOR coabaldept readwrite;
+		     ORDER BY glmaster.cAcctNo, cYear, cPeriod, cdeptno ;
+		     GROUP BY glmaster.cAcctNo, cYear, cPeriod, ccdeptno
+		ELSE
+		   SELECT cAcctNo,          ;
+		          cYear,                     ;
+		          cPeriod,                   ;
+		          cdeptno, ;
+		          SUM(nDebits) AS nDebits,   ;
+		          SUM(nCredits) AS nCredits ;
+		     FROM glmaster ;
+		     INTO CURSOR coabaldept readwrite;
+		     ORDER BY glmaster.cAcctNo, cYear, cPeriod, cdeptno ;
+		     GROUP BY glmaster.cAcctNo, cYear, cPeriod, cdeptno
+		ENDIF         
+		SELECT coabaldept
+		INDEX on cdeptno+cacctno TAG cacctno
+		INDEX on cdeptno+cyear+cperiod TAG cyearprd
+
+		RETURN 
+
+		*********************************************************************************
+		*  CHANGED TO CREATE COABAL EVERYTIME - pws 12/09/08
+		*********************************************************************************
+	ENDPROC
+
+
+	*-- Delete the given batch in the specified company's glmaster.
+	PROCEDURE delbatch_c
+		LPARA tcBatch
+		LOCAL ldDate, lcAcctNo, lnDebits, lnCredit
+
+		IF NOT m.goApp.lAMVersion
+		   RETURN
+		ENDIF   
+
+		IF TYPE('tcBatch') <> 'C'
+		   WAIT WIND NOWAIT 'Bad batch passed to glmaint:delbatch'
+		   RETURN
+		ENDIF   
+
+		*
+		*  Delete any entries tied to the batch number passed
+		*
+		SELECT altglmaster
+		SET ORDER TO glbatch
+		IF SEEK(tcBatch)
+		   ldDate   = dDate
+		   lcYear   = this.getperiod_c(ldDate,.T.)
+		   lcPeriod = this.getperiod_c(ldDate,.F.)
+		   this.cYear   = lcYear
+		   this.cPeriod = lcPeriod
+		ELSE
+		   STORE 0 TO this.nDebits, this.nCredits
+		   STORE '' TO this.cYear, this.cPeriod
+		   RETURN   
+		ENDIF   
+
+		SCAN FOR cBatch == tcBatch
+		   ldDate    = ddate
+		   lcAcctNo  = cAcctNo   
+		   lnDebits  = nDebits * -1
+		   lnCredits = nCredits * -1
+		*   this.updbalance_c(lcAcctNo, lnDebits, lnCredits)
+		   DELETE NEXT 1
+		ENDSCAN           
+
+		*
+		*  Reset properties
+		*
+		STORE 0 TO this.nDebits, this.nCredits, this.nAmount
+		STORE '' TO this.cYear, this.cPeriod, this.cBatch, this.cID, this.cReference, ;
+		            this.dmbatch, this.cbunch, this.cdesc, this.csource
+		STORE {} TO this.dgldate            
+		   
+	ENDPROC
+
+
+	*-- Add the batch entries to the given company's glmaster.
+	PROCEDURE updatebatch_c
+		LOCAL m.cbatch, m.cbunch, m.cref, m.cdesc, m.ddate, m.cunitno, m.cdeptno, m.cid
+		LOCAL m.csource, m.cdmbatch, m.namount, oregistry, osecurity, m.cidchec
+		LOCAL m.cref, m.ddate, m.cunitno, m.cdeptno, m.cbunch, m.cdesc, m.cid
+
+		* Don't execute this procedure if running the stand-alone disb mgr
+		IF NOT m.goApp.lAMVersion
+		   RETURN
+		ENDIF
+
+		IF TYPE('this.nDebits_c') <> 'N'
+		   THIS.ndebits_c = 0
+		ENDIF
+		IF TYPE('this.nCredits_c') <> 'N'
+		   THIS.ncredits_c = 0
+		ENDIF
+
+		*
+		*  Adds and updates batches to the GLMASTER table
+		*
+		*set asserts on
+		ASSERT TYPE('this.cacctno') = 'C' ;
+		   MESSAGE 'The account number property must be set before calling the updatebatch method'
+		ASSERT TYPE('this.cbatch') = 'C'   ;
+		   MESSAGE 'The batch number property must be set before calling the updatebatch method'
+		ASSERT TYPE('this.cSource') = 'C'   ;
+		   MESSAGE 'The source property must be set before calling the updatebatch method'
+		ASSERT INLIST(THIS.csource,'AP','CS','DM','AR','GJ','PR','LM','YE','PD')  ;
+		   MESSAGE 'The csource property must be a valid journal source'
+		ASSERT TYPE('this.dGLDate') = 'D'   ;
+		   MESSAGE 'A valid date must be passed to the updatebatch method'
+		ASSERT TYPE('this.nAmount') = 'N'   ;
+		   MESSAGE 'A valid date must be passed to the updatebatch method'
+
+		*
+		*  Set defaults for properties not setup
+		*
+		IF TYPE('this.cUnitNo') <> 'C'
+		   THIS.cunitno = ' '
+		ENDIF
+		IF TYPE('this.cDeptNo') <> 'C'
+		   THIS.cdeptno = ' '
+		ENDIF
+		IF TYPE('this.cBunch') <> 'C'
+		   THIS.cbunch = ' '
+		ENDIF
+		IF TYPE('this.dmbatch') <> 'C'
+		   THIS.dmbatch = ' '
+		ENDIF
+		IF TYPE('this.cCatCode') <> 'C'
+		   THIS.ccatcode = ' '
+		ENDIF
+		IF TYPE('this.cidchec') <> 'C'
+		   THIS.cidchec = ''
+		ENDIF
+		IF TYPE('this.cafeno') <> 'C'
+		   THIS.cafeno = ''
+		ENDIF
+		*
+		*  Set up the memory variables so that the insert will have
+		*  the data it needs.
+		*
+
+		m.cbatch     = THIS.cbatch
+		m.csource    = THIS.csource
+		m.cref       = THIS.creference
+		m.ddate      = THIS.dgldate
+		m.cunitno    = THIS.cunitno
+		m.cdeptno    = THIS.cdeptno
+		m.cacctno    = THIS.cacctno
+		m.cdmbatch   = THIS.dmbatch
+		m.cbunch     = THIS.cbunch
+		m.cdesc      = THIS.cdesc
+		m.cid        = THIS.cid
+		m.ccatcode   = THIS.ccatcode
+		m.cidchec    = THIS.cidchec
+		lcnotes      = THIS.mnotes
+		m.cafeno     = this.cafeno 
+		IF NOT EMPTY(lcnotes)
+		   m.mnotes     = EVAL(lcnotes)
+		ELSE
+		   m.mnotes = ''
+		ENDIF
+
+		*
+		*  Get the fiscal year and period the date falls in
+		*   (Only do it the 1st time)
+		*IF TYPE('this.cYear') <> 'C' OR EMPTY(this.cyear)
+		m.cyear       = THIS.getperiod_c(m.ddate,.T.)
+		m.cperiod     = THIS.getperiod_c(m.ddate,.F.)
+		THIS.cyear    = m.cyear
+		THIS.cperiod  = m.cperiod
+		*ENDIF
+
+		*
+		*  Figure out whether we're debiting or crediting
+		*  the given account
+		*
+		DO CASE
+		   CASE THIS.namount > 0
+		      m.ndebits  = THIS.namount
+		      m.ncredits = 0
+		   CASE THIS.namount < 0
+		      m.ncredits = ABS(THIS.namount)
+		      m.ndebits  = 0
+		   OTHERWISE
+		      *  Don't save a zero entry
+		      RETURN .T.
+		ENDCASE
+
+		m.cidglma    = THIS.oregistry.incrementcounter('%Shared.Counters.glmaster')
+		SET DELETED OFF
+		SELECT altglmaster
+		SET ORDER TO cidglma
+		IF SEEK(m.cidglma)
+		   GO BOTT
+		   ocounter = THIS.oregistry.lockcounter('%Shared.Counters.glmaster')
+		   m.ccountervalue = THIS.oregistry.getcounter(ocounter)
+		   IF altglmaster.cidglma >= m.ccountervalue
+		      THIS.oregistry.setcounter(ocounter, glmaster.cidglma)
+		      THIS.oregistry.updatecounter(ocounter)
+		   ENDIF
+		   THIS.oregistry.unlockcounter(ocounter)
+		   m.cidglma = THIS.oregistry.incrementcounter('%Shared.Counters.glmaster')
+		ENDIF
+		SET DELETED ON
+
+		THIS.ndebits_c  = THIS.ndebits_c + m.ndebits
+		THIS.ncredits_c = THIS.ncredits_c + m.ncredits
+
+		*
+		*  Fill in the current date and time
+		m.dlastmodified   = DATETIME()
+		m.cuser           = m.goapp.cuser
+
+		*
+		*  Recycle deleted records
+		*
+		lcdeleted = SET('DELETED')
+
+		SELECT altglmaster
+		SET DELETED OFF
+		SET ORDER TO _deleted
+		IF SEEK(.T.)
+		   RECALL
+		   GATHER MEMVAR MEMO
+		ELSE
+		   INSERT INTO altglmaster FROM MEMVAR
+		ENDIF
+
+		SET ORDER TO glbatch
+
+		SET DELETED &lcdeleted
+
+		*
+		*  Update the system balance for this account
+		*
+		*THIS.updbalance_c(m.cacctno, m.ndebits, m.ncredits)
+	ENDPROC
+
+
+	*-- Initialize for the given company
+	PROCEDURE init_c
+		LPARA tcidComp
+		*
+		*  Opens the required tables from the alternate company
+		*
+
+		if not used('compmast')
+		   use datafiles\compmast in 0
+		endif
+
+		sele compmast
+		set order to cidcomp
+		if not seek(tcidcomp)
+		   this.omessage.severe('The company key passed to glmaint:init_c was not found in the company file.  Cannot initialize.')   
+		   return .f.
+		else
+		   this.altcompany = cproducer
+		   this.altcidcomp = cidcomp
+		   this.altdatapath = allt(cdatapath)
+		endif
+
+		if used('altglopt')
+		   use in altglopt
+		endif
+		if used('altglmaster')
+		   use in altglmaster
+		endif
+		if used('altcoabal')
+		   use in altcoabal
+		endif
+		if used('altchecks')
+		   use in altchecks
+		endif
+
+		use (this.altdatapath+'glmaster') in 0 alias altglmaster
+		use (this.altdatapath+'glopt')    in 0 alias altglopt
+		use (this.altdatapath+'coabal')   in 0 alias altcoabal
+		use (this.altdatapath+'checks')   in 0 alias altchecks
+
+		return .t.
+	ENDPROC
+
+
+	*-- Update the balance in the alternate company's coabal
+	PROCEDURE updbalance_c
+		*=================================================================================
+		*  Description: Updates the balances for G/L accounts.
+		*  Parameters.: tdDate    - The date of the transaction.
+		*               tcAccount - The account number of the account to update.
+		*               tnDr      - The debit amount.
+		*               tnCr      - The credit amount.
+		*=================================================================================
+		PARA tcAccount, tnDr, tnCr
+		LOCAL lcPeriod, lcYear, lcSelect
+
+		*  Don't execute this method if running the stand-alone disb mgr.
+		IF NOT m.goApp.lAMVersion
+		   RETURN
+		ENDIF   
+
+		lcSelect = SELECT()
+
+		lcYear   = this.cYear
+		lcPeriod = this.cPeriod
+
+		SET DELETED OFF
+		SELECT altcoabal
+		SET ORDER TO acctprd
+		IF SEEK(tcAccount+lcYear+lcPeriod)
+		   IF DELETED()
+		      RECALL
+		   ENDIF   
+		   REPLACE nDebits  WITH (nDebits + tnDr), ;
+		           nCredits WITH (nCredits + tnCr)
+		ELSE
+		   m.cAcctNo    = tcAccount
+		   m.cFiscalYr  = lcYear
+		   m.cFiscalPrd = lcPeriod
+		   m.nDebits    = tnDr
+		   m.nCredits   = tnCr
+		   INSERT INTO altcoabal FROM MEMVAR
+		ENDIF         
+
+		SET DELETED ON
+		SELECT (lcSelect)
+	ENDPROC
+
+
+	PROCEDURE getperiod_c
+		LPARA tdDate, tlYear
+		LOCAL laPeriods[13,2]
+		LOCAL lcYear, lcPeriod, lnX, lcSelect
+
+
+		ASSERT TYPE('tdDate') = 'D'  ;
+		   MESSAGE 'A blank date was passed to the getperiod method.  Fix it!!!!'
+
+		lcSelect = SELECT()
+
+		SELECT altglopt
+		GO TOP
+		SCATTER MEMVAR
+
+		SELECT (lcSelect)
+
+		m.cFYEnd = PADL(TRANSFORM(VAL(m.cFYBegin)-1),2,'0')
+		IF m.cFYEnd = '00'
+		    m.cFYEnd = '12'
+		ENDIF
+
+		SELECT (lcSelect)
+		lcFYBegYr = TRANSFORM(YEAR(tdDate))
+
+		*
+		*  Get the beginning date of the fiscal year.
+		*
+		ldBegDate = CTOD(m.cFYBegin + '/' + '01' + '/' + STR(VAL(lcFYBegYr),4))
+
+		if tdDate < ldBegDate
+		   ldBegDate = gomonth(ldbegdate,-12)
+		endif 
+		ldEndDate = gomonth(ldBegDate,11)
+		ldEndDate = this.goendmonth(ldEndDate,0,.t.)
+
+		*
+		*  Just asking for fiscal year
+		*
+		IF tlYear
+		   IF tdDate >= ldBegDate
+		      *
+		      * The date is after the beginning FY date.
+		      * Calculate what FY the date is in by calculating the number
+		      * of years the given date is past the beginning date.
+		      *
+		      lnDays = tdDate - ldBegDate
+		      IF MOD(YEAR(DATE()),4) = 0
+		         lnDays = lnDays - 1
+		      ENDIF   
+		      lnYrs  = INT(lnDays/365.4)
+		      IF m.lFYEnd
+		         lcYear = STR(VAL(lcFYBegYr) + lnYrs+1,4)
+		      ELSE
+		         lcYear = STR(VAL(lcFYBegYr) + lnYrs,4)
+		      ENDIF   
+		      RETURN(lcYear)
+		   ELSE
+		      *
+		      * The date is before the beginning date.
+		      * Calculate what FY the date is in by calculating the number
+		      * of years the given date is before the beginning date.
+		      * 
+		      lnDays = ldBegDate - tdDate
+		      IF m.lFYEnd
+		         lnYrs  = INT(lnDays/365) 
+		      ELSE
+		         lnYrs  = INT(lnDays/365) + 1
+		      ENDIF   
+		      lcYear = STR(VAL(lcFYBegYr) - lnYrs,4)
+		      RETURN(lcYear)
+		   ENDIF      
+		ENDIF
+
+		*
+		*  If we get this far we can safely assume the period
+		*  was requested
+		*
+
+		* Force the fiscal period count to be 12 per year --pws 3/24/97
+		m.nfyprds = 12
+
+		DO CASE
+		   CASE m.nfyprds = 13
+		      *
+		      * If there are 13 periods in a FY, each period is 28 days long.
+		      * Put the month and ending day of each period in the laPeriods
+		      * array.
+		      *
+		      ldWrkDate = ldBegDate + 28
+		      FOR lnX = 1 TO m.nfyprds
+		          laPeriods[lnX,1] = PADL(ALLTRIM(STR(MONTH(ldWrkDate),2)),2,'0')
+		          laPeriods[lnX,2] = PADL(ALLTRIM(STR(DAY(ldWrkDate),2)),2,'0')
+		          ldWrkDate = ldWrkDate + 28
+		      ENDFOR
+		   CASE m.nfyprds = 12
+		      *
+		      * If there are 12 periods in a FY, each period coincides with a given
+		      * month. Put the month and ending day of each period in the laPeriods
+		      * array.
+		      *
+		      ldWrkDate = this.goendmonth(ldBegDate,0,.T.)
+		      laPeriods[1,1] = PADL(ALLTRIM(STR(MONTH(ldWrkDate),2)),2,'0')
+		      laPeriods[1,2] = PADL(ALLTRIM(STR(DAY(ldWrkDate),2)),2,'0')
+		      ldWrkDate = this.goendmonth(ldBegDate,1)
+		      FOR lnX = 2 TO m.nfyprds
+		          laPeriods[lnX,1] = PADL(ALLTRIM(STR(MONTH(ldWrkDate),2)),2,'0')
+		          laPeriods[lnX,2] = PADL(ALLTRIM(STR(DAY(ldWrkDate),2)),2,'0')
+		          ldWrkDate = this.goendmonth(ldBegDate, lnX)
+		      ENDFOR
+		ENDCASE      
+
+		*
+		* Set the period as 'XX'. If the period is still 'XX' after we've
+		* looked it up in the laPeriods array, the date is invalid.
+		*
+		lcPeriod = 'XX'
+
+		*
+		* Look for the period in the laPeriods array.  Return the period
+		* by formatting the index of the given element as the period the
+		* given date falls into.
+		*
+		FOR lnX = 1 TO m.nFYPrds
+		    lcMonth = PADL(ALLTRIM(STR(MONTH(tdDate))),2,'0')
+		    lcDay   = PADL(ALLTRIM(STR(DAY(tdDate))),2,'0')
+		    IF lcMonth = laPeriods[lnX,1] AND lcDay <= laPeriods[lnX,2]
+		       lcPeriod = (PADL(ALLTRIM(STR(lnX)),2,'0'))
+		       EXIT   
+		    ENDIF
+		ENDFOR
+
+		SELECT (lcSelect)
+
+		RETURN (lcPeriod)     
+	ENDPROC
+
+
+	PROCEDURE chkbalance_c
+		*
+		*  Checks to make sure the batch is in balance
+		*  Returns .T. if it is in balance
+		*  Returns .F. if is is not in balance
+		*
+
+		*
+		*  Check the value in the nDebits and nCredits properties
+		*
+		IF TYPE('this.nDebits_c') <> 'N'
+		   RETURN .F.
+		ENDIF
+		IF TYPE('this.nCredits_c') <> 'N'
+		   RETURN .F.
+		ENDIF
+		   
+		*
+		*  Reset the cYear and cPeriod properties
+		*
+		this.cYear     = ''
+		this.cPeriod   = ''
+
+		IF this.nDebits_c = this.nCredits_c
+		   STORE 0 TO this.nDebits_c, this.nCredits_c
+		   RETURN .T.
+		ELSE
+		   STORE 0 TO this.nDebits_c, this.nCredits_c
+		   RETURN .F.
+		ENDIF      
+	ENDPROC
+
+
+	PROCEDURE addcheck_c
+		*
+		*  Adds a check to the check register  (checks)
+		*
+		LOCAL m.cId, m.cPayee, m.cIdType, m.nAmount, m.cSource, m.dCheckDate
+		LOCAL m.cGroup, m.cAcctNo, m.cCheckNo, m.cidchec, m.cPeriod, m.cYear, m.lDeleted
+		LOCAL m.cMemo, m.lVoid, m.nVoidAmt, m.lManual, m.lHist, m.dRecDate, m.lDeposited
+		LOCAL m.lCleared, m.dPostDate, lcSelect, m.cBatch, m.lPrinted, m.cEntryType
+
+		lcSelect = SELECT()
+
+		m.cId        = this.cId
+		m.cPayee     = this.cPayee
+		m.cIdType    = this.cIdType
+		m.nAmount    = this.nAmount
+		m.cSource    = this.cSource
+		m.dCheckDate = this.dCheckDate
+		m.cGroup     = this.cGroup
+		m.cMemo      = this.cMemo
+		m.dPostDate  = this.dPostDate
+		m.cAcctNo    = this.cAcctNo
+		m.cEntryType = this.cEntryType
+		m.cBatch     = this.cBatch
+		m.cCheckNo   = this.cCheckNo
+		m.lCleared   = this.lCleared
+		m.lPrinted   = this.lPrinted
+		m.dRecDate   = this.dRecDate
+		m.cYear      = this.cYear
+		m.cPeriod    = this.cPeriod
+
+		IF TYPE('m.dRecDate') <> 'D'
+		   m.dRecDate = {}
+		ENDIF   
+
+		*
+		*  Check to make sure the required properties were set
+		*
+		ASSERT TYPE('m.cId')        = 'C' MESSAGE 'The cId property must be set before calling glmaint'
+		ASSERT TYPE('m.cPayee')     = 'C' MESSAGE 'The cPayee property must be set before calling glmaint'
+		ASSERT TYPE('m.nAmount')    = 'N' MESSAGE 'The nAmount property must be set before calling glmaint'
+		ASSERT TYPE('m.cSource')    = 'C' MESSAGE 'The cSource property must be set before calling glmaint'
+		ASSERT TYPE('m.cAcctNo')    = 'C' MESSAGE 'The cAcctNo property must be set before calling glmaint'
+		ASSERT TYPE('m.cEntryType') = 'C' MESSAGE 'The cEntryType property must be set before calling glmaint'
+		ASSERT TYPE('m.cBatch')     = 'C' MESSAGE 'The cBatch property must be set before calling glmaint'
+		ASSERT TYPE('m.cIdType')    = 'C' MESSAGE 'The cIdType property must be set before calling glmaint'
+		ASSERT TYPE('m.dCheckDate') = 'D' MESSAGE 'The dCheckDate property must be set before calling glmaint'
+		ASSERT TYPE('m.dPostDate')  = 'D' MESSAGE 'The dPostDate property must be set before calling glmaint'
+
+		*
+		*  Set default properties if they weren't set
+		*
+		IF TYPE('m.cGroup') <> 'C'
+		   m.cGroup = '00'
+		ENDIF
+
+		IF TYPE('m.cMemo') <> 'C'
+		   m.cMemo = ''
+		ENDIF
+
+		STORE .F. TO m.lManual, m.lHist, m.lVoid, m.lDeleted, m.lDeposited
+		STORE 0   TO m.nVoidAmt
+
+		*
+		*  Don't save zero amount checks
+		*
+		IF this.nAmount = 0
+		   RETURN
+		ENDIF   
+
+
+		*  Get the fiscal year and period the date falls in
+		IF m.goApp.lAMVersion
+		   m.cYear       = this.getperiod_c(m.dPostDate,.T.)
+		   m.cPeriod     = this.getperiod_c(m.dPostDate,.F.)
+		   this.cYear    = m.cYear
+		   this.cPeriod  = m.cPeriod
+		ENDIF   
+
+		*
+		*  Get the next available check key
+		*
+		SET DELETED OFF
+		this.cidchec = this.oRegistry.IncrementCounter('%Shared.Counters.Checks')
+		m.cidchec    = this.cidchec 
+		SELECT altchecks
+		SET ORDER TO cidchec
+		DO WHILE SEEK(m.cidchec)
+		   this.cidchec = this.oRegistry.IncrementCounter('%Shared.Counters.Checks')
+		   m.cidchec    = this.cidchec 
+		ENDDO   
+		SET DELETED ON
+
+		*
+		*  Add the entry to the checks table
+		*
+		*
+		*  Recycle deleted records
+		*
+		lcDeleted = SET('DELETED')
+
+		SELECT altchecks
+		INSERT INTO altchecks FROM MEMVAR   
+
+		SET DELETED &lcDeleted
+
+		SELECT (lcSelect)
+	ENDPROC
+
+
+	*-- Closes the alternate company's tables.
+	PROCEDURE unload_c
+
+		*  Close the alternate company's tables
+
+		if used('altglopt')
+		   use in altglopt
+		endif
+		if used('altglmaster')
+		   use in altglmaster
+		endif
+		if used('altcoabal')
+		   use in altcoabal
+		endif
+		if used('altchecks')
+		   use in altchecks
+		endif
+	ENDPROC
+
+
+	*-- Calculates balances for accounts, including any subaccounts under them.
+	PROCEDURE calcsub
+		**  Takes passed account, and totals all accounts beneath it for the given range of time **
+
+		**  tcAcctNo  - Account to sum
+		**  tcPeriod1 - Beginning Fiscal Period
+		**  tcYear1   - Beginning Fiscal Year
+		**  tcPeriod2 - Ending Fiscal Period
+		**  tcYear2   - Ending Fiscal Year
+
+		PARA tcAcctNo, tcPeriod1, tcYear1, tcPeriod2, tcYear2
+
+		LOCAL lcAcctNo, lcPeriod1, lcYear1, lcPeriod2, lcYear2, lcAcctNo2, lcAcctNo3, lcAcctNo4, lcAcctNo5
+
+		lcAcctNo  = tcAcctNo
+		lcPeriod1 = tcPeriod1
+		lcYear1   = tcYear1
+		lcPeriod2 = tcPeriod2
+		lcYear2   = tcYear2
+
+		STORE SPACE(6) TO lcAcctNo2,lcAcctNo3,lcAcctNo4,lcAcctNo5
+
+		SELECT coa  &&  Build list of all subaccounts, so we know which list of accounts to pull for the total
+		SCAN FOR cParent = lcAcctNo
+		   lcAcctNo2 = coa.cAcctNo
+		   SCAN FOR cParent = lcAcctNo2
+		      lcAcctNo3 = coa.cAcctNo
+		      SCAN FOR cParent = lcAcctNo3
+		         lcAcctNo4 = coa.cAcctNo
+		         SCAN FOR cParent = lcAcctNo4
+		            lcAcctNo5 = coa.cAcctNo
+		         ENDSCAN
+		      ENDSCAN
+		   ENDSCAN
+		ENDSCAN
+
+		SELECT cAcctNo, SUM(nDebits) AS nDebits, SUM(nCredits) AS nCredits, .F. AS junk FROM glmaster  ;
+		   WHERE INLIST(cAcctNo,lcAcctNo,lcAcctNo2,lcAcctNo3,lcAcctNo4,lcAcctNo5)  ;
+		   AND BETWEEN(cYear+cPeriod,lcYear1+lcPeriod1,lcYear2+lcPeriod2)  ;
+		   INTO CURSOR temp  ;
+		   GROUP BY cAcctNo
+	ENDPROC
+
+
+	*-- Returns the account level of a passed account number
+	PROCEDURE calcsublevel
+		**  Returns the level of the passed account number  **
+
+		**  tcAcctNo - Account Number to process
+
+		PARA tcAcctNo
+
+		LOCAL lcAcctNo, lnLevel
+
+		WAIT WINDOW NOWAIT 'Calculating Account Level'
+
+		lcAcctNo = tcAcctNo
+		lnLevel = 1  &&  Level that will be returned for this account
+
+		IF NOT USED('coa')
+		   USE coa IN 0
+		ENDIF
+		IF USED('coaleveltemp')
+		   USE IN coaleveltemp
+		ENDIF
+
+		SELECT cacctno, cacctdesc, cparent, .F. AS junk FROM coa INTO CURSOR coaleveltemp readwrite  &&  Use a cursor to avoid moving the record pointer
+
+		SELECT coaleveltemp
+		INDEX on cacctno TAG cacctno
+		SET ORDER to cacctno
+		IF SEEK(lcAcctNo)
+		   IF NOT EMPTY(cParent)  &&  If the parent is empty, this is automatically going to stay a level 1
+		      IF SEEK(coaleveltemp.cParent)  &&  An account is set as this account's parent, so it becomes a level 2
+		         lnLevel = 2
+		         IF SEEK(coaleveltemp.cParent)  &&  An account is set as this account's parent, so it becomes a level 3
+		            lnLevel = 3
+		            IF SEEK(coaleveltemp.cParent)  &&  An account is set as this account's parent, so it becomes a level 4
+		               lnLevel = 4
+		               IF SEEK(coaleveltemp.cParent)  &&  An account is set as this account's parent, so it becomes a level 5
+		                  lnLevel = 5
+		               ENDIF
+		            ENDIF
+		         ENDIF
+		      ENDIF
+		   ENDIF
+		ELSE &&  Should never get here - invalid account passed
+		   WAIT WINDOW NOWAIT 'Invalid account'
+		ENDIF
+
+		RETURN lnLevel
+	ENDPROC
+
+
+	PROCEDURE getbalance
+		LPARAMETERS tcAcctNo, tdStartDate, tcUnit, tdEndDate
+
+		swselect('glmaster')
+
+		IF VARTYPE(tcUnit) <> 'C'
+		   SELECT cacctno, SUM(ndebits - ncredits) AS nbalance ;
+		      FROM glmaster ;
+		      WHERE cacctno = tcAcctNo AND BETWEEN(ddate,tdStartDate,tdEndDate) ;
+		      INTO CURSOR temp
+		ELSE
+		   SELECT cacctno, SUM(ndebits - ncredits) AS nbalance ;
+		      FROM glmaster ;
+		      WHERE cunitno = tcUnit AND cacctno = tcAcctNo AND BETWEEN(ddate,tdStartDate,tdEndDate) ;
+		      INTO CURSOR temp
+		ENDIF
+
+		IF _TALLY > 0
+		   SELECT temp
+		   GO TOP
+		   lnbalance = nbalance
+		ELSE
+		   lnbalance = 0
+		ENDIF
+
+		RETURN (lnbalance)
+	ENDPROC
+
+
+	*-- Voids and reissues the given check.
+	PROCEDURE reissuecheck
+		LPARAMETERS tcidchec, tlNoConfirm
+		LOCAL lcAcct, lcPayee, lcidchec, ldNewDate
+
+		ldNewDate = DATE()
+
+		SWSELECT('checks')
+		SET ORDER to cidchec
+		IF SEEK(tcidchec)
+		   SCATTER memvar
+		   lcBatch   = cBatch
+		   lcAcct    = cAcctno
+		   lcPayee   = cPayee
+		   lcID      = cID
+		   lnRecNo   = RECNO()
+		   ldNewDate = dCheckDate
+		ELSE
+		   RETURN .f.
+		ENDIF    
+
+		IF this.IsYearArchived(checks.dcheckdate)
+		   MESSAGEBOX('The year this check was posted to has been archived. It cannot be voided.',16,'Void Check Problem')
+		   RETURN .f. 
+		ENDIF 
+
+		* Make sure we have references to the global objects
+		IF VARTYPE(this.omessage) <> 'O'
+		   this.oMessage = findglobalobject('cmmessage')
+		ENDIF
+		IF VARTYPE(this.oregistry) <> 'O'
+		   this.oRegistry = findglobalobject('cmregistry')
+		ENDIF
+
+
+		IF checks.csource = 'CS'
+		   this.omessage.warning('Cash Disbursement checks cannot be reissued. Go to Maintain Cash Disbursements and change the disbursement that created this check.')
+		   RETURN .f.
+		ENDIF
+
+		*  Save the original check key
+		lcidchec = tcidchec
+		IF EMPTY(m.cGroup)
+		   m.cGroup = '00'
+		ENDIF
+
+		IF EMPTY(checks.csource) AND m.goApp.lAMVersion  &&  If DM only, we don't care about the source, and the user doesn't see it anyway
+		   this.oMessage.Warning('This check has no source.  Please enter a valid source and try again.')
+		   RETURN .f.
+		ENDIF
+
+		IF checks.lvoid
+		   this.oMessage.Warning('This check has been voided.  It cannot be reissued.')
+		   RETURN .f.
+		ENDIF
+
+		IF checks.lcleared
+		   this.oMessage.Warning('This check has been cleared. It cannot be reissued.')
+		   RETURN .f.
+		ENDIF
+
+		IF m.cEntryType <> 'C'
+		   this.oMessage.Warning('You cannot reissue deposits...')
+		   RETURN .f.
+		ENDIF
+
+		IF NOT tlNoConfirm
+		   IF NOT this.oMessage.CONFIRM('Are you sure you want to reissue this check?')
+		      RETURN .f.
+		   ENDIF
+		ENDIF    
+
+		* Moved outside of the IF stmt below so everyone gets asked. - pws 1/19/12
+		DO FORM csgetdate WITH 'CHK' TO ldNewDate
+
+		IF m.goApp.lAMVersion
+		   DO CASE
+		      CASE m.csource = 'AP' OR (m.csource = 'DM' AND m.cidtype = 'V')
+		         swselect('apopt')
+		         * Get the A/P Account Number
+		         lcAPAcct = apopt.capacct
+
+		         *
+		         *  Create a journal entry to void the original check
+		         *
+		         this.cBatch     = this.oRegistry.incrementcounter('%Shared.Counters.Batch')
+		         this.dgldate    = ldNewDate
+		         this.csource    = 'AP'
+		         this.cReference = 'VOID: ' + m.cCheckno
+		         this.cID        = m.cID
+		         this.dcheckdate = ldNewDate
+		         this.dpostdate  = ldNewDate
+		         this.cdesc      = m.cPayee
+		         this.cunitno    = ''
+		         this.cdeptno    = ''
+
+		         * Create the deposit entry to add the amount back to the register
+		         this.cEntryType = 'D'
+		         this.cidtype    = 'D'
+		         this.cAcctno    = lcAcct
+		         this.nAmount    = m.nAmount
+		         this.cPayee     = lcPayee
+		         this.lPrinted   = .T.
+		         this.lvoid      = .T.
+		         this.lcleared   = .T.
+		         this.cGroup     = m.cGroup
+		         this.dRecDate   = ldNewDate
+		         this.cMemo      = 'VOIDED CHECK ' + ALLT(m.cCheckno)
+		         this.addcheck()
+		         this.cidchec    = this.GETKEY()
+
+		         *  Add the amount back to cash
+		         this.cAcctno    = lcAcct
+		         this.nAmount    = m.nAmount
+		         this.updatebatch()
+
+		         *  Credit accounts payable
+		         this.cAcctno    = lcAPAcct
+		         this.nAmount    = m.nAmount * -1
+		         IF NOT m.lManual
+		            this.updatebatch()
+		         ENDIF
+
+		         * Create the check register entry to reissue the check
+		         this.cEntryType = 'C'
+		         this.cidtype    = 'V'
+		         this.cAcctno    = lcAcct
+		         this.cPayee     = lcPayee
+		         this.nAmount    = m.nAmount
+		         this.lPrinted   = .F.
+		         this.lvoid      = .F.
+		         this.cCheckno   = ''
+		         this.lvoid      = .F.
+		         this.lcleared   = .F.
+		         this.dRecDate   = {}
+		         this.cMemo      = ''
+		         this.cGroup     = m.cGroup
+		         this.addcheck()
+		         this.cidchec    = this.GETKEY()
+
+		         * Replace the check key in the payment record with the new key
+		         SWSELECT('appmtdet')
+		         SCAN FOR cidchec == lcidchec
+		            REPL cidchec WITH this.cidchec
+		         ENDSCAN
+
+		         *
+		         *  Create a journal entry to add the new check
+		         *
+		         this.cBatch      = this.oRegistry.incrementcounter('%Shared.Counters.Batch')
+		         this.cReference  = 'REISSUE ' + m.cCheckno
+		         this.cAcctno     = lcAPAcct
+		         this.nAmount     = m.nAmount
+		         this.cCheckno    = 'REISSUED'
+		         IF NOT m.lManual
+		            this.updatebatch()
+		         ENDIF
+
+		         *  Credit cash for the newly issued check
+		         this.cAcctno     = lcAcct
+		         this.nAmount     = m.nAmount * -1
+		         IF NOT m.lManual
+		            this.updatebatch()
+		         ENDIF
+
+		      CASE INLIST(m.csource,'CS','CD','CJ','LM','PD')
+		         * Create the deposit or check entry to add the amount back to the register
+		         this.cBatch     = this.oRegistry.incrementcounter('%Shared.Counters.Batch')
+		         this.dgldate    = ldNewDate
+		         this.csource    = 'CS'
+		         this.cReference = 'VOID: ' + m.cCheckno
+		         this.cID        = m.cID
+		         this.dcheckdate = ldNewDate
+		         this.dpostdate  = ldNewDate
+		         this.cPayee     = m.cPayee
+
+		         IF m.cEntryType = 'C'
+		            this.cEntryType = 'D'
+		            this.cidtype    = 'D'
+		         ELSE
+		            this.cEntryType = 'C'
+		            this.cidtype    = m.cidtype
+		            *
+		            *  Return the receipts to undeposited funds
+		            *
+		            SWSELECT('glopt')
+		            lcUnDepFund = cUnDepFund
+		            SWSELECT('deposits')
+		            SET ORDER TO cBatch
+		            IF SEEK(lcBatch)
+		               SWSELECT('depositd')
+		               SCAN FOR cBatch = lcBatch
+		                  m.cidchec = cidchec
+		                  SWSELECT('checks')
+		                  LOCATE FOR cidchec = m.cidchec
+		                  IF FOUND()
+		                     REPLACE lDeposited WITH .F.
+		                  ENDIF
+		                  SWSELECT('depositd')
+		                  DELETE NEXT 1
+		               ENDSCAN
+		               SWSELECT('deposits')
+		               DELETE NEXT 1
+		            ENDIF
+		            SWSELECT('checks')
+		            DELE FOR cAcctno = lcUnDepFund AND cEntryType = 'C' AND cBatch = lcBatch
+		         ENDIF
+		         this.cAcctno    = lcAcct
+		         this.cCheckno   = m.cCheckno
+		         this.cPayee     = lcPayee
+		         this.nAmount    = m.nAmount
+		         this.lPrinted   = .T.
+		         this.lvoid      = .T.
+		         this.lcleared   = .T.
+		         this.dRecDate   = ldNewDate
+		         this.cMemo      = 'VOIDED CHECK ' + ALLT(m.cCheckno)
+		         this.addcheck()
+		         this.cidchec    = this.GETKEY()
+		         *
+		         *  Scan through Glmaster to get the journal entry for this entry
+		         *  so that the debits and credits can be reversed
+		         *
+		         SELECT glmaster1
+		         SCAN FOR cBatch == lcBatch AND cID == lcID
+		            *
+		            *  Create a journal entry to void the original check
+		            *
+		            this.cdesc      = glmaster1.cdesc
+		            this.cunitno    = glmaster1.cunitno
+		            this.cdeptno    = glmaster1.cdeptno
+		            this.cAcctno    = glmaster1.cAcctno
+		            IF glmaster1.nDebits > 0
+		               this.nAmount = glmaster1.nDebits * -1
+		            ELSE
+		               this.nAmount = glmaster1.nCredits
+		            ENDIF
+		            IF NOT m.lManual
+		               this.updatebatch()
+		            ENDIF
+		         ENDSCAN
+
+		         * Create the check register entry to reissue the entry
+		         this.cBatch     = this.oRegistry.incrementcounter('%Shared.Counters.Batch')
+		         this.cEntryType = m.cEntryType
+		         this.cidtype    = m.cidtype
+		         this.cAcctno    = lcAcct
+		         this.cPayee     = lcPayee
+		         this.nAmount    = m.nAmount
+		         this.lPrinted   = .F.
+		         this.lvoid      = .F.
+		         this.lcleared   = .F.
+		         this.csource    = m.csource  &&  Keep original source on it - BH 04/29/08
+		         this.dRecDate   = {}
+		         this.cCheckno   = ''
+		         this.cMemo      = ''
+
+		         this.addcheck()
+		         this.cidchec    = this.GETKEY()
+
+		         *  Replace the check key in the cash disbursement records
+		         SWSELECT('csdishdr')
+		         SCAN FOR cidchec == lcidchec
+		            REPL cidchec WITH this.cidchec
+		         ENDSCAN
+
+		        * Change the landhist records associated with this check
+		         IF m.cSource = 'LM'
+		            swSelect('landhist')
+		            REPLACE cidchec WITH this.cidchec FOR cidchec = lcidchec
+		         ENDIF    
+
+		         *
+		         *  Scan through Glmaster to get the origial journal entry
+		         *  so that that it can be duplicated with the new date
+		         *
+		         SELECT glmaster1
+		         SCAN FOR cBatch == lcBatch AND cID == lcID
+		            *
+		            *  Create a journal entry to void the original check
+		            *
+		            this.cdesc      = glmaster1.cdesc
+		            this.cunitno    = glmaster1.cunitno
+		            this.cdeptno    = glmaster1.cdeptno
+		            this.cAcctno    = glmaster1.cAcctno
+		            this.cReference = ''
+		            IF glmaster1.nDebits > 0
+		               this.nAmount = glmaster1.nDebits
+		            ELSE
+		               this.nAmount = glmaster1.nCredits * -1
+		            ENDIF
+		            IF NOT m.lManual
+		               this.updatebatch()
+		            ENDIF
+		         ENDSCAN
+
+		      CASE m.csource = 'DM'
+		            swselect('options')
+		            * Get the legal suspense account
+		            lcSuspAcct = options.cMinAcct
+		            IF EMPTY(lcSuspAcct)
+		               SWSELECT('glopt')
+		               lcSuspAcct = cSuspense
+		            ENDIF
+		            *
+		            *  Get the production period associated with this check
+		            *
+		            SWSELECT('sysctl')
+		            LOCATE FOR cBatch = lcBatch
+		            IF FOUND()
+		               lcYear   = cYear
+		               lcPeriod = cPeriod
+		               ldSuspDate = dAcctDate
+		               lcDMBatch  = cDMBatch
+		               lcGroup = cGroup
+		            ELSE
+		               * Should never get here
+		               lcYear = ''
+		               lcPeriod = ''
+		               ldSuspDate = {}
+		               lcDMBatch = ''
+		            ENDIF
+
+		            *
+		            *  Create a journal entry to void the original check
+		            *
+		            this.cBatch     = this.oRegistry.incrementcounter('%Shared.Counters.Batch')
+		            this.dgldate    = ldNewDate
+		            this.csource    = 'DM'
+		            this.cReference = 'VOID: ' + m.cCheckno
+		            this.cID        = m.cID
+		            this.cidtype    = m.cidtype
+		            this.dcheckdate = ldNewDate
+		            this.dpostdate  = ldNewDate
+		            this.cdesc      = m.cPayee
+		            this.cunitno    = ''
+		            this.cdeptno    = ''
+		            this.cGroup    = lcGroup
+
+		            * Create the deposit entry to add the amount back to the register
+		            this.cEntryType = 'D'
+		            this.cidtype    = 'D'
+		            this.cAcctno    = lcAcct
+		            this.cCheckno   = m.cCheckno
+		            this.nAmount    = m.nAmount
+		            this.cPayee     = lcPayee
+		            this.lPrinted   = .T.
+		            this.lvoid      = .T.
+		            this.lcleared   = .T.
+		            this.dRecDate   = ldNewDate
+		            this.cMemo      = 'VOIDED CHECK ' + ALLT(m.cCheckno)
+		            this.addcheck()
+		            this.cidchec    = this.GETKEY()
+
+		            *  Add the amount back to cash
+		            this.cAcctno    = lcAcct
+		            this.nAmount    = m.nAmount
+		            IF NOT m.lManual
+		               this.updatebatch()
+		            ENDIF
+
+		            *  Credit the legal suspense account
+		            this.cAcctno    = lcSuspAcct
+		            this.nAmount    = m.nAmount * -1
+		            IF NOT m.lManual
+		               this.updatebatch()
+		            ENDIF
+
+		            * Create the check register entry to reissue the check
+		            this.cEntryType = 'C'
+		            this.cidtype    = 'I'
+		            this.cBatch     = lcBatch
+		            this.cAcctno    = lcAcct
+		            this.nAmount    = m.nAmount
+		            this.cPayee     = lcPayee
+		            this.lPrinted   = .F.
+		            this.lvoid      = .F.
+		            this.lcleared   = .F.
+		            this.dRecDate   = {}
+		            this.cCheckno   = ''
+		            this.cMemo      = ''
+		            this.addcheck()
+		            this.cidchec    = this.GETKEY()
+
+		            *
+		            *  Create a journal entry to add the new check
+		            *
+		            this.cBatch      = this.oRegistry.incrementcounter('%Shared.Counters.Batch')
+		            this.cReference  = 'REISSUE ' + m.cCheckno
+		            this.cidtype     = m.cidtype
+		            this.cAcctno     = lcSuspAcct
+		            this.nAmount     = m.nAmount
+		            this.cCheckno    = 'REISSUED'
+		            IF NOT m.lManual
+		               this.updatebatch()
+		            ENDIF
+
+		            *  Credit cash for the newly issued check
+		            this.cAcctno     = lcAcct
+		            this.nAmount     = m.nAmount * -1
+		            IF NOT m.lManual
+		               this.updatebatch()
+		            ENDIF
+
+		            SWSELECT('expense')
+		            SCAN FOR cpaidbyck == lcidchec
+		               REPL cpaidbyck WITH m.cidchec
+		            ENDSCAN
+
+		      CASE m.csource = 'PR'
+
+		         lcOldCidChec = tcidchec  &&  Store old cidchec value, so the payroll recs can be updated
+
+		         * Create the deposit entry to add the amount back to the register
+		         this.dgldate    = ldNewDate
+		         this.csource    = 'PR'
+		         this.cReference = 'VOID: ' + m.cCheckno
+		         this.cID        = m.cID
+		         this.dcheckdate = ldNewDate
+		         this.dpostdate  = ldNewDate
+		         this.cEntryType = 'D'
+		         this.cidtype    = 'D'
+		         this.cAcctno    = lcAcct
+		         this.cPayee     = lcPayee
+		         this.nAmount    = m.nAmount
+		         this.lPrinted   = .T.
+		         this.lvoid      = .T.
+		         this.lcleared   = .T.
+		         this.dRecDate   = ldNewDate
+		         this.cMemo      = 'VOIDED CHECK ' + ALLT(m.cCheckno)
+		         this.addcheck()
+		         this.cidchec    = this.GETKEY()
+
+		         *
+		         *  Scan through Glmaster to get the journal entry for this entry
+		         *  so that the debits and credits can be reversed
+		         *
+		         this.cBatch = this.oRegistry.incrementcounter('%Shared.Counters.Batch')
+		         SELECT glmaster1
+		         SCAN FOR cBatch = lcBatch
+		            *
+		            *  Create a journal entry to void the original check
+		            *
+		            this.cdesc      = glmaster1.cdesc
+		            this.cunitno    = glmaster1.cunitno
+		            this.cdeptno    = glmaster1.cdeptno
+		            this.cAcctno    = glmaster1.cAcctno
+		            IF glmaster1.nDebits > 0
+		               this.nAmount = glmaster1.nDebits * -1
+		            ELSE
+		               this.nAmount = glmaster1.nCredits
+		            ENDIF
+		            IF NOT m.lManual
+		               this.updatebatch()
+		            ENDIF
+		         ENDSCAN
+
+
+		         * Create the check register entry to reissue the entry
+		         this.cEntryType = m.cEntryType
+		         this.cidtype    = m.cidtype
+		         this.cAcctno    = lcAcct
+		         this.nAmount    = m.nAmount
+		         this.cPayee     = lcPayee
+		         this.lPrinted   = .F.
+		         this.lvoid      = .F.
+		         this.lcleared   = .F.
+		         this.dRecDate   = {}
+		         this.cCheckno   = ''
+		         this.cMemo      = ''
+		         this.addcheck()
+		         this.cidchec    = this.GETKEY()
+
+		         SWSELECT('prdata')  &&  Locate original payroll entry, so the new cidchec can be put on the record, so the stub prints correctly
+		         SCAN FOR cidchec = lcOldCidChec
+		            REPLACE cidchec WITH checks.cidchec
+		         ENDSCAN
+
+		         *
+		         *  Scan through Glmaster to get the origial journal entry
+		         *  so that that it can be duplicated with the new date
+		         *
+		         this.cBatch = this.oRegistry.incrementcounter('%Shared.Counters.Batch')
+		         SELECT glmaster1
+		         SCAN FOR cBatch = lcBatch
+		            *
+		            *  Create a journal entry to void the original check
+		            *
+		            this.cdesc      = glmaster1.cdesc
+		            this.cunitno    = glmaster1.cunitno
+		            this.cdeptno    = glmaster1.cdeptno
+		            this.cAcctno    = glmaster1.cAcctno
+		            IF glmaster1.nDebits > 0
+		               this.nAmount = glmaster1.nDebits
+		            ELSE
+		               this.nAmount = glmaster1.nCredits * -1
+		            ENDIF
+		            IF NOT m.lManual
+		               this.updatebatch()
+		            ENDIF
+		         ENDSCAN
+
+		      CASE m.csource = 'GJ'
+		         * Create the deposit or check entry to add the amount back to the register
+		         this.cBatch     = this.oRegistry.incrementcounter('%Shared.Counters.Batch')
+		         this.dgldate    = ldNewDate
+		         this.csource    = 'GJ'
+		         this.cReference = 'VOID: ' + m.cCheckno
+		         this.cID        = m.cID
+		         this.dcheckdate = ldNewDate
+		         this.dpostdate  = ldNewDate
+		         this.cPayee     = m.cPayee
+		         IF m.cEntryType = 'C'
+		            this.cEntryType = 'D'
+		            this.cidtype    = 'D'
+		         ELSE
+		            this.cEntryType = 'C'
+		            this.cidtype    = m.cidtype
+		            *
+		            *  Return the receipts to undeposited funds if it came from there
+		            *
+		            SWSELECT('glopt')
+		            lcUnDepFund = cUnDepFund
+		            SWSELECT('deposits')
+		            SET ORDER TO cBatch
+		            IF SEEK(lcBatch)
+		               SWSELECT('depositd')
+		               SCAN FOR cBatch = lcBatch
+		                  m.cidchec = cidchec
+		                  SWSELECT('checks')
+		                  LOCATE FOR cidchec = m.cidchec
+		                  IF FOUND()
+		                     REPLACE lDeposited WITH .F.
+		                  ENDIF
+		                  SWSELECT('depositd')
+		                  DELETE NEXT 1
+		               ENDSCAN
+		               SWSELECT('deposits')
+		               DELETE NEXT 1
+		            ENDIF
+		            SWSELECT('checks')
+		            DELE FOR cAcctno = lcUnDepFund AND cEntryType = 'C' AND cBatch = lcBatch
+		         ENDIF
+		         this.cAcctno    = m.cAcctno
+		         this.cCheckno   = m.cCheckno
+		         this.nAmount    = m.nAmount
+		         this.lPrinted   = .T.
+		         this.cPayee     = lcPayee
+		         this.lvoid      = .T.
+		         this.lcleared   = .T.
+		         this.dRecDate   = ldNewDate
+		         this.cMemo      = 'VOIDED CHECK ' + ALLT(m.cCheckno)
+		         this.addcheck()
+		         this.cidchec    = this.GETKEY()
+
+		         *
+		         *  Scan through Glmaster to get the journal entry for this entry
+		         *  so that the debits and credits can be reversed
+		         *
+		         SELECT glmaster1
+		         SCAN FOR cBatch = lcBatch
+		            *
+		            *  Create a journal entry to void the original check
+		            *
+		            this.cdesc      = glmaster1.cdesc
+		            this.cunitno    = glmaster1.cunitno
+		            this.cdeptno    = glmaster1.cdeptno
+		            this.cAcctno    = glmaster1.cAcctno
+		            IF glmaster1.nDebits > 0
+		               this.nAmount = glmaster1.nDebits * -1
+		            ELSE
+		               this.nAmount = glmaster1.nCredits
+		            ENDIF
+		            IF NOT m.lManual
+		               this.updatebatch()
+		            ENDIF
+		         ENDSCAN
+
+
+		         * Create the check register entry to reissue the entry
+		         this.cBatch     = lcBatch  &&  Put original batch on it, so it can be removed when deleting a journal entry
+		         this.cEntryType = m.cEntryType
+		         this.cidtype    = m.cidtype
+		         this.cAcctno    = lcAcct
+		         this.nAmount    = m.nAmount
+		         this.cCheckno   = ''
+		         this.cPayee     = lcPayee
+		         this.lPrinted   = .T.
+		         this.lvoid      = .F.
+		         this.lcleared   = .F.
+		         this.dRecDate   = {}
+		         this.cMemo      = ''
+		         this.addcheck()
+		         this.cidchec    = this.GETKEY()
+		         
+		         *  Check gljndet to update the cidchec field to use the re-issued value
+		         swselect('gljndet',.t.)
+		         SCAN FOR cidchec = lcidchec
+		            replace cidchec WITH this.cidchec
+		         ENDSCAN
+		         =TABLEUPDATE(.t.,.t.)
+
+		         *
+		         *  Scan through Glmaster to get the origial journal entry
+		         *  so that that it can be duplicated with the new date
+		         *
+		         SELECT glmaster1
+		         SCAN FOR cBatch = lcBatch
+		            *
+		            *  Create a journal entry to void the original check
+		            *
+		            this.cdesc      = glmaster1.cdesc
+		            this.cunitno    = glmaster1.cunitno
+		            this.cdeptno    = glmaster1.cdeptno
+		            this.cAcctno    = glmaster1.cAcctno
+		            this.cReference = ''
+		            IF glmaster1.nDebits > 0
+		               this.nAmount = glmaster1.nDebits
+		            ELSE
+		               this.nAmount = glmaster1.nCredits * -1
+		            ENDIF
+		            IF NOT m.lManual
+		               this.updatebatch()
+		            ENDIF
+		         ENDSCAN
+
+		   ENDCASE
+
+		   SWSELECT('checks')
+		   GOTO lnRecNo
+		   REPLACE Lvoid    WITH .T.
+		   REPLACE Nvoidamt WITH checks.nAmount
+		   *  If this is getting re-issued, the original batch means nothing.  Assign it a new one, so it doesn't get messed with 
+		   *  at any point in the future by deleting the entry that originally created it. It should now be pointed to the reissued check.
+		   replace cBatch WITH this.oRegistry.incrementcounter('%Shared.Counters.Batch')
+		*   REPLACE Namount  WITH 0
+		   REPLACE LPrinted WITH .T.
+		   REPLACE lCleared WITH .T.
+		   REPLACE Drecdate WITH ldNewDate
+		ELSE  &&  Disbursement Manager only
+		   * Create the check register entry to reissue the check
+		   this.cEntryType = 'C'
+		   this.cBatch     = lcBatch
+		   this.cAcctno    = ''
+		   this.nAmount    = m.nAmount
+		   this.cPayee     = lcPayee
+		   this.cID        = m.cID
+		   this.cidtype    = m.cidtype
+		   this.lPrinted   = .F.
+		   this.lvoid      = .F.
+		   this.lcleared   = .F.
+		   this.dRecDate   = {}
+		   this.dpostdate  = ldNewDate
+		   this.csource    = 'DM'  &&  Added 9/6/02 - BH - If DM only people re-issue, they can't print the re-issued check, because it doesn't have a DM source on it
+		   this.cCheckno   = ''
+		   this.cMemo      = ''
+		   this.dcheckdate = ldNewDate
+		   this.cGroup     = m.cGroup
+		   this.cYear      = m.cYear
+		   this.cPeriod    = m.cPeriod
+		   this.addcheck()
+		   this.cidchec    = this.GETKEY()
+
+		   IF m.csource = 'AP'
+		      * Replace the check key in the payment record with the new key
+		      SWSELECT('appmtdet')
+		      SCAN FOR cidchec == lcidchec
+		         REPL cidchec WITH this.cidchec
+		      ENDSCAN
+		   ENDIF
+
+		   IF m.csource = 'DM'  &&  Paying for Expenses, so change the cidchec field in expense - BH 12/01/06
+		      lcOldCidChec = tcidchec  &&  Store old cidchec value, so the payroll recs can be updated
+		      SWSELECT('expense')
+		      SCAN FOR cidchec = lcOldCidChec
+		         REPLACE cpaidbyck WITH this.cidchec
+		      ENDSCAN
+		   ENDIF
+
+		   SWSELECT('checks')
+		   GOTO lnRecNo
+		   REPLACE Lvoid    WITH .T.
+		   REPLACE Nvoidamt WITH checks.nAmount
+		   REPLACE Namount  WITH 0
+		   REPLACE LPrinted WITH .T.
+		   REPLACE lCleared WITH .T.
+		   REPLACE Drecdate WITH ldNewDate
+
+		ENDIF
+
+		this.oMessage.DISPLAY('The check has been reissued and is waiting to be printed.')
+		RETURN .t.
+	ENDPROC
+
+
+	*-- Checks the date passed to see if the year that date is in has been archived. Returns .T. if it has been archived.
+	PROCEDURE isyeararchived
+		LPARA tdDate
+		LOCAL llReturn, lnYears
+
+		*
+		* Checks the date passed to see if the year that date is in has been archived
+		*
+
+		* Ignore blank dates 
+		IF EMPTY(tdDate)
+		   RETURN .t.
+		ENDIF 
+
+		lnYears = 0
+
+		*  Get the fiscal year the date is in
+		lcYear   = THIS.getperiod(tdDate,.T.)
+
+		swselect('glmaster')
+
+		WAIT WINDOW NOWAIT 'Checking for archived years...'
+		IF NOT USED('glarctemp')
+		   SELECT cyear, cref FROM glmaster WHERE 'Archived' $ cref INTO CURSOR glarctemp ORDER BY cyear GROUP BY cyear
+		ENDIF    
+
+		SELECT glarctemp
+		lnYears = RECCOUNT()
+
+		WAIT CLEAR 
+
+		IF lnYears > 0
+		   SELECT glarctemp
+		   LOCATE FOR cyear == lcYear
+		   IF FOUND()
+		      llReturn = .T.
+		   ELSE
+		      llReturn = .F.
+		   ENDIF    
+		ELSE
+		   llReturn = .F.
+		ENDIF
+
+		RETURN (llReturn)   
+		      
+	ENDPROC
+
+
+	PROCEDURE calcsublevelcon
+		**  Returns the level of the passed account number  **
+
+		**  tcAcctNo - Account Number to process
+
+		PARA tcAcctNo
+
+		LOCAL lcAcctNo, lnLevel
+
+		WAIT WINDOW NOWAIT 'Calculating Account Level'
+
+		lcAcctNo = tcAcctNo
+		lnLevel = 1  &&  Level that will be returned for this account
+
+		IF NOT USED('newcoa')
+		   return
+		ENDIF
+		IF USED('coaleveltemp')
+		   USE IN coaleveltemp
+		ENDIF
+
+		SELECT cacctno, cacctdesc, cparent, .F. AS junk FROM newcoa INTO CURSOR coaleveltemp readwrite  &&  Use a cursor to avoid moving the record pointer
+
+		SELECT coaleveltemp
+		INDEX on cacctno TAG cacctno
+		SET ORDER to cacctno
+		IF SEEK(lcAcctNo)
+		   IF NOT EMPTY(cParent)  &&  If the parent is empty, this is automatically going to stay a level 1
+		      IF SEEK(coaleveltemp.cParent)  &&  An account is set as this account's parent, so it becomes a level 2
+		         lnLevel = 2
+		         IF SEEK(coaleveltemp.cParent)  &&  An account is set as this account's parent, so it becomes a level 3
+		            lnLevel = 3
+		            IF SEEK(coaleveltemp.cParent)  &&  An account is set as this account's parent, so it becomes a level 4
+		               lnLevel = 4
+		               IF SEEK(coaleveltemp.cParent)  &&  An account is set as this account's parent, so it becomes a level 5
+		                  lnLevel = 5
+		               ENDIF
+		            ENDIF
+		         ENDIF
+		      ENDIF
+		   ENDIF
+		ELSE &&  Should never get here - invalid account passed
+		   WAIT WINDOW NOWAIT 'Invalid account'
+		ENDIF
+
+		RETURN lnLevel
+	ENDPROC
+
+
+	*-- Calculate the account balances by company
+	PROCEDURE calcconbalcomp
+		LPARA tlFinancial
+
+		*
+		*  Calculates the balances for each account in the chart of accounts
+		*  for each company that is to be consolidated
+		*
+		LOCAL lcPeriod, lcYear, lnDebits, lnCredits, lnAccttype, m.ccompany
+
+		STORE 0 TO lnCredits, lnDebits, lnAccttype
+
+		swclose('temp')
+		swclose('coa')
+		swclose('coabal')
+		swclose('compgl')
+		swclose('compcoa')
+
+		IF NOT USED('compmast')
+		   USE datafiles\compmast IN 0
+		ENDIF
+
+		SWSELECT('coabal',.T.)
+		 
+		CREATE CURSOR tempcoa ;
+		  (ccompany   c(8), ;
+		   cacctno    C(6), ;
+		   cAcctdesc  C(30), ;
+		   nAccttype  I, ;
+		   cparent    c(6), ;
+		   lTitle     L, ;
+		   lTotalAcct L)
+		  
+
+		CREATE CURSOR tempbal ;
+		   (ccompany  c(8),;
+		   cacctno    C(6), ;
+		   nAcctType  N(2), ;
+		   cYear      C(4), ;
+		   cPeriod    C(2), ;
+		   nDebits    N(12,2), ;
+		   nCredits   N(12,2), ;
+		   lTitle     L, ;
+		   lTotalAcct L)
+		INDEX ON cYear+cPeriod+cacctno TAG acctprd
+
+		*
+		*  Scan through the consolidated companies and add their balances
+		*
+		SELE compmast
+		SCAN FOR RIGHT(xflag,1) = 'C'
+		   m.cDataPath = ALLT(cDataPath)
+		   m.cCompany = cidcomp
+		   WAIT WIND NOWAIT 'Adding balances for ' + ALLT(cproducer)
+
+		   * Close the tables if already in use
+		   IF USED('compcoa')
+		      USE IN compcoa
+		   ENDIF
+		   IF USED('compgl')
+		      USE IN compgl
+		   ENDIF 
+		   
+		   USE (m.cDataPath+'coa') IN 0 again ALIAS compcoa
+		   USE (m.cDataPath+'glmaster') IN 0 again ALIAS compgl
+
+		   SELE tempcoa
+		   APPEND FROM DBF('compcoa')
+		   
+		   IF tlFinancial
+		      SELECT SPACE(8) as ccompany, ;
+		         compgl.cacctno,          ;
+		         cYear,                     ;
+		         cPeriod,                   ;
+		         SUM(nDebits) AS nDebits,   ;
+		         SUM(nCredits) AS nCredits ;
+		         FROM compgl ;
+		         WHERE compgl.csource <> 'YE' ;
+		         INTO CURSOR temp READWRITE ;
+		         ORDER BY compgl.cacctno, cYear, cPeriod ;
+		         GROUP BY compgl.cacctno, cYear, cPeriod
+		   ELSE
+		      SELECT SPACE(8) as ccompany, ;
+		         compgl.cacctno,          ;
+		         cYear,                     ;
+		         cPeriod,                   ;
+		         SUM(nDebits) AS nDebits,   ;
+		         SUM(nCredits) AS nCredits  ;
+		         FROM compgl ;
+		         INTO CURSOR temp READWRITE ;
+		         ORDER BY compgl.cacctno, cYear, cPeriod ;
+		         GROUP BY compgl.cacctno, cYear, cPeriod
+		   ENDIF
+
+		   IF _TALLY > 0
+		      lnMax = _TALLY
+		      lnCount = 1
+		      SELECT temp
+		      REPLACE ccompany WITH m.ccompany ALL 
+		      SELECT tempbal
+		      APPEND FROM DBF('temp')
+		   ENDIF
+		ENDSCAN
+
+		*
+		*  Total by account and period
+		*
+		SELE ccompany, cacctno, cyear, cPeriod, ;
+		   SUM(nDebits) AS nDebits, ;
+		   SUM(nCredits) AS nCredits ;
+		   FROM tempbal ;
+		   INTO CURSOR coabalnew readwrite  ;
+		   ORDER BY ccompany, cacctno, cyear, cperiod ;
+		   GROUP BY ccompany, cacctno, cyear, cperiod
+		SELECT coabalnew
+		INDEX on ccompany+cacctno TAG cacctno
+		INDEX on ccompany+cyear+cperiod TAG cyearprd
+		*
+		*  Combine chart of accounts
+		*
+		SELE * FROM tempcoa ;
+		  INTO CURSOR newcoa readwrite;
+		  ORDER BY cacctno ;
+		  GROUP BY cacctno
+		INDEX on cacctno TAG acctno
+
+		SELECT coabalnew
+	ENDPROC
+
+
+	PROCEDURE Init
+		*
+		*  Get an object reference for the Security Manager so
+		*  that we can get the user's login name
+		*
+		THIS.oRegistry = FindGlobalObject('cmRegistry')
+		THIS.oSecurity = FindGlobalObject('cmSecurity')
+		THIS.oMessage  = FindGlobalObject('cmMessage')
+
+		WITH THIS
+		   STORE '' TO .cbatch, .cReference, .cYear, .cPeriod, .cDesc, .cPayee, ;
+		            .cID, .cGroup, .cMemo, .cSource, .cUnitNo, ;
+		            .cDeptNo, .cEntryType, .cBunch, .cCheckNo
+		   STORE 0  TO .nDebits, .nCredits, .nAmount         
+		ENDWITH
+	ENDPROC
+
+
+	*-- Add a new G/L batch to the G/L Master file.
+	PROCEDURE addnew
+	ENDPROC
+
+
+ENDDEFINE
+*
+*-- EndDefine: glmaint
+**************************************************

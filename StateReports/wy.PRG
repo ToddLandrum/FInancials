@@ -1,0 +1,1 @@
+BUILD EXE ..\rpts\statereports\wy\wystatereports FROM wystatereports

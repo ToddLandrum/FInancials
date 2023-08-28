@@ -1,0 +1,1 @@
+BUILD EXE ..\rpts\statereports\wv\wvstatereports FROM wvstatereports

@@ -1,0 +1,1 @@
+BUILD EXE ..\rpts\statereports\co\costatereports FROM costatereports

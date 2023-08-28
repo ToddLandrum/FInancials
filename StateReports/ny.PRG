@@ -1,0 +1,1 @@
+BUILD EXE ..\rpts\statereports\ny\nystatereports FROM nystatereports

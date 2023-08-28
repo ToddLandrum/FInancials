@@ -1,0 +1,1 @@
+BUILD EXE ..\rpts\statereports\ok\okstatereports FROM okstatereports

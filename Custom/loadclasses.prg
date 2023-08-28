@@ -1,0 +1,68 @@
+SET CLASSLIB TO cmactivx 
+SET CLASSLIB TO cmstate additive
+SET CLASSLIB TO cmbutton additive
+SET CLASSLIB TO cmdata additive
+SET CLASSLIB TO cmdataa additive
+SET CLASSLIB TO cmmsgman additive
+SET CLASSLIB TO codemine additive
+SET CLASSLIB TO cmgadget ADDITIVE
+SET CLASSLIB TO cmregedt ADDITIVE
+SET CLASSLIB TO cmregkey ADDITIVE 
+SET CLASSLIB TO cmsecure ADDITIVE
+SET CLASSLIB TO cmtools ADDITIVE
+SET CLASSLIB TO apptools ADDITIVE
+SET CLASSLIB TO cmapp ADDITIVE
+SET CLASSLIB TO cmcredit ADDITIVE
+SET CLASSLIB TO cmname ADDITIVE
+SET CLASSLIB TO cmlookup ADDITIVE
+SET CLASSLIB TO cmsecman ADDITIVE
+SET CLASSLIB TO cmsetup additive
+SET CLASSLIB TO picklist.vcx ADDITIVE 
+SET CLASSLIB TO gridextras.vcx ADDITIVE 
+
+IF NOT m.goapp.lQBVersion
+   SET CLASSLIB TO appdata ADDITIVE 
+ENDIF 
+   
+SET CLASSLIB TO cmdialog ADDITIVE 
+SET CLASSLIB TO cmforms ADDITIVE 
+SET CLASSLIB TO custom\ccontrol.vcx ADDITIVE
+SET CLASSLIB TO custom\foxaudit.vcx ADDITIVE 
+SET CLASSLIB TO custom\cbutton.vcx ADDITIVE
+SET CLASSLIB TO custom\cforms.vcx ADDITIVE
+SET CLASSLIB TO custom\swcontrol.vcx ADDITIVE
+SET CLASSLIB TO custom\cdata.vcx ADDITIVE
+SET CLASSLIB TO custom\sw_encrypt.vcx ADDITIVE
+SET CLASSLIB TO custom\swforms.vcx ADDITIVE
+SET CLASSLIB TO custom\swgl.vcx ADDITIVE
+SET CLASSLIB TO custom\swland.vcx ADDITIVE 
+SET CLASSLIB TO custom\cgadget.vcx additive
+SET CLASSLIB TO custom\swprefs.vcx ADDITIVE 
+SET CLASSLIB TO custom\swcde.vcx ADDITIVE 
+SET CLASSLIB TO custom\swdate.vcx ADDITIVE 
+SET CLASSLIB TO custom\swoldstuff.vcx ADDITIVE 
+SET CLASSLIB TO custom\basectrl.vcx ADDITIVE 
+SET CLASSLIB TO custom\swreports.vcx ADDITIVE 
+SET CLASSLIB TO custom\swregistry.vcx ADDITIVE 
+SET CLASSLIB TO custom\registry.vcx ADDITIVE 
+SET CLASSLIB TO custom\swemail.vcx ADDITIVE 
+SET CLASSLIB TO custom\swxfrx.vcx ADDITIVE 
+SET CLASSLIB TO custom\mwresize.vcx ADDITIVE 
+SET CLASSLIB TO custom\sfcommon.vcx ADDITIVE 
+SET CLASSLIB TO custom\sflogger.vcx ADDITIVE 
+SET CLASSLIB TO custom\vfpxworkbookxlsx.vcx ADDITIVE 
+SET CLASSLIB TO custom\sfctrls.vcx ADDITIVE 
+SET CLASSLIB TO custom\foxaudit.vcx additive
+SET CLASSLIB TO ..\..\3rdparty\stonefield9\sdt\source\dbcxmgr.vcx ADDITIVE 
+SET CLASSLIB TO ..\..\3rdparty\stonefield9\sdt\source\sdt.vcx ADDITIVE 
+SET CLASSLIB TO ..\..\3rdparty\xfrx\xfrx_17_2\xfrx\xfrxlib\xfrxlib.vcx ADDITIVE 
+SET CLASSLIB TO ..\..\3rdparty\stonefield\sfcommon\sfmover.vcx ADDITIVE 
+SET CLASSLIB TO ..\..\3rdparty\stonefield9\sdt\source\controls.vcx ADDITIVE 
+SET CLASSLIB TO ..\..\3rdparty\stonefield\sfcommon\sfbutton.vcx ADDITIVE 
+SET CLASSLIB TO ..\..\3rdparty\ffc\_hyperlink.vcx ADDITIVE 
+SET CLASSLIB TO ..\..\3rdparty\ffc\_reportlistener.vcx ADDITIVE 
+SET CLASSLIB TO ..\..\3rdparty\ffc\_base.vcx ADDITIVE 
+SET CLASSLIB TO ..\..\3rdparty\ffc\_gdiplus.vcx ADDITIVE 
+SET CLASSLIB TO ..\..\3rdparty\ffc\_frxcursor.vcx ADDITIVE 
+SET CLASSLIB TO ..\..\3rdparty\oopmenu-master\source\sfmenu.vcx ADDITIVE
+SET CLASSLIB TO ..\..\wconnect6\classes\wwxml.vcx ADDITIVE 
