@@ -39,6 +39,9 @@ DEFINE CLASS formafebuild AS frmmodaldialogcustom OF "..\custom\cforms.vcx"
 	lreleaseonclose = .T.
 	Name = "FormAfebuild"
 	Width = 542
+	Mwresize1.lblHighLight.Name = "lblHighLight"
+	Mwresize1.lblShading.Name = "lblShading"
+	Mwresize1.Name = "Mwresize1"
 
 	ADD OBJECT 'cmdCancel' AS cmdcommandbuttoncustom WITH ;
 		Caption = "\<Cancel", ;
