@@ -1,0 +1,69 @@
+# All of the files we don't want included in the remote repository 
+
+
+######################################################
+# The VFP Binary files because we use FoxBin2Prg to turn them into text files
+# So don't do the binaries
+######################################################
+*.scx
+*.sct
+
+*.frx
+*.frt
+
+*.mnx
+*.mnt
+
+*.pjt
+*.pjx
+
+*.vcx
+*.vct
+
+######################################################
+# The VFP backup files and compiled files
+######################################################
+*.bak
+*.tbk
+
+*.fxp
+
+######################################################
+# We don't put data files in the repository
+######################################################
+*.dbc
+*.dct
+*.dcx
+
+*.dbf
+*.cdx
+*.fpt
+
+*.tbk
+
+######################################################
+# Miscellaneous other file types we don't want in the repository
+######################################################
+*.app
+*.exe
+
+*.err
+*.log
+*.zip
+
+######################################################
+# Some entire directories we can ignore
+######################################################
+**/_sgbak/
+
+######################################################
+# Specfic files that get added by right-click Ignore
+######################################################
+Database/Sdtuser.dbf_unshelve_bak0
+Database/Sdtuser.cdx_unshelve_bak0
+Database/SDTMETA.fpt_unshelve_bak0
+Database/SDTMETA.DBF_unshelve_bak0
+Database/sdtmeta.cdx_unshelve_bak0
+Database/dbcxreg.fpt_unshelve_bak0
+Database/dbcxreg.dbf_unshelve_bak0
+Database/dbcxreg.cdx_unshelve_bak0
