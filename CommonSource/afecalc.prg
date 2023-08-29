@@ -1,6 +1,6 @@
 LPARA tcWellID, tcBatch, tcAFENo
 LOCAL lcWellID, lcBatch, lcAPAcct, lcFixedAcct
-
+*todd was here
 STORE '******' TO lcAPAcct, lcFixedAcct
 
 lcWellID = tcWellID
