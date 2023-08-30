@@ -40,14 +40,14 @@ FOR EACH loProject IN _VFP.Projects FOXOBJECT
 ENDFOR
 
 STRTOFILE( '', '__newproject.f2b' )
-BUILD PROJECT SherWare.pjx FROM '__newproject.f2b'
+BUILD PROJECT sherware.pjx FROM '__newproject.f2b'
 FOR EACH loProject IN _VFP.Projects FOXOBJECT
 	loProject.Close()
 ENDFOR
 
-MODIFY PROJECT 'SherWare.pjx' NOWAIT NOSHOW NOPROJECTHOOK
+MODIFY PROJECT 'sherware.pjx' NOWAIT NOSHOW NOPROJECTHOOK
 
-loProject = _VFP.Projects('SherWare.pjx')
+loProject = _VFP.Projects('sherware.pjx')
 
 WITH loProject.FILES
 	.ADD('..\..\program files (x86)\microsoft visual foxpro 9\ffc\_base.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU5BQw==" />
@@ -87,18 +87,19 @@ WITH loProject.FILES
 	.ADD('..\3rdparty\stonefield9\sfcommon\sfmover.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU5NRw==" />
 	.ADD('..\3rdparty\vfp2c32\vfp2c32\vfp2c.h')		&& *< FileMetadata: Type="T" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzZDUDBVVktMMw==" />
 	.ADD('..\3rdparty\wconnect6\classes\wwxml.vcx')		&& *< FileMetadata: Type="V" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU5HSw==" />
-	.ADD('..\3rdparty\wconnect7\classes\wwapi.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="AQApAC4uXGNvZGVtaW5lbmV3XGFtcHJvX3J2XGN1c3RvbVx3Y29ubmVjdC5ohpvNlEJK" />
-	.ADD('..\3rdparty\wconnect7\classes\wwcollections.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AQApAC4uXGNvZGVtaW5lbmV3XGFtcHJvX3J2XGN1c3RvbVx3Y29ubmVjdC5oHnvNlEJK" />
+	.ADD('..\3rdparty\wconnect7\classes\wwapi.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="AQARAGN1c3RvbVx3Y29ubmVjdC5oPqHkchxX" />
+	.ADD('..\3rdparty\wconnect7\classes\wwcollections.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AQARAGN1c3RvbVx3Y29ubmVjdC5oZiDkchxX" />
 	.ADD('..\3rdparty\wconnect7\classes\wwdotnetbridge.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
-	.ADD('..\3rdparty\wconnect7\classes\wwftp.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AQAXAC4uXHdjb25uZWN0Nlx3Y29ubmVjdC5o/gk7V3pT" />
-	.ADD('..\3rdparty\wconnect7\classes\wwhttp.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AQApAC4uXGNvZGVtaW5lbmV3XGFtcHJvX3J2XGN1c3RvbVx3Y29ubmVjdC5oHnvNlEJK" />
-	.ADD('..\3rdparty\wconnect7\classes\wwjsonserializer.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AQApAC4uXGNvZGVtaW5lbmV3XGFtcHJvX3J2XGN1c3RvbVx3Y29ubmVjdC5o3qnNlEJK" />
+	.ADD('..\3rdparty\wconnect7\classes\wwftp.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AQARAGN1c3RvbVx3Y29ubmVjdC5oPpnkchxX" />
+	.ADD('..\3rdparty\wconnect7\classes\wwhttp.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AQARAGN1c3RvbVx3Y29ubmVjdC5oZiDkchxX" />
+	.ADD('..\3rdparty\wconnect7\classes\wwjsonserializer.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AQARAGN1c3RvbVx3Y29ubmVjdC5otjLkchxX" />
 	.ADD('..\3rdparty\wconnect7\classes\wwregex.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
-	.ADD('..\3rdparty\wconnect7\classes\wwsmtp.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AQApAC4uXGNvZGVtaW5lbmV3XGFtcHJvX3J2XGN1c3RvbVx3Y29ubmVjdC5oHnvNlEJK" />
-	.ADD('..\3rdparty\wconnect7\classes\wwsoap.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AQApAC4uXGNvZGVtaW5lbmV3XGFtcHJvX3J2XGN1c3RvbVx3Y29ubmVjdC5obgjNlEJK" />
-	.ADD('..\3rdparty\wconnect7\classes\wwsql.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AQApAC4uXGNvZGVtaW5lbmV3XGFtcHJvX3J2XGN1c3RvbVx3Y29ubmVjdC5oHnvNlEJK" />
-	.ADD('..\3rdparty\wconnect7\classes\wwutils.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="AgA8AC4uXC4uXHByb2dyYW0gZmlsZXMgKHg4NilcbWljcm9zb2Z0IHZpc3VhbCBmb3hwcm8gOVxmb3hwcm8uaDZa9aBdVREAY3VzdG9tXHdjb25uZWN0Lmg+W82UQko=" />
-	.ADD('..\3rdparty\xfrx\xfrx_22_2\xfrx\xfrx.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AQAmAC4uXDNyZHBhcnR5XHhmcnhceGZyeF8yMl8yXHhmcnhceGZyeC5orjSCOihW" />
+	.ADD('..\3rdparty\wconnect7\classes\wwsmtp.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AQARAGN1c3RvbVx3Y29ubmVjdC5oZiDkchxX" />
+	.ADD('..\3rdparty\wconnect7\classes\wwsoap.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AQARAGN1c3RvbVx3Y29ubmVjdC5oDvXkchxX" />
+	.ADD('..\3rdparty\wconnect7\classes\wwsql.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AQARAGN1c3RvbVx3Y29ubmVjdC5oDvXkchxX" />
+	.ADD('..\3rdparty\wconnect7\classes\wwutils.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="AgAaAC4uXC4uXHdpbmRldlx2ZnA5XGZveHByby5otloLgokxEQBjdXN0b21cd2Nvbm5lY3QuaL5b5HIcVw==" />
+	.ADD('..\3rdparty\wconnect7\classes\wwxml.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
+	.ADD('..\3rdparty\xfrx\xfrx_22_2\xfrx\xfrx.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AQAmAC4uXDNyZHBhcnR5XHhmcnhceGZyeF8yMl8yXHhmcnhceGZyeC5oZiDwfcZW" />
 	.ADD('..\3rdparty\xfrx\xfrx_22_2\xfrx\xfrxlib.fll')		&& *< FileMetadata: Type="L" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
 	.ADD('..\3rdparty\xfrx\xfrx_22_2\xfrx\xfrxlib\xfrxbook.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
 	.ADD('..\3rdparty\xfrx\xfrx_22_2\xfrx\xfrxlib\xfrxbook.msk')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
@@ -190,7 +191,6 @@ WITH loProject.FILES
 	.ADD('..\3rdparty\xfrx\xfrx_22_2\xfrx\xfrxlib\xfrxtlbo.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
 	.ADD('..\3rdparty\xfrx\xfrx_22_2\xfrx\xfrxlib\xfrxtlbo.msk')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
 	.ADD('..\3rdparty\xfrx\xfrx_22_2\xfrx\xfrxproxy.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
-	.ADD('..\codeminenew\ampro_rv\graphics\pivoten.png')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
 	.ADD('checks\apchekda.frx')		&& *< FileMetadata: Type="R" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUwxMA==" />
 	.ADD('checks\apchekdb.frx')		&& *< FileMetadata: Type="R" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUwxMw==" />
 	.ADD('checks\apchekdn.frx')		&& *< FileMetadata: Type="R" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUwxNg==" />
@@ -211,34 +211,34 @@ WITH loProject.FILES
 	.ADD('checks\prchekda.frx')		&& *< FileMetadata: Type="R" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUwyMw==" />
 	.ADD('checks\prchekdb.frx')		&& *< FileMetadata: Type="R" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUwyNg==" />
 	.ADD('checks\prcheklv.frx')		&& *< FileMetadata: Type="R" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUwyOQ==" />
-	.ADD('common\adodefs.h')		&& *< FileMetadata: Type="T" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU1TMw==" />
-	.ADD('common\cmactivx.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTUs1Rw==" />
-	.ADD('common\cmapp.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTUs5Sg==" />
-	.ADD('common\cmbutton.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTUs1Sg==" />
-	.ADD('common\cmcredit.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTUtCSg==" />
-	.ADD('common\cmdata.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTUs1TQ==" />
-	.ADD('common\cmdataa.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTUxQTg==" />
-	.ADD('common\cmdialog.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTUs1Uw==" />
-	.ADD('common\cmforms.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTUs1UA==" />
-	.ADD('common\cmgadget.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTUs1VQ==" />
-	.ADD('common\cmlookup.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTUtCUA==" />
-	.ADD('common\cmmsgman.vcx')		&& *< FileMetadata: Type="V" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU1NTw==" />
-	.ADD('common\cmname.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTUtCTQ==" />
-	.ADD('common\cmregedt.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTUs1WA==" />
-	.ADD('common\cmregkey.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTUtOTw==" />
-	.ADD('common\cmsecman.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU1NNg==" />
-	.ADD('common\cmsecure.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTUs2MA==" />
-	.ADD('common\cmsetup.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU1NQQ==" />
-	.ADD('common\cmstate.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTUtCQg==" />
-	.ADD('common\cmtools.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTUs2Mw==" />
-	.ADD('common\cmutil.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="AgARAGNvbW1vblxjb2RlbWluZS5oHjf8chxXDgBjb21tb25cd2luMzIuaCY4/HIcVw==" />
-	.ADD('common\codemine.fll')		&& *< FileMetadata: Type="L" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs2Qg==" />
-	.ADD('common\codemine.h')		&& *< FileMetadata: Type="T" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU1SUQ==" />
-	.ADD('common\codemine.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="AgARAGNvbW1vblxjb2RlbWluZS5oHjf8chxXDgBjb21tb25cd2luMzIuaCY4/HIcVw==" />
-	.ADD('common\codemine.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTUs1Qw==" />
-	.ADD('common\datadefs.h')		&& *< FileMetadata: Type="T" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU1SWg==" />
 	.ADD('commondata\appsec.dbf')		&& *< FileMetadata: Type="D" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="WQ==" DevInfo="XzVPUzEwTU1MTQ==" />
 	.ADD('commondata\chkcopy.dbf')		&& *< FileMetadata: Type="D" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU1aMw==" />
+	.ADD('commondata\common\adodefs.h')		&& *< FileMetadata: Type="T" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU1TMw==" />
+	.ADD('commondata\common\cmactivx.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTUs1Rw==" />
+	.ADD('commondata\common\cmapp.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTUs5Sg==" />
+	.ADD('commondata\common\cmbutton.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTUs1Sg==" />
+	.ADD('commondata\common\cmcredit.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTUtCSg==" />
+	.ADD('commondata\common\cmdata.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTUs1TQ==" />
+	.ADD('commondata\common\cmdataa.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTUxQTg==" />
+	.ADD('commondata\common\cmdialog.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTUs1Uw==" />
+	.ADD('commondata\common\cmforms.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTUs1UA==" />
+	.ADD('commondata\common\cmgadget.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTUs1VQ==" />
+	.ADD('commondata\common\cmlookup.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTUtCUA==" />
+	.ADD('commondata\common\cmmsgman.vcx')		&& *< FileMetadata: Type="V" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU1NTw==" />
+	.ADD('commondata\common\cmname.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTUtCTQ==" />
+	.ADD('commondata\common\cmregedt.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTUs1WA==" />
+	.ADD('commondata\common\cmregkey.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTUtOTw==" />
+	.ADD('commondata\common\cmsecman.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU1NNg==" />
+	.ADD('commondata\common\cmsecure.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTUs2MA==" />
+	.ADD('commondata\common\cmsetup.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU1NQQ==" />
+	.ADD('commondata\common\cmstate.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTUtCQg==" />
+	.ADD('commondata\common\cmtools.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTUs2Mw==" />
+	.ADD('commondata\common\cmutil.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="AgAcAGNvbW1vbmRhdGFcY29tbW9uXGNvZGVtaW5lLmi2d/xyHFcZAGNvbW1vbmRhdGFcY29tbW9uXHdpbjMyLmi+ePxyHFc=" />
+	.ADD('commondata\common\codemine.fll')		&& *< FileMetadata: Type="L" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs2Qg==" />
+	.ADD('commondata\common\codemine.h')		&& *< FileMetadata: Type="T" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU1SUQ==" />
+	.ADD('commondata\common\codemine.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="AgAcAGNvbW1vbmRhdGFcY29tbW9uXGNvZGVtaW5lLmi2d/xyHFcZAGNvbW1vbmRhdGFcY29tbW9uXHdpbjMyLmi+ePxyHFc=" />
+	.ADD('commondata\common\codemine.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTUs1Qw==" />
+	.ADD('commondata\common\datadefs.h')		&& *< FileMetadata: Type="T" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU1SWg==" />
 	.ADD('commondata\customchk.dbf')		&& *< FileMetadata: Type="D" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU41RQ==" />
 	.ADD('commondata\stubtmp.dbf')		&& *< FileMetadata: Type="D" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTU1FUg==" />
 	.ADD('commondata\stubtmpa.dbf')		&& *< FileMetadata: Type="D" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTU1FVQ==" />
@@ -852,7 +852,7 @@ WITH loProject.FILES
 	.ADD('commonsource\utsendemail.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU1SRQ==" />
 	.ADD('commonsource\utsupportemail.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU1SSw==" />
 	.ADD('custom\basectrl.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU1TTQ==" />
-	.ADD('custom\capp.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AwAQAHNvdXJjZVxhcHBkZWZzLmiWyrw88VYRAGNvbW1vblxjb2RlbWluZS5onsvjfn5UDgBjb21tb25cd2luMzIuaKbMjlG9Vg==" />
+	.ADD('custom\capp.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AwAQAHNvdXJjZVxhcHBkZWZzLmim5PNyHFccAGNvbW1vbmRhdGFcY29tbW9uXGNvZGVtaW5lLmiu5fxyHFcZAGNvbW1vbmRhdGFcY29tbW9uXHdpbjMyLmi25vxyHFc=" />
 	.ADD('custom\cbutton.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTUtDUg==" />
 	.ADD('custom\ccontrol.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTUtDTw==" />
 	.ADD('custom\cdata.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTUxQUQ==" />
@@ -882,7 +882,7 @@ WITH loProject.FILES
 	.ADD('custom\pdf.h')		&& *< FileMetadata: Type="T" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU1aUA==" />
 	.ADD('custom\picklist.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
 	.ADD('custom\plugging.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
-	.ADD('custom\qbentity.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
+	.ADD('custom\qbentity.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AQAQAGN1c3RvbVxzd3FiYXBpLmg+meRyHFc=" />
 	.ADD('custom\registry.h')		&& *< FileMetadata: Type="T" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU4xUQ==" />
 	.ADD('custom\registry.vcx')		&& *< FileMetadata: Type="V" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU41Nw==" />
 	.ADD('custom\screenshot.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
@@ -910,7 +910,7 @@ WITH loProject.FILES
 	.ADD('custom\swexternal.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
 	.ADD('custom\swfile.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
 	.ADD('custom\swforms.vcx')		&& *< FileMetadata: Type="V" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU1NUw==" />
-	.ADD('custom\swftp.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AQARAGN1c3RvbVx3Y29ubmVjdC5oNmHNlEJK" />
+	.ADD('custom\swftp.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AQARAGN1c3RvbVx3Y29ubmVjdC5oht/kchxX" />
 	.ADD('custom\swgl.vcx')		&& *< FileMetadata: Type="V" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU1NVg==" />
 	.ADD('custom\swglmaint.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
 	.ADD('custom\swjib.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
@@ -921,8 +921,8 @@ WITH loProject.FILES
 	.ADD('custom\swpartners.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
 	.ADD('custom\swpdf.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
 	.ADD('custom\swprefs.vcx')		&& *< FileMetadata: Type="V" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU1PMA==" />
-	.ADD('custom\swqb.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AwAQAHNvdXJjZVxhcHBkZWZzLmhm0bw88VYRAGNvbW1vblxjb2RlbWluZS5obtLjfn5UDgBjb21tb25cd2luMzIuaHbTjlG9Vg==" />
-	.ADD('custom\swqbapi.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AQAQAGN1c3RvbVxzd3FiYXBpLmj2MnuOalM=" />
+	.ADD('custom\swqb.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AwAQAHNvdXJjZVxhcHBkZWZzLmim5PNyHFccAGNvbW1vbmRhdGFcY29tbW9uXGNvZGVtaW5lLmiu5fxyHFcZAGNvbW1vbmRhdGFcY29tbW9uXHdpbjMyLmi25vxyHFc=" />
+	.ADD('custom\swqbapi.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AQAQAGN1c3RvbVxzd3FiYXBpLmgekORyHFc=" />
 	.ADD('custom\swqbo.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
 	.ADD('custom\swregcode.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
 	.ADD('custom\swregistry.vcx')		&& *< FileMetadata: Type="V" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU4xTQ==" />
@@ -1013,6 +1013,7 @@ WITH loProject.FILES
 	.ADD('graphics\paste.msk')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs4Mg==" />
 	.ADD('graphics\pivoten-icon.ico')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
 	.ADD('graphics\pivoten-logon.png')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
+	.ADD('graphics\pivoten.png')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
 	.ADD('graphics\preview.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtOUg==" />
 	.ADD('graphics\preview.msk')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtOVQ==" />
 	.ADD('graphics\prevrec.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs4TA==" />
@@ -1091,7 +1092,7 @@ WITH loProject.FILES
 	.ADD('rpts\prw2l.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU1YWg==" />
 	.ADD('source\appdefs.h')		&& *< FileMetadata: Type="T" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
 	.ADD('source\cappmain.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
-	.ADD('source\config.fpw')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtCRQ==" />
+	.ADD('source\config.fpw')		&& *< FileMetadata: Type="T" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtCRQ==" />
 	.ADD('sourceam\apagecon1.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU5KVw==" />
 	.ADD('sourceam\apagecon2.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU5KWg==" />
 	.ADD('sourceam\apagecon2a.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU5LMg==" />
@@ -1103,7 +1104,7 @@ WITH loProject.FILES
 	.ADD('sourceam\apbillpayrpt.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
 	.ADD('sourceam\appdata.vcx')		&& *< FileMetadata: Type="V" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU1WRw==" />
 	.ADD('sourceam\appforms.vcx')		&& *< FileMetadata: Type="V" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTU1DVw==" />
-	.ADD('sourceam\appmain.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AwAQAHNvdXJjZVxhcHBkZWZzLmhm0bw88VYRAGNvbW1vblxjb2RlbWluZS5obtLjfn5UDgBjb21tb25cd2luMzIuaHbTjlG9Vg==" />
+	.ADD('sourceam\appmain.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="BgASAHNvdXJjZWFtXGFwcGRlZnMuaD5o83IcVxwAY29tbW9uZGF0YVxjb21tb25cY29kZW1pbmUuaEZp/HIcVxkAY29tbW9uZGF0YVxjb21tb25cd2luMzIuaE5q/HIcVxAAY3VzdG9tXHNmY3RybHMuaFZr43IcVxoALi5cLi5cd2luZGV2XHZmcDlcZm94cHJvLmhebAuCiTEZAGNvbW1vbmRhdGFcY29tbW9uXHdpbjMyLmhmbfxyHFc=" />
 	.ADD('sourceam\apptools.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTUs2OA==" />
 	.ADD('sourceam\aprecur.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU1UVw==" />
 	.ADD('sourceam\arbillcode.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
@@ -1253,24 +1254,24 @@ WITH loProject.FILES
 	.ITEM('__newproject.f2b').Remove()
 
 	*<FileComments>
-	.ITEM(lcCurdir + 'common\cmactivx.vcx').Description = 'CodeMine ActiveX control subclasses'
-	.ITEM(lcCurdir + 'common\cmapp.vcx').Description = 'Codemine application object foundation class'
-	.ITEM(lcCurdir + 'common\cmbutton.vcx').Description = 'CodeMine common dialog command buttons'
-	.ITEM(lcCurdir + 'common\cmcredit.vcx').Description = 'Codemine Credit Card control and support classes'
-	.ITEM(lcCurdir + 'common\cmdata.vcx').Description = 'CodeMine form Data Manager classes'
-	.ITEM(lcCurdir + 'common\cmdialog.vcx').Description = 'CodeMine help and message dialog classes'
-	.ITEM(lcCurdir + 'common\cmforms.vcx').Description = 'CodeMine Foundation Form Classes'
-	.ITEM(lcCurdir + 'common\cmgadget.vcx').Description = 'CodeMine gadget control classes'
-	.ITEM(lcCurdir + 'common\cmlookup.vcx').Description = 'CodeMine Find/List dialogs and support classes'
-	.ITEM(lcCurdir + 'common\cmname.vcx').Description = 'CodeMine Name Parser and support classes'
-	.ITEM(lcCurdir + 'common\cmregedt.vcx').Description = 'CodeMine application registry editor classes'
-	.ITEM(lcCurdir + 'common\cmsecure.vcx').Description = 'CodeMine security manager classes'
-	.ITEM(lcCurdir + 'common\cmstate.vcx').Description = 'CodeMine State Manager classes'
-	.ITEM(lcCurdir + 'common\cmtools.vcx').Description = 'CodeMine foundation toolbar action button classes'
-	.ITEM(lcCurdir + 'common\cmutil.prg').Description = 'CodeMine Report Output Formatting Utility Functions'
-	.ITEM(lcCurdir + 'common\codemine.fll').Description = 'CodeMine API library'
-	.ITEM(lcCurdir + 'common\codemine.prg').Description = 'CodeMine procedure library and Global Object Manager'
-	.ITEM(lcCurdir + 'common\codemine.vcx').Description = 'CodeMine foundation control classes'
+	.ITEM(lcCurdir + 'commondata\common\cmactivx.vcx').Description = 'CodeMine ActiveX control subclasses'
+	.ITEM(lcCurdir + 'commondata\common\cmapp.vcx').Description = 'Codemine application object foundation class'
+	.ITEM(lcCurdir + 'commondata\common\cmbutton.vcx').Description = 'CodeMine common dialog command buttons'
+	.ITEM(lcCurdir + 'commondata\common\cmcredit.vcx').Description = 'Codemine Credit Card control and support classes'
+	.ITEM(lcCurdir + 'commondata\common\cmdata.vcx').Description = 'CodeMine form Data Manager classes'
+	.ITEM(lcCurdir + 'commondata\common\cmdialog.vcx').Description = 'CodeMine help and message dialog classes'
+	.ITEM(lcCurdir + 'commondata\common\cmforms.vcx').Description = 'CodeMine Foundation Form Classes'
+	.ITEM(lcCurdir + 'commondata\common\cmgadget.vcx').Description = 'CodeMine gadget control classes'
+	.ITEM(lcCurdir + 'commondata\common\cmlookup.vcx').Description = 'CodeMine Find/List dialogs and support classes'
+	.ITEM(lcCurdir + 'commondata\common\cmname.vcx').Description = 'CodeMine Name Parser and support classes'
+	.ITEM(lcCurdir + 'commondata\common\cmregedt.vcx').Description = 'CodeMine application registry editor classes'
+	.ITEM(lcCurdir + 'commondata\common\cmsecure.vcx').Description = 'CodeMine security manager classes'
+	.ITEM(lcCurdir + 'commondata\common\cmstate.vcx').Description = 'CodeMine State Manager classes'
+	.ITEM(lcCurdir + 'commondata\common\cmtools.vcx').Description = 'CodeMine foundation toolbar action button classes'
+	.ITEM(lcCurdir + 'commondata\common\cmutil.prg').Description = 'CodeMine Report Output Formatting Utility Functions'
+	.ITEM(lcCurdir + 'commondata\common\codemine.fll').Description = 'CodeMine API library'
+	.ITEM(lcCurdir + 'commondata\common\codemine.prg').Description = 'CodeMine procedure library and Global Object Manager'
+	.ITEM(lcCurdir + 'commondata\common\codemine.vcx').Description = 'CodeMine foundation control classes'
 	.ITEM(lcCurdir + 'commonsource\afebuild.scx').Description = 'Build AFE Record'
 	.ITEM(lcCurdir + 'commonsource\afecashcall.scx').Description = 'Create Cash Call Invoices'
 	.ITEM(lcCurdir + 'commonsource\afedetrpt.scx').Description = 'RPT: AFE Detail Report'
@@ -1494,7 +1495,7 @@ WITH loProject.FILES
 	.ITEM(lcCurdir + 'checks\prchekda.frx').Exclude = .T.
 	.ITEM(lcCurdir + 'checks\prchekdb.frx').Exclude = .T.
 	.ITEM(lcCurdir + 'checks\prcheklv.frx').Exclude = .T.
-	.ITEM(lcCurdir + 'common\codemine.fll').Exclude = .T.
+	.ITEM(lcCurdir + 'commondata\common\codemine.fll').Exclude = .T.
 	.ITEM(lcCurdir + 'commonsource\dmrojibrun.frx').Exclude = .T.
 	.ITEM(lcCurdir + 'commonsource\dmroktax.scx').Exclude = .T.
 	.ITEM(lcCurdir + 'custom\system.app').Exclude = .T.
@@ -1538,9 +1539,9 @@ WITH loProject.FILES
 	.ITEM(lcCurdir + '..\..\program files (x86)\microsoft visual foxpro 9\foxpro.h').Type = 'T'
 	.ITEM(lcCurdir + '..\3rdparty\stonefield9\sdt\source\sdt.h').Type = 'T'
 	.ITEM(lcCurdir + '..\3rdparty\vfp2c32\vfp2c32\vfp2c.h').Type = 'T'
-	.ITEM(lcCurdir + 'common\adodefs.h').Type = 'T'
-	.ITEM(lcCurdir + 'common\codemine.h').Type = 'T'
-	.ITEM(lcCurdir + 'common\datadefs.h').Type = 'T'
+	.ITEM(lcCurdir + 'commondata\common\adodefs.h').Type = 'T'
+	.ITEM(lcCurdir + 'commondata\common\codemine.h').Type = 'T'
+	.ITEM(lcCurdir + 'commondata\common\datadefs.h').Type = 'T'
 	.ITEM(lcCurdir + 'custom\pdf.h').Type = 'T'
 	.ITEM(lcCurdir + 'custom\registry.h').Type = 'T'
 	.ITEM(lcCurdir + 'custom\sfctrls.h').Type = 'T'
@@ -1560,14 +1561,14 @@ WITH loProject
 	*<.CmntStyle = 1 />
 	*<.NoLogo = .F. />
 	*<.SaveCode = .T. />
-	*<.User = 'Tg0KKi8vL1dMQ1Byb2plY3RIb29rIEhlYWRlci8vLyo8P3htbCB2ZXJzaW9uID0gIjEuMCIgZW5jb2Rpbmc9IldpbmRvd3MtMTI1MiIgc3RhbmRhbG9uZT0ieWVzIj8+DQo8VkZQRGF0YT4NCgk8eHNkOnNjaGVtYSBpZD0iVkZQRGF0YSIgeG1sbnM6eHNkPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSIgeG1sbnM6bXNkYXRhPSJ1cm46c2NoZW1hcy1taWNyb3NvZnQtY29tOnhtbC1tc2RhdGEiPg0KCQk8eHNkOmVsZW1lbnQgbmFtZT0iVkZQRGF0YSIgbXNkYXRhOklzRGF0YVNldD0idHJ1ZSI+DQoJCQk8eHNkOmNvbXBsZXhUeXBlPg0KCQkJCTx4c2Q6Y2hvaWNlIG1heE9jY3Vycz0idW5ib3VuZGVkIj4NCgkJCQkJPHhzZDplbGVtZW50IG5hbWU9ImN1cm1haW50aG9va3MiIG1pbk9jY3Vycz0iMCIgbWF4T2NjdXJzPSJ1bmJvdW5kZWQiPg0KCQkJCQkJPHhzZDpjb21wbGV4VHlwZT4NCgkJCQkJCQk8eHNkOnNlcXVlbmNlPg0KCQkJCQkJCQk8eHNkOmVsZW1lbnQgbmFtZT0iY2hvb2tjbGFzcyI+DQoJCQkJCQkJCQk8eHNkOnNpbXBsZVR5cGU+DQoJCQkJCQkJCQkJPHhzZDpyZXN0cmljdGlvbiBiYXNlPSJ4c2Q6c3RyaW5nIj4NCgkJCQkJCQkJCQkJPHhzZDptYXhMZW5ndGggdmFsdWU9IjUwIi8+DQoJCQkJCQkJCQkJPC94c2Q6cmVzdHJpY3Rpb24+DQoJCQkJCQkJCQk8L3hzZDpzaW1wbGVUeXBlPg0KCQkJCQkJCQk8L3hzZDplbGVtZW50Pg0KCQkJCQkJCQk8eHNkOmVsZW1lbnQgbmFtZT0iY2hvb2tjbGFzc2xpYiI+DQoJCQkJCQkJCQk8eHNkOnNpbXBsZVR5cGU+DQoJCQkJCQkJCQkJPHhzZDpyZXN0cmljdGlvbiBiYXNlPSJ4c2Q6c3RyaW5nIj4NCgkJCQkJCQkJCQkJPHhzZDptYXhMZW5ndGggdmFsdWU9IjI1MCIvPg0KCQkJCQkJCQkJCTwveHNkOnJlc3RyaWN0aW9uPg0KCQkJCQkJCQkJPC94c2Q6c2ltcGxlVHlwZT4NCgkJCQkJCQkJPC94c2Q6ZWxlbWVudD4NCgkJCQkJCQkJPHhzZDplbGVtZW50IG5hbWU9ImNob29rY2xhc3NkZXNjcmlwdGlvbiI+DQoJCQkJCQkJCQk8eHNkOnNpbXBsZVR5cGU+DQoJCQkJCQkJCQkJPHhzZDpyZXN0cmljdGlvbiBiYXNlPSJ4c2Q6c3RyaW5nIj4NCgkJCQkJCQkJCQkJPHhzZDptYXhMZW5ndGggdmFsdWU9IjI1MCIvPg0KCQkJCQkJCQkJCTwveHNkOnJlc3RyaWN0aW9uPg0KCQkJCQkJCQkJPC94c2Q6c2ltcGxlVHlwZT4NCgkJCQkJCQkJPC94c2Q6ZWxlbWVudD4NCgkJCQkJCQkJPHhzZDplbGVtZW50IG5hbWU9ImNob29raW5kZXhuYW1lIj4NCgkJCQkJCQkJCTx4c2Q6c2ltcGxlVHlwZT4NCgkJCQkJCQkJCQk8eHNkOnJlc3RyaWN0aW9uIGJhc2U9InhzZDpzdHJpbmciPg0KCQkJCQkJCQkJCQk8eHNkOm1heExlbmd0aCB2YWx1ZT0iMzAiLz4NCgkJCQkJCQkJCQk8L3hzZDpyZXN0cmljdGlvbj4NCgkJCQkJCQkJCTwveHNkOnNpbXBsZVR5cGU+DQoJCQkJCQkJCTwveHNkOmVsZW1lbnQ+DQoJCQkJCQkJCTx4c2Q6ZWxlbWVudCBuYW1lPSJuaG9va3NlcXVlbmNlIiB0eXBlPSJ4c2Q6aW50Ii8+DQoJCQkJCQkJPC94c2Q6c2VxdWVuY2U+DQoJCQkJCQk8L3hzZDpjb21wbGV4VHlwZT4NCgkJCQkJPC94c2Q6ZWxlbWVudD4NCgkJCQk8L3hzZDpjaG9pY2U+DQoJCQkJPHhzZDphbnlBdHRyaWJ1dGUgbmFtZXNwYWNlPSJodHRwOi8vd3d3LnczLm9yZy9YTUwvMTk5OC9uYW1lc3BhY2UiIHByb2Nlc3NDb250ZW50cz0ibGF4Ii8+DQoJCQk8L3hzZDpjb21wbGV4VHlwZT4NCgkJPC94c2Q6ZWxlbWVudD4NCgk8L3hzZDpzY2hlbWE+DQoJPGN1cm1haW50aG9va3M+DQoJCTxjaG9va2NsYXNzPmN1c2hvb2tjbGVhbnJlcG9ydHM8L2Nob29rY2xhc3M+DQoJCTxjaG9va2NsYXNzbGliPmM6XGRldmVsb3BcM3JkcGFydHlcZzJ0b29sc1xjcHJvamVjdGhvb2s1LnZjeDwvY2hvb2tjbGFzc2xpYj4NCgkJPGNob29rY2xhc3NkZXNjcmlwdGlvbj5DbGVhbiBSZXBvcnRzPC9jaG9va2NsYXNzZGVzY3JpcHRpb24+DQoJCTxjaG9va2luZGV4bmFtZT5DbGVhblJlcG9ydHM8L2Nob29raW5kZXhuYW1lPg0KCQk8bmhvb2tzZXF1ZW5jZT4xPC9uaG9va3NlcXVlbmNlPg0KCTwvY3VybWFpbnRob29rcz4NCjwvVkZQRGF0YT4NCipcXFxXTENQcm9qZWN0SG9vayBGb290ZXJcXFwq' />
-	.ProjectHookLibrary = '..\3rdparty\g2tools\cprojecthook5.vcx'
-	.ProjectHookClass = 'phkdevelopment'
+	*<.User = '' />
+	.ProjectHookLibrary = ''
+	.ProjectHookClass = ''
 	*</ProjectProperties>
 ENDWITH
 
 
-_VFP.Projects('SherWare.pjx').Close()
+_VFP.Projects('sherware.pjx').Close()
 *ERASE '__newproject.f2b'
 CD (lcCurdir)
 RETURN

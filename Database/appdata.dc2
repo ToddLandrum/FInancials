@@ -138,7 +138,7 @@
 					<RefIntegrity>CCI</RefIntegrity>
 				</RELATION>
 				<RELATION>
-					<Name>Relation 31</Name>
+					<Name>Relation 35</Name>
 					<ChildTable>AFEDET</ChildTable>
 					<ParentTable>EXPCAT</ParentTable>
 					<ChildIndex>CCATCODE</ChildIndex>
@@ -409,7 +409,7 @@ The tables are related on key cidafeh.</Comment>
 
 			<RELATIONS>
 				<RELATION>
-					<Name>Relation 96</Name>
+					<Name>Relation 102</Name>
 					<ChildTable>AFEHDR</ChildTable>
 					<ParentTable>WELLS</ParentTable>
 					<ChildIndex>CWELLID</ChildIndex>
@@ -627,7 +627,7 @@ The tables are related on key cidafeh.</Comment>
 
 			<RELATIONS>
 				<RELATION>
-					<Name>Relation 28</Name>
+					<Name>Relation 32</Name>
 					<ChildTable>AFEOWNER</ChildTable>
 					<ParentTable>EXPCAT</ParentTable>
 					<ChildIndex>CCATCODE</ChildIndex>
@@ -2639,7 +2639,7 @@ The tables are related on key cidafeh.</Comment>
 					<RefIntegrity>CCI</RefIntegrity>
 				</RELATION>
 				<RELATION>
-					<Name>Relation 91</Name>
+					<Name>Relation 90</Name>
 					<ChildTable>APPMTDET</ChildTable>
 					<ParentTable>VENDOR</ParentTable>
 					<ChildIndex>VENDORID</ChildIndex>
@@ -3415,7 +3415,15 @@ The tables are related on key cidafeh.</Comment>
 					<RefIntegrity>CII</RefIntegrity>
 				</RELATION>
 				<RELATION>
-					<Name>Relation 30</Name>
+					<Name>Relation 13</Name>
+					<ChildTable>APPURCHD</ChildTable>
+					<ParentTable>COA</ParentTable>
+					<ChildIndex>CACCTNO</ChildIndex>
+					<ParentIndex>ACCTNO</ParentIndex>
+					<RefIntegrity>CII</RefIntegrity>
+				</RELATION>
+				<RELATION>
+					<Name>Relation 34</Name>
 					<ChildTable>APPURCHD</ChildTable>
 					<ParentTable>EXPCAT</ParentTable>
 					<ChildIndex>CCATCODE</ChildIndex>
@@ -3431,19 +3439,11 @@ The tables are related on key cidafeh.</Comment>
 					<RefIntegrity>CCI</RefIntegrity>
 				</RELATION>
 				<RELATION>
-					<Name>Relation 49</Name>
+					<Name>Relation 53</Name>
 					<ChildTable>APPURCHD</ChildTable>
 					<ParentTable>INVESTOR</ParentTable>
 					<ChildIndex>COWNERID</ChildIndex>
 					<ParentIndex>COWNERID</ParentIndex>
-					<RefIntegrity>CII</RefIntegrity>
-				</RELATION>
-				<RELATION>
-					<Name>Relation 9</Name>
-					<ChildTable>APPURCHD</ChildTable>
-					<ParentTable>COA</ParentTable>
-					<ChildIndex>CACCTNO</ChildIndex>
-					<ParentIndex>ACCTNO</ParentIndex>
 					<RefIntegrity>CII</RefIntegrity>
 				</RELATION>
 			</RELATIONS>
@@ -4261,7 +4261,15 @@ The tables are related on key cidafeh.</Comment>
 
 			<RELATIONS>
 				<RELATION>
-					<Name>Relation 35</Name>
+					<Name>Relation 107</Name>
+					<ChildTable>APPURECD</ChildTable>
+					<ParentTable>WELLS</ParentTable>
+					<ChildIndex>CUNITNO</ChildIndex>
+					<ParentIndex>CWELLID</ParentIndex>
+					<RefIntegrity>CII</RefIntegrity>
+				</RELATION>
+				<RELATION>
+					<Name>Relation 31</Name>
 					<ChildTable>APPURECD</ChildTable>
 					<ParentTable>EXPCAT</ParentTable>
 					<ChildIndex>CCATCODE</ChildIndex>
@@ -4285,19 +4293,11 @@ The tables are related on key cidafeh.</Comment>
 					<RefIntegrity>CII</RefIntegrity>
 				</RELATION>
 				<RELATION>
-					<Name>Relation 6</Name>
+					<Name>Relation 9</Name>
 					<ChildTable>APPURECD</ChildTable>
 					<ParentTable>COA</ParentTable>
 					<ChildIndex>CACCTNO</ChildIndex>
 					<ParentIndex>ACCTNO</ParentIndex>
-					<RefIntegrity>CII</RefIntegrity>
-				</RELATION>
-				<RELATION>
-					<Name>Relation 95</Name>
-					<ChildTable>APPURECD</ChildTable>
-					<ParentTable>WELLS</ParentTable>
-					<ChildIndex>CUNITNO</ChildIndex>
-					<ParentIndex>CWELLID</ParentIndex>
 					<RefIntegrity>CII</RefIntegrity>
 				</RELATION>
 			</RELATIONS>
@@ -4567,7 +4567,7 @@ The tables are related on key cidafeh.</Comment>
 
 			<RELATIONS>
 				<RELATION>
-					<Name>Relation 93</Name>
+					<Name>Relation 92</Name>
 					<ChildTable>APPURECH</ChildTable>
 					<ParentTable>VENDOR</ParentTable>
 					<ChildIndex>VENDORID</ChildIndex>
@@ -5126,7 +5126,7 @@ The tables are related on key cidafeh.</Comment>
 
 			<RELATIONS>
 				<RELATION>
-					<Name>Relation 55</Name>
+					<Name>Relation 56</Name>
 					<ChildTable>ARPMTDET</ChildTable>
 					<ParentTable>INVESTOR</ParentTable>
 					<ChildIndex>CCUSTID</ChildIndex>
@@ -5405,7 +5405,7 @@ The tables are related on key cidafeh.</Comment>
 
 			<RELATIONS>
 				<RELATION>
-					<Name>Relation 19</Name>
+					<Name>Relation 16</Name>
 					<ChildTable>ARPMTHDR</ChildTable>
 					<ParentTable>CUSTS</ParentTable>
 					<ChildIndex>CCUSTID</ChildIndex>
@@ -5413,7 +5413,7 @@ The tables are related on key cidafeh.</Comment>
 					<RefIntegrity>CII</RefIntegrity>
 				</RELATION>
 				<RELATION>
-					<Name>Relation 50</Name>
+					<Name>Relation 42</Name>
 					<ChildTable>ARPMTHDR</ChildTable>
 					<ParentTable>INVESTOR</ParentTable>
 					<ChildIndex>CCUSTID</ChildIndex>
@@ -6309,7 +6309,7 @@ The tables are related on key cidafeh.</Comment>
 
 			<RELATIONS>
 				<RELATION>
-					<Name>Relation 21</Name>
+					<Name>Relation 22</Name>
 					<ChildTable>BRINELOG</ChildTable>
 					<ParentTable>DISPOSAL</ParentTable>
 					<ChildIndex>DISPPERM</ChildIndex>
@@ -7023,7 +7023,7 @@ The tables are related on key cidafeh.</Comment>
 					<RefIntegrity>CRI</RefIntegrity>
 				</RELATION>
 				<RELATION>
-					<Name>Relation 17</Name>
+					<Name>Relation 18</Name>
 					<ChildTable>CHECKS</ChildTable>
 					<ParentTable>CUSTS</ParentTable>
 					<ChildIndex>ID</ChildIndex>
@@ -7031,7 +7031,7 @@ The tables are related on key cidafeh.</Comment>
 					<RefIntegrity>CII</RefIntegrity>
 				</RELATION>
 				<RELATION>
-					<Name>Relation 26</Name>
+					<Name>Relation 25</Name>
 					<ChildTable>CHECKS</ChildTable>
 					<ParentTable>EMPS</ParentTable>
 					<ChildIndex>ID</ChildIndex>
@@ -7039,7 +7039,7 @@ The tables are related on key cidafeh.</Comment>
 					<RefIntegrity>CII</RefIntegrity>
 				</RELATION>
 				<RELATION>
-					<Name>Relation 44</Name>
+					<Name>Relation 57</Name>
 					<ChildTable>CHECKS</ChildTable>
 					<ParentTable>INVESTOR</ParentTable>
 					<ChildIndex>ID</ChildIndex>
@@ -7047,7 +7047,7 @@ The tables are related on key cidafeh.</Comment>
 					<RefIntegrity>CII</RefIntegrity>
 				</RELATION>
 				<RELATION>
-					<Name>Relation 90</Name>
+					<Name>Relation 93</Name>
 					<ChildTable>CHECKS</ChildTable>
 					<ParentTable>VENDOR</ParentTable>
 					<ChildIndex>ID</ChildIndex>
@@ -8905,14 +8905,6 @@ The tables are related on key cidafeh.</Comment>
 
 			<RELATIONS>
 				<RELATION>
-					<Name>Relation 102</Name>
-					<ChildTable>CSDISDET</ChildTable>
-					<ParentTable>WELLS</ParentTable>
-					<ChildIndex>CUNITNO</ChildIndex>
-					<ParentIndex>CWELLID</ParentIndex>
-					<RefIntegrity>CII</RefIntegrity>
-				</RELATION>
-				<RELATION>
 					<Name>Relation 14</Name>
 					<ChildTable>CSDISDET</ChildTable>
 					<ParentTable>CSDISHDR</ParentTable>
@@ -8926,6 +8918,14 @@ The tables are related on key cidafeh.</Comment>
 					<ParentTable>INVESTOR</ParentTable>
 					<ChildIndex>COWNERID</ChildIndex>
 					<ParentIndex>COWNERID</ParentIndex>
+					<RefIntegrity>CII</RefIntegrity>
+				</RELATION>
+				<RELATION>
+					<Name>Relation 95</Name>
+					<ChildTable>CSDISDET</ChildTable>
+					<ParentTable>WELLS</ParentTable>
+					<ChildIndex>CUNITNO</ChildIndex>
+					<ParentIndex>CWELLID</ParentIndex>
 					<RefIntegrity>CII</RefIntegrity>
 				</RELATION>
 			</RELATIONS>
@@ -9724,7 +9724,7 @@ The tables are related on key cidafeh.</Comment>
 
 			<RELATIONS>
 				<RELATION>
-					<Name>Relation 117</Name>
+					<Name>Relation 101</Name>
 					<ChildTable>CSRCTDET</ChildTable>
 					<ParentTable>WELLS</ParentTable>
 					<ChildIndex>CWELLID</ChildIndex>
@@ -9740,7 +9740,7 @@ The tables are related on key cidafeh.</Comment>
 					<RefIntegrity>CCI</RefIntegrity>
 				</RELATION>
 				<RELATION>
-					<Name>Relation 32</Name>
+					<Name>Relation 30</Name>
 					<ChildTable>CSRCTDET</ChildTable>
 					<ParentTable>EXPCAT</ParentTable>
 					<ChildIndex>CTYPE</ChildIndex>
@@ -9748,7 +9748,7 @@ The tables are related on key cidafeh.</Comment>
 					<RefIntegrity>CII</RefIntegrity>
 				</RELATION>
 				<RELATION>
-					<Name>Relation 48</Name>
+					<Name>Relation 62</Name>
 					<ChildTable>CSRCTDET</ChildTable>
 					<ParentTable>INVESTOR</ParentTable>
 					<ChildIndex>COWNERID</ChildIndex>
@@ -12839,7 +12839,7 @@ The tables are related on key cidafeh.</Comment>
 
 			<RELATIONS>
 				<RELATION>
-					<Name>Relation 118</Name>
+					<Name>Relation 103</Name>
 					<ChildTable>DEPLFILE</ChildTable>
 					<ParentTable>WELLS</ParentTable>
 					<ChildIndex>WELLID</ChildIndex>
@@ -14548,7 +14548,7 @@ The tables are related on key cidafeh.</Comment>
 					<RefIntegrity>CII</RefIntegrity>
 				</RELATION>
 				<RELATION>
-					<Name>Relation 47</Name>
+					<Name>Relation 59</Name>
 					<ChildTable>DISBHIST</ChildTable>
 					<ParentTable>INVESTOR</ParentTable>
 					<ChildIndex>COWNERID</ChildIndex>
@@ -17246,23 +17246,31 @@ The tables are related on key cidafeh.</Comment>
 					<Name>Relation 11</Name>
 					<ChildTable>EXPCAT</ChildTable>
 					<ParentTable>COA</ParentTable>
+					<ChildIndex>CCRACCTO</ChildIndex>
+					<ParentIndex>ACCTNO</ParentIndex>
+					<RefIntegrity>CII</RefIntegrity>
+				</RELATION>
+				<RELATION>
+					<Name>Relation 5</Name>
+					<ChildTable>EXPCAT</ChildTable>
+					<ParentTable>COA</ParentTable>
 					<ChildIndex>CDRACCTO</ChildIndex>
 					<ParentIndex>ACCTNO</ParentIndex>
 					<RefIntegrity>CII</RefIntegrity>
 				</RELATION>
 				<RELATION>
-					<Name>Relation 12</Name>
+					<Name>Relation 6</Name>
 					<ChildTable>EXPCAT</ChildTable>
 					<ParentTable>COA</ParentTable>
-					<ChildIndex>CDRACCTV</ChildIndex>
+					<ChildIndex>CCRACCTV</ChildIndex>
 					<ParentIndex>ACCTNO</ParentIndex>
 					<RefIntegrity>CII</RefIntegrity>
 				</RELATION>
 				<RELATION>
-					<Name>Relation 13</Name>
+					<Name>Relation 7</Name>
 					<ChildTable>EXPCAT</ChildTable>
 					<ParentTable>COA</ParentTable>
-					<ChildIndex>CCRACCTV</ChildIndex>
+					<ChildIndex>CDRACCTV</ChildIndex>
 					<ParentIndex>ACCTNO</ParentIndex>
 					<RefIntegrity>CII</RefIntegrity>
 				</RELATION>
@@ -17272,14 +17280,6 @@ The tables are related on key cidafeh.</Comment>
 					<ParentTable>TAXCODES</ParentTable>
 					<ChildIndex>CTAXCODE</ChildIndex>
 					<ParentIndex>CTAXCODE</ParentIndex>
-					<RefIntegrity>CII</RefIntegrity>
-				</RELATION>
-				<RELATION>
-					<Name>Relation 8</Name>
-					<ChildTable>EXPCAT</ChildTable>
-					<ParentTable>COA</ParentTable>
-					<ChildIndex>CCRACCTO</ChildIndex>
-					<ParentIndex>ACCTNO</ParentIndex>
 					<RefIntegrity>CII</RefIntegrity>
 				</RELATION>
 			</RELATIONS>
@@ -17939,7 +17939,7 @@ The tables are related on key cidafeh.</Comment>
 
 			<RELATIONS>
 				<RELATION>
-					<Name>Relation 108</Name>
+					<Name>Relation 109</Name>
 					<ChildTable>EXPENSE</ChildTable>
 					<ParentTable>WELLS</ParentTable>
 					<ChildIndex>CWELLID</ChildIndex>
@@ -17947,7 +17947,7 @@ The tables are related on key cidafeh.</Comment>
 					<RefIntegrity>CII</RefIntegrity>
 				</RELATION>
 				<RELATION>
-					<Name>Relation 34</Name>
+					<Name>Relation 28</Name>
 					<ChildTable>EXPENSE</ChildTable>
 					<ParentTable>EXPCAT</ParentTable>
 					<ChildIndex>CCATCODE</ChildIndex>
@@ -17955,7 +17955,7 @@ The tables are related on key cidafeh.</Comment>
 					<RefIntegrity>CII</RefIntegrity>
 				</RELATION>
 				<RELATION>
-					<Name>Relation 54</Name>
+					<Name>Relation 46</Name>
 					<ChildTable>EXPENSE</ChildTable>
 					<ParentTable>INVESTOR</ParentTable>
 					<ChildIndex>COWNERID</ChildIndex>
@@ -17963,7 +17963,7 @@ The tables are related on key cidafeh.</Comment>
 					<RefIntegrity>CII</RefIntegrity>
 				</RELATION>
 				<RELATION>
-					<Name>Relation 89</Name>
+					<Name>Relation 94</Name>
 					<ChildTable>EXPENSE</ChildTable>
 					<ParentTable>VENDOR</ParentTable>
 					<ChildIndex>CVENDORID</ChildIndex>
@@ -18465,7 +18465,7 @@ The tables are related on key cidafeh.</Comment>
 
 			<RELATIONS>
 				<RELATION>
-					<Name>Relation 101</Name>
+					<Name>Relation 110</Name>
 					<ChildTable>EXPSUSP</ChildTable>
 					<ParentTable>WELLS</ParentTable>
 					<ChildIndex>CWELLID</ChildIndex>
@@ -18481,7 +18481,7 @@ The tables are related on key cidafeh.</Comment>
 					<RefIntegrity>CII</RefIntegrity>
 				</RELATION>
 				<RELATION>
-					<Name>Relation 43</Name>
+					<Name>Relation 50</Name>
 					<ChildTable>EXPSUSP</ChildTable>
 					<ParentTable>INVESTOR</ParentTable>
 					<ChildIndex>COWNERID</ChildIndex>
@@ -19592,7 +19592,7 @@ The tables are related on key cidafeh.</Comment>
 
 			<RELATIONS>
 				<RELATION>
-					<Name>Relation 79</Name>
+					<Name>Relation 83</Name>
 					<ChildTable>FORM1065</ChildTable>
 					<ParentTable>PROGRAMS</ParentTable>
 					<ChildIndex>CPROGCODE</ChildIndex>
@@ -21230,7 +21230,7 @@ The tables are related on key cidafeh.</Comment>
 
 			<RELATIONS>
 				<RELATION>
-					<Name>Relation 36</Name>
+					<Name>Relation 37</Name>
 					<ChildTable>GASINV</ChildTable>
 					<ParentTable>GASOWN</ParentTable>
 					<ChildIndex>CMETERNO</ChildIndex>
@@ -22174,15 +22174,7 @@ The tables are related on key cidafeh.</Comment>
 
 			<RELATIONS>
 				<RELATION>
-					<Name>Relation 37</Name>
-					<ChildTable>GASUSE</ChildTable>
-					<ParentTable>GASOWN</ParentTable>
-					<ChildIndex>CMETER</ChildIndex>
-					<ParentIndex>CMETERNO</ParentIndex>
-					<RefIntegrity>CII</RefIntegrity>
-				</RELATION>
-				<RELATION>
-					<Name>Relation 38</Name>
+					<Name>Relation 36</Name>
 					<ChildTable>GASUSE</ChildTable>
 					<ParentTable>GASOWN</ParentTable>
 					<ChildIndex>CMETERNO</ChildIndex>
@@ -22190,7 +22182,15 @@ The tables are related on key cidafeh.</Comment>
 					<RefIntegrity>CII</RefIntegrity>
 				</RELATION>
 				<RELATION>
-					<Name>Relation 45</Name>
+					<Name>Relation 38</Name>
+					<ChildTable>GASUSE</ChildTable>
+					<ParentTable>GASOWN</ParentTable>
+					<ChildIndex>CMETER</ChildIndex>
+					<ParentIndex>CMETERNO</ParentIndex>
+					<RefIntegrity>CII</RefIntegrity>
+				</RELATION>
+				<RELATION>
+					<Name>Relation 58</Name>
 					<ChildTable>GASUSE</ChildTable>
 					<ParentTable>INVESTOR</ParentTable>
 					<ChildIndex>COWNERID</ChildIndex>
@@ -23391,7 +23391,15 @@ The tables are related on key cidafeh.</Comment>
 
 			<RELATIONS>
 				<RELATION>
-					<Name>Relation 18</Name>
+					<Name>Relation 122</Name>
+					<ChildTable>GLMASTER</ChildTable>
+					<ParentTable>WELLS</ParentTable>
+					<ChildIndex>CUNITNO</ChildIndex>
+					<ParentIndex>CWELLID</ParentIndex>
+					<RefIntegrity>CII</RefIntegrity>
+				</RELATION>
+				<RELATION>
+					<Name>Relation 19</Name>
 					<ChildTable>GLMASTER</ChildTable>
 					<ParentTable>CUSTS</ParentTable>
 					<ChildIndex>CID</ChildIndex>
@@ -23399,7 +23407,7 @@ The tables are related on key cidafeh.</Comment>
 					<RefIntegrity>CII</RefIntegrity>
 				</RELATION>
 				<RELATION>
-					<Name>Relation 24</Name>
+					<Name>Relation 27</Name>
 					<ChildTable>GLMASTER</ChildTable>
 					<ParentTable>EMPS</ParentTable>
 					<ChildIndex>CID</ChildIndex>
@@ -23415,7 +23423,7 @@ The tables are related on key cidafeh.</Comment>
 					<RefIntegrity>CII</RefIntegrity>
 				</RELATION>
 				<RELATION>
-					<Name>Relation 51</Name>
+					<Name>Relation 47</Name>
 					<ChildTable>GLMASTER</ChildTable>
 					<ParentTable>INVESTOR</ParentTable>
 					<ChildIndex>CID</ChildIndex>
@@ -23423,7 +23431,7 @@ The tables are related on key cidafeh.</Comment>
 					<RefIntegrity>CII</RefIntegrity>
 				</RELATION>
 				<RELATION>
-					<Name>Relation 5</Name>
+					<Name>Relation 8</Name>
 					<ChildTable>GLMASTER</ChildTable>
 					<ParentTable>COA</ParentTable>
 					<ChildIndex>ACCTNO</ChildIndex>
@@ -23431,19 +23439,11 @@ The tables are related on key cidafeh.</Comment>
 					<RefIntegrity>CRI</RefIntegrity>
 				</RELATION>
 				<RELATION>
-					<Name>Relation 92</Name>
+					<Name>Relation 91</Name>
 					<ChildTable>GLMASTER</ChildTable>
 					<ParentTable>VENDOR</ParentTable>
 					<ChildIndex>CID</ChildIndex>
 					<ParentIndex>CVENDORID</ParentIndex>
-					<RefIntegrity>CII</RefIntegrity>
-				</RELATION>
-				<RELATION>
-					<Name>Relation 97</Name>
-					<ChildTable>GLMASTER</ChildTable>
-					<ParentTable>WELLS</ParentTable>
-					<ChildIndex>CUNITNO</ChildIndex>
-					<ParentIndex>CWELLID</ParentIndex>
 					<RefIntegrity>CII</RefIntegrity>
 				</RELATION>
 			</RELATIONS>
@@ -24177,20 +24177,20 @@ The tables are related on key cidafeh.</Comment>
 
 			<RELATIONS>
 				<RELATION>
-					<Name>Relation 104</Name>
-					<ChildTable>GLREDET</ChildTable>
-					<ParentTable>WELLS</ParentTable>
-					<ChildIndex>CUNITNO</ChildIndex>
-					<ParentIndex>CWELLID</ParentIndex>
-					<RefIntegrity>CII</RefIntegrity>
-				</RELATION>
-				<RELATION>
 					<Name>Relation 39</Name>
 					<ChildTable>GLREDET</ChildTable>
 					<ParentTable>GLRECUR</ParentTable>
 					<ChildIndex>BATCH</ChildIndex>
 					<ParentIndex>BATCH</ParentIndex>
 					<RefIntegrity>CCI</RefIntegrity>
+				</RELATION>
+				<RELATION>
+					<Name>Relation 97</Name>
+					<ChildTable>GLREDET</ChildTable>
+					<ParentTable>WELLS</ParentTable>
+					<ChildIndex>CUNITNO</ChildIndex>
+					<ParentIndex>CWELLID</ParentIndex>
+					<RefIntegrity>CII</RefIntegrity>
 				</RELATION>
 			</RELATIONS>
 
@@ -26080,7 +26080,7 @@ The tables are related on key cidafeh.</Comment>
 
 			<RELATIONS>
 				<RELATION>
-					<Name>Relation 115</Name>
+					<Name>Relation 100</Name>
 					<ChildTable>INCSUSP</ChildTable>
 					<ParentTable>WELLS</ParentTable>
 					<ChildIndex>CWELLID</ChildIndex>
@@ -26088,7 +26088,7 @@ The tables are related on key cidafeh.</Comment>
 					<RefIntegrity>CII</RefIntegrity>
 				</RELATION>
 				<RELATION>
-					<Name>Relation 58</Name>
+					<Name>Relation 55</Name>
 					<ChildTable>INCSUSP</ChildTable>
 					<ParentTable>INVESTOR</ParentTable>
 					<ChildIndex>COWNERID</ChildIndex>
@@ -26756,11 +26756,19 @@ The tables are related on key cidafeh.</Comment>
 
 			<RELATIONS>
 				<RELATION>
-					<Name>Relation 105</Name>
+					<Name>Relation 114</Name>
 					<ChildTable>INVDET</ChildTable>
 					<ParentTable>WELLS</ParentTable>
 					<ChildIndex>CUNITNO</ChildIndex>
 					<ParentIndex>CWELLID</ParentIndex>
+					<RefIntegrity>CII</RefIntegrity>
+				</RELATION>
+				<RELATION>
+					<Name>Relation 12</Name>
+					<ChildTable>INVDET</ChildTable>
+					<ParentTable>COA</ParentTable>
+					<ChildIndex>CACCTNO</ChildIndex>
+					<ParentIndex>ACCTNO</ParentIndex>
 					<RefIntegrity>CII</RefIntegrity>
 				</RELATION>
 				<RELATION>
@@ -26778,14 +26786,6 @@ The tables are related on key cidafeh.</Comment>
 					<ChildIndex>CITEMID</ChildIndex>
 					<ParentIndex>CITEMID</ParentIndex>
 					<RefIntegrity>CRI</RefIntegrity>
-				</RELATION>
-				<RELATION>
-					<Name>Relation 7</Name>
-					<ChildTable>INVDET</ChildTable>
-					<ParentTable>COA</ParentTable>
-					<ChildIndex>CACCTNO</ChildIndex>
-					<ParentIndex>ACCTNO</ParentIndex>
-					<RefIntegrity>CII</RefIntegrity>
 				</RELATION>
 			</RELATIONS>
 
@@ -28226,7 +28226,7 @@ The tables are related on key cidafeh.</Comment>
 
 			<RELATIONS>
 				<RELATION>
-					<Name>Relation 16</Name>
+					<Name>Relation 17</Name>
 					<ChildTable>INVHDR</ChildTable>
 					<ParentTable>CUSTS</ParentTable>
 					<ChildIndex>CCUSTID</ChildIndex>
@@ -28234,7 +28234,7 @@ The tables are related on key cidafeh.</Comment>
 					<RefIntegrity>CII</RefIntegrity>
 				</RELATION>
 				<RELATION>
-					<Name>Relation 62</Name>
+					<Name>Relation 44</Name>
 					<ChildTable>INVHDR</ChildTable>
 					<ParentTable>INVESTOR</ParentTable>
 					<ChildIndex>CCUSTID</ChildIndex>
@@ -29006,7 +29006,7 @@ The tables are related on key cidafeh.</Comment>
 
 			<RELATIONS>
 				<RELATION>
-					<Name>Relation 110</Name>
+					<Name>Relation 120</Name>
 					<ChildTable>INVTRANS</ChildTable>
 					<ParentTable>WELLS</ParentTable>
 					<ChildIndex>CWELLID</ChildIndex>
@@ -29605,7 +29605,7 @@ The tables are related on key cidafeh.</Comment>
 
 			<RELATIONS>
 				<RELATION>
-					<Name>Relation 22</Name>
+					<Name>Relation 21</Name>
 					<ChildTable>ITEMS</ChildTable>
 					<ParentTable>DISPOSAL</ParentTable>
 					<ChildIndex>CDISPERM</ChildIndex>
@@ -30244,7 +30244,7 @@ The tables are related on key cidafeh.</Comment>
 
 			<RELATIONS>
 				<RELATION>
-					<Name>Relation 83</Name>
+					<Name>Relation 79</Name>
 					<ChildTable>K1FILE</ChildTable>
 					<ParentTable>PROGRAMS</ParentTable>
 					<ChildIndex>CPROGCODE</ChildIndex>
@@ -31827,7 +31827,7 @@ The tables are related on key cidafeh.</Comment>
 
 			<RELATIONS>
 				<RELATION>
-					<Name>Relation 42</Name>
+					<Name>Relation 63</Name>
 					<ChildTable>LANDHIST</ChildTable>
 					<ParentTable>INVESTOR</ParentTable>
 					<ChildIndex>COWNERID</ChildIndex>
@@ -31835,7 +31835,7 @@ The tables are related on key cidafeh.</Comment>
 					<RefIntegrity>CII</RefIntegrity>
 				</RELATION>
 				<RELATION>
-					<Name>Relation 72</Name>
+					<Name>Relation 70</Name>
 					<ChildTable>LANDHIST</ChildTable>
 					<ParentTable>LAND</ParentTable>
 					<ChildIndex>CLEASEID</ChildIndex>
@@ -32648,7 +32648,7 @@ The tables are related on key cidafeh.</Comment>
 
 			<RELATIONS>
 				<RELATION>
-					<Name>Relation 63</Name>
+					<Name>Relation 49</Name>
 					<ChildTable>LANDOWNER</ChildTable>
 					<ParentTable>INVESTOR</ParentTable>
 					<ChildIndex>COWNERID</ChildIndex>
@@ -32656,7 +32656,7 @@ The tables are related on key cidafeh.</Comment>
 					<RefIntegrity>CII</RefIntegrity>
 				</RELATION>
 				<RELATION>
-					<Name>Relation 69</Name>
+					<Name>Relation 71</Name>
 					<ChildTable>LANDOWNER</ChildTable>
 					<ParentTable>LAND</ParentTable>
 					<ChildIndex>CLEASEID</ChildIndex>
@@ -33272,7 +33272,7 @@ The tables are related on key cidafeh.</Comment>
 
 			<RELATIONS>
 				<RELATION>
-					<Name>Relation 114</Name>
+					<Name>Relation 117</Name>
 					<ChildTable>LEASEWELL</ChildTable>
 					<ParentTable>WELLS</ParentTable>
 					<ChildIndex>CWELLID</ChildIndex>
@@ -33280,7 +33280,7 @@ The tables are related on key cidafeh.</Comment>
 					<RefIntegrity>CCI</RefIntegrity>
 				</RELATION>
 				<RELATION>
-					<Name>Relation 71</Name>
+					<Name>Relation 69</Name>
 					<ChildTable>LEASEWELL</ChildTable>
 					<ParentTable>LAND</ParentTable>
 					<ChildIndex>CLEASEID</ChildIndex>
@@ -33937,7 +33937,7 @@ The tables are related on key cidafeh.</Comment>
 
 			<RELATIONS>
 				<RELATION>
-					<Name>Relation 76</Name>
+					<Name>Relation 75</Name>
 					<ChildTable>METERALL</ChildTable>
 					<ParentTable>METERS</ParentTable>
 					<ChildIndex>CMETERID</ChildIndex>
@@ -34315,7 +34315,7 @@ The tables are related on key cidafeh.</Comment>
 
 			<RELATIONS>
 				<RELATION>
-					<Name>Relation 122</Name>
+					<Name>Relation 104</Name>
 					<ChildTable>METERDATA</ChildTable>
 					<ParentTable>WELLS</ParentTable>
 					<ChildIndex>CWELLID</ChildIndex>
@@ -34323,7 +34323,7 @@ The tables are related on key cidafeh.</Comment>
 					<RefIntegrity>CII</RefIntegrity>
 				</RELATION>
 				<RELATION>
-					<Name>Relation 74</Name>
+					<Name>Relation 77</Name>
 					<ChildTable>METERDATA</ChildTable>
 					<ParentTable>METERS</ParentTable>
 					<ChildIndex>CMETERID</ChildIndex>
@@ -34920,14 +34920,6 @@ The tables are related on key cidafeh.</Comment>
 
 			<RELATIONS>
 				<RELATION>
-					<Name>Relation 100</Name>
-					<ChildTable>METERSUB</ChildTable>
-					<ParentTable>WELLS</ParentTable>
-					<ChildIndex>CWELLID</ChildIndex>
-					<ParentIndex>CWELLID</ParentIndex>
-					<RefIntegrity>CII</RefIntegrity>
-				</RELATION>
-				<RELATION>
 					<Name>Relation 73</Name>
 					<ChildTable>METERSUB</ChildTable>
 					<ParentTable>METERALL</ParentTable>
@@ -34936,11 +34928,19 @@ The tables are related on key cidafeh.</Comment>
 					<RefIntegrity>CCI</RefIntegrity>
 				</RELATION>
 				<RELATION>
-					<Name>Relation 75</Name>
+					<Name>Relation 74</Name>
 					<ChildTable>METERSUB</ChildTable>
 					<ParentTable>METERS</ParentTable>
 					<ChildIndex>CMETERID</ChildIndex>
 					<ParentIndex>METERID</ParentIndex>
+					<RefIntegrity>CII</RefIntegrity>
+				</RELATION>
+				<RELATION>
+					<Name>Relation 96</Name>
+					<ChildTable>METERSUB</ChildTable>
+					<ParentTable>WELLS</ParentTable>
+					<ChildIndex>CWELLID</ChildIndex>
+					<ParentIndex>CWELLID</ParentIndex>
 					<RefIntegrity>CII</RefIntegrity>
 				</RELATION>
 			</RELATIONS>
@@ -41007,7 +41007,7 @@ The tables are related on key cidafeh.</Comment>
 
 			<RELATIONS>
 				<RELATION>
-					<Name>Relation 23</Name>
+					<Name>Relation 24</Name>
 					<ChildTable>PRCODES</ChildTable>
 					<ParentTable>EMPS</ParentTable>
 					<ChildIndex>CEMPID</ChildIndex>
@@ -42032,7 +42032,7 @@ The tables are related on key cidafeh.</Comment>
 
 			<RELATIONS>
 				<RELATION>
-					<Name>Relation 25</Name>
+					<Name>Relation 23</Name>
 					<ChildTable>PRDATA</ChildTable>
 					<ParentTable>EMPS</ParentTable>
 					<ChildIndex>CEMPID</ChildIndex>
@@ -42137,7 +42137,7 @@ The tables are related on key cidafeh.</Comment>
 
 			<RELATIONS>
 				<RELATION>
-					<Name>Relation 27</Name>
+					<Name>Relation 26</Name>
 					<ChildTable>PREMPTAX</ChildTable>
 					<ParentTable>EMPS</ParentTable>
 					<ChildIndex>CEMPID</ChildIndex>
@@ -42356,7 +42356,7 @@ The tables are related on key cidafeh.</Comment>
 
 			<RELATIONS>
 				<RELATION>
-					<Name>Relation 46</Name>
+					<Name>Relation 51</Name>
 					<ChildTable>PREPAYD</ChildTable>
 					<ParentTable>INVESTOR</ParentTable>
 					<ChildIndex>COWNERID</ChildIndex>
@@ -42594,7 +42594,7 @@ The tables are related on key cidafeh.</Comment>
 
 			<RELATIONS>
 				<RELATION>
-					<Name>Relation 57</Name>
+					<Name>Relation 52</Name>
 					<ChildTable>PREPAYH</ChildTable>
 					<ParentTable>INVESTOR</ParentTable>
 					<ChildIndex>COWNERID</ChildIndex>
@@ -46239,7 +46239,7 @@ The tables are related on key cidafeh.</Comment>
 
 			<RELATIONS>
 				<RELATION>
-					<Name>Relation 119</Name>
+					<Name>Relation 118</Name>
 					<ChildTable>ROUNDTMP</ChildTable>
 					<ParentTable>WELLS</ParentTable>
 					<ChildIndex>CWELLID</ChildIndex>
@@ -48061,7 +48061,7 @@ The tables are related on key cidafeh.</Comment>
 
 			<RELATIONS>
 				<RELATION>
-					<Name>Relation 103</Name>
+					<Name>Relation 119</Name>
 					<ChildTable>STMTNOTE</ChildTable>
 					<ParentTable>WELLS</ParentTable>
 					<ChildIndex>CWELLID</ChildIndex>
@@ -48645,7 +48645,7 @@ The tables are related on key cidafeh.</Comment>
 
 			<RELATIONS>
 				<RELATION>
-					<Name>Relation 106</Name>
+					<Name>Relation 105</Name>
 					<ChildTable>SUSAUDIT</ChildTable>
 					<ParentTable>WELLS</ParentTable>
 					<ChildIndex>CWELLID</ChildIndex>
@@ -48653,7 +48653,7 @@ The tables are related on key cidafeh.</Comment>
 					<RefIntegrity>CII</RefIntegrity>
 				</RELATION>
 				<RELATION>
-					<Name>Relation 52</Name>
+					<Name>Relation 45</Name>
 					<ChildTable>SUSAUDIT</ChildTable>
 					<ParentTable>INVESTOR</ParentTable>
 					<ChildIndex>COWNERID</ChildIndex>
@@ -50164,7 +50164,7 @@ The tables are related on key cidafeh.</Comment>
 
 			<RELATIONS>
 				<RELATION>
-					<Name>Relation 109</Name>
+					<Name>Relation 108</Name>
 					<ChildTable>SUSPENSE</ChildTable>
 					<ParentTable>WELLS</ParentTable>
 					<ChildIndex>CWELLID</ChildIndex>
@@ -50180,7 +50180,7 @@ The tables are related on key cidafeh.</Comment>
 					<RefIntegrity>CII</RefIntegrity>
 				</RELATION>
 				<RELATION>
-					<Name>Relation 59</Name>
+					<Name>Relation 43</Name>
 					<ChildTable>SUSPENSE</ChildTable>
 					<ParentTable>INVESTOR</ParentTable>
 					<ChildIndex>COWNERID</ChildIndex>
@@ -51758,7 +51758,7 @@ The tables are related on key cidafeh.</Comment>
 
 			<RELATIONS>
 				<RELATION>
-					<Name>Relation 56</Name>
+					<Name>Relation 48</Name>
 					<ChildTable>TAX1099</ChildTable>
 					<ParentTable>INVESTOR</ParentTable>
 					<ChildIndex>CID</ChildIndex>
@@ -54343,7 +54343,7 @@ The tables are related on key cidafeh.</Comment>
 
 			<RELATIONS>
 				<RELATION>
-					<Name>Relation 94</Name>
+					<Name>Relation 89</Name>
 					<ChildTable>VENDEXP</ChildTable>
 					<ParentTable>VENDOR</ParentTable>
 					<ChildIndex>VENDORID</ChildIndex>
@@ -58116,7 +58116,7 @@ The tables are related on key cidafeh.</Comment>
 
 			<RELATIONS>
 				<RELATION>
-					<Name>Relation 120</Name>
+					<Name>Relation 115</Name>
 					<ChildTable>WELLINV</ChildTable>
 					<ParentTable>WELLS</ParentTable>
 					<ChildIndex>CWELLID</ChildIndex>
@@ -58124,7 +58124,7 @@ The tables are related on key cidafeh.</Comment>
 					<RefIntegrity>CII</RefIntegrity>
 				</RELATION>
 				<RELATION>
-					<Name>Relation 53</Name>
+					<Name>Relation 54</Name>
 					<ChildTable>WELLINV</ChildTable>
 					<ParentTable>INVESTOR</ParentTable>
 					<ChildIndex>COWNERID</ChildIndex>
@@ -60032,7 +60032,7 @@ The tables are related on key cidafeh.</Comment>
 					<RefIntegrity>CII</RefIntegrity>
 				</RELATION>
 				<RELATION>
-					<Name>Relation 70</Name>
+					<Name>Relation 72</Name>
 					<ChildTable>WELLS</ChildTable>
 					<ParentTable>LAND</ParentTable>
 					<ChildIndex>CLEASEID</ChildIndex>
@@ -60040,7 +60040,7 @@ The tables are related on key cidafeh.</Comment>
 					<RefIntegrity>CII</RefIntegrity>
 				</RELATION>
 				<RELATION>
-					<Name>Relation 77</Name>
+					<Name>Relation 76</Name>
 					<ChildTable>WELLS</ChildTable>
 					<ParentTable>METERS</ParentTable>
 					<ChildIndex>CMETERID</ChildIndex>
@@ -61041,7 +61041,7 @@ The tables are related on key cidafeh.</Comment>
 
 			<RELATIONS>
 				<RELATION>
-					<Name>Relation 107</Name>
+					<Name>Relation 106</Name>
 					<ChildTable>WORKORD</ChildTable>
 					<ParentTable>WELLS</ParentTable>
 					<ChildIndex>CWELLID</ChildIndex>

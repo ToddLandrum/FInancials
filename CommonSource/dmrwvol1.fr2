@@ -1840,7 +1840,8 @@ COLOR=2
 	<style><![CDATA[J]]>
 	<expr><![CDATA[ntotwtr1]]>
 	<supexpr><![CDATA[lBrine = .t.]]>
-	<comment><![CDATA[]]>
+	<comment><![CDATA[
+]]>
 	<user><![CDATA[]]>
 </Reportes>
 <Reportes 
@@ -1876,7 +1877,8 @@ COLOR=2
 	<style><![CDATA[J]]>
 	<expr><![CDATA[ntotwtr2]]>
 	<supexpr><![CDATA[lBrine = .t.]]>
-	<comment><![CDATA[]]>
+	<comment><![CDATA[
+]]>
 	<user><![CDATA[]]>
 </Reportes>
 <Reportes 
@@ -1912,7 +1914,8 @@ COLOR=2
 	<style><![CDATA[J]]>
 	<expr><![CDATA[ntotwtr3]]>
 	<supexpr><![CDATA[lBrine = .t.]]>
-	<comment><![CDATA[]]>
+	<comment><![CDATA[
+]]>
 	<user><![CDATA[]]>
 </Reportes>
 <Reportes 
@@ -2800,7 +2803,8 @@ COLOR=2
 	<style><![CDATA[J]]>
 	<expr><![CDATA[ntotmtr1]]>
 	<supexpr><![CDATA[lBrine = .f.]]>
-	<comment><![CDATA[]]>
+	<comment><![CDATA[
+]]>
 	<user><![CDATA[]]>
 </Reportes>
 <Reportes 
@@ -2812,7 +2816,8 @@ COLOR=2
 	<style><![CDATA[J]]>
 	<expr><![CDATA[ntotmtr2]]>
 	<supexpr><![CDATA[lBrine = .f.]]>
-	<comment><![CDATA[]]>
+	<comment><![CDATA[
+]]>
 	<user><![CDATA[]]>
 </Reportes>
 <Reportes 
@@ -2824,7 +2829,8 @@ COLOR=2
 	<style><![CDATA[J]]>
 	<expr><![CDATA[ntotmtr3]]>
 	<supexpr><![CDATA[lBrine = .f.]]>
-	<comment><![CDATA[]]>
+	<comment><![CDATA[
+]]>
 	<user><![CDATA[]]>
 </Reportes>
 <Reportes 

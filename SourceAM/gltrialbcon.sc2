@@ -5,6 +5,8 @@
 *< FOXBIN2PRG: Version="1.19" SourceFile="gltrialbcon.scx" /> (Solo para binarios VFP 9 / Only for VFP 9 binaries)
 *
 *
+#INCLUDE "vfp2c.h"
+
 DEFINE CLASS dataenvironment AS dataenvironment 
  	*< CLASSDATA: Baseclass="dataenvironment" Timestamp="" Scale="" Uniqueid="" ClassIcon="2" />
 

@@ -604,7 +604,8 @@ COLOR=1
 	<style><![CDATA[]]>
 	<expr><![CDATA[]]>
 	<supexpr><![CDATA[lSummary]]>
-	<comment><![CDATA[]]>
+	<comment><![CDATA[
+]]>
 	<user><![CDATA[]]>
 </Reportes>
 <Reportes 

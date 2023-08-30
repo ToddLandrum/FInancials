@@ -600,7 +600,10 @@ COLOR=1
 	<picture><![CDATA[]]>
 	<tag><![CDATA[
 PROCEDURE Destroy
-*- [CONVERTER] Reset tables for compatibilityTHIS.OpenTablesTHIS.Init
+*- [CONVERTER] Reset tables for compatibility
+THIS.OpenTables
+THIS.Init
+
 ENDPROC
 ]]>
 	<tag2><![CDATA[]]>

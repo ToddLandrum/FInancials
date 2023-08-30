@@ -940,7 +940,8 @@ COLOR=1
 	<style><![CDATA[]]>
 	<expr><![CDATA[iif(nlocalwg1 # 0, nlocalwg1, nlocalwg2)]]>
 	<supexpr><![CDATA[]]>
-	<comment><![CDATA[]]>
+	<comment><![CDATA[
+]]>
 	<user><![CDATA[]]>
 </Reportes>
 <Reportes 
