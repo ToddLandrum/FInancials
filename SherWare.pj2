@@ -70,35 +70,6 @@ WITH loProject.FILES
 	.ADD('..\3rdparty\foxaudit6\foxaudit.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUw3Ng==" />
 	.ADD('..\3rdparty\oopmenu-master\source\sfmenu.vcx')		&& *< FileMetadata: Type="V" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
 	.ADD('..\3rdparty\perflog\csnwperflog.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
-	.ADD('..\3rdparty\picklistproject\forms\picklist.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
-	.ADD('..\3rdparty\picklistproject\gridextras\add16.png')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
-	.ADD('..\3rdparty\picklistproject\gridextras\addfilter16.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
-	.ADD('..\3rdparty\picklistproject\gridextras\arrow_down_blue.png')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
-	.ADD('..\3rdparty\picklistproject\gridextras\arrow_up_blue.png')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
-	.ADD('..\3rdparty\picklistproject\gridextras\ascendingsort12.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
-	.ADD('..\3rdparty\picklistproject\gridextras\clearfilter16.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
-	.ADD('..\3rdparty\picklistproject\gridextras\close16.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
-	.ADD('..\3rdparty\picklistproject\gridextras\delete16.png')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
-	.ADD('..\3rdparty\picklistproject\gridextras\descendingsort12.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
-	.ADD('..\3rdparty\picklistproject\gridextras\excel.jpg')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
-	.ADD('..\3rdparty\picklistproject\gridextras\excel24.jpg')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
-	.ADD('..\3rdparty\picklistproject\gridextras\exit.png')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
-	.ADD('..\3rdparty\picklistproject\gridextras\filter12.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
-	.ADD('..\3rdparty\picklistproject\gridextras\filterascending12.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
-	.ADD('..\3rdparty\picklistproject\gridextras\filterdescending12.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
-	.ADD('..\3rdparty\picklistproject\gridextras\gridextras.vcx')		&& *< FileMetadata: Type="V" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
-	.ADD('..\3rdparty\picklistproject\gridextras\gridextrasprocs.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
-	.ADD('..\3rdparty\picklistproject\gridextras\gridfunctions16.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
-	.ADD('..\3rdparty\picklistproject\gridextras\nosort12.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
-	.ADD('..\3rdparty\picklistproject\gridextras\printer16.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
-	.ADD('..\3rdparty\picklistproject\gridextras\printer16.png')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
-	.ADD('..\3rdparty\picklistproject\gridextras\reverse.png')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
-	.ADD('..\3rdparty\picklistproject\gridextras\search16.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
-	.ADD('..\3rdparty\picklistproject\gridextras\sfrepobj\sfrepobj.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
-	.ADD('..\3rdparty\picklistproject\gridextras\showfilters16.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
-	.ADD('..\3rdparty\picklistproject\gridextras\table_sql_view.png')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
-	.ADD('..\3rdparty\picklistproject\gridextras\table_sql_view16.png')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
-	.ADD('..\3rdparty\picklistproject\libs\picklist.vcx')		&& *< FileMetadata: Type="V" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
 	.ADD('..\3rdparty\stonefield9\sdt\source\close.msk')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU5EQw==" />
 	.ADD('..\3rdparty\stonefield9\sdt\source\controls.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU5NSg==" />
 	.ADD('..\3rdparty\stonefield9\sdt\source\dbcxmgr.vcx')		&& *< FileMetadata: Type="V" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU1OMw==" />
@@ -114,6 +85,19 @@ WITH loProject.FILES
 	.ADD('..\3rdparty\stonefield9\sfcommon\sfbutton.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU5NUg==" />
 	.ADD('..\3rdparty\stonefield9\sfcommon\sfcollection.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVSOTFERFpXQg==" />
 	.ADD('..\3rdparty\stonefield9\sfcommon\sfmover.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU5NRw==" />
+	.ADD('..\3rdparty\vfp2c32\vfp2c32\vfp2c.h')		&& *< FileMetadata: Type="T" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzZDUDBVVktMMw==" />
+	.ADD('..\3rdparty\wconnect6\classes\wwxml.vcx')		&& *< FileMetadata: Type="V" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU5HSw==" />
+	.ADD('..\3rdparty\wconnect7\classes\wwapi.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="AQApAC4uXGNvZGVtaW5lbmV3XGFtcHJvX3J2XGN1c3RvbVx3Y29ubmVjdC5ohpvNlEJK" />
+	.ADD('..\3rdparty\wconnect7\classes\wwcollections.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AQApAC4uXGNvZGVtaW5lbmV3XGFtcHJvX3J2XGN1c3RvbVx3Y29ubmVjdC5oHnvNlEJK" />
+	.ADD('..\3rdparty\wconnect7\classes\wwdotnetbridge.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
+	.ADD('..\3rdparty\wconnect7\classes\wwftp.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AQAXAC4uXHdjb25uZWN0Nlx3Y29ubmVjdC5o/gk7V3pT" />
+	.ADD('..\3rdparty\wconnect7\classes\wwhttp.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AQApAC4uXGNvZGVtaW5lbmV3XGFtcHJvX3J2XGN1c3RvbVx3Y29ubmVjdC5oHnvNlEJK" />
+	.ADD('..\3rdparty\wconnect7\classes\wwjsonserializer.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AQApAC4uXGNvZGVtaW5lbmV3XGFtcHJvX3J2XGN1c3RvbVx3Y29ubmVjdC5o3qnNlEJK" />
+	.ADD('..\3rdparty\wconnect7\classes\wwregex.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
+	.ADD('..\3rdparty\wconnect7\classes\wwsmtp.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AQApAC4uXGNvZGVtaW5lbmV3XGFtcHJvX3J2XGN1c3RvbVx3Y29ubmVjdC5oHnvNlEJK" />
+	.ADD('..\3rdparty\wconnect7\classes\wwsoap.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AQApAC4uXGNvZGVtaW5lbmV3XGFtcHJvX3J2XGN1c3RvbVx3Y29ubmVjdC5obgjNlEJK" />
+	.ADD('..\3rdparty\wconnect7\classes\wwsql.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AQApAC4uXGNvZGVtaW5lbmV3XGFtcHJvX3J2XGN1c3RvbVx3Y29ubmVjdC5oHnvNlEJK" />
+	.ADD('..\3rdparty\wconnect7\classes\wwutils.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="AgA8AC4uXC4uXHByb2dyYW0gZmlsZXMgKHg4NilcbWljcm9zb2Z0IHZpc3VhbCBmb3hwcm8gOVxmb3hwcm8uaDZa9aBdVREAY3VzdG9tXHdjb25uZWN0Lmg+W82UQko=" />
 	.ADD('..\3rdparty\xfrx\xfrx_22_2\xfrx\xfrx.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AQAmAC4uXDNyZHBhcnR5XHhmcnhceGZyeF8yMl8yXHhmcnhceGZyeC5orjSCOihW" />
 	.ADD('..\3rdparty\xfrx\xfrx_22_2\xfrx\xfrxlib.fll')		&& *< FileMetadata: Type="L" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
 	.ADD('..\3rdparty\xfrx\xfrx_22_2\xfrx\xfrxlib\xfrxbook.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
@@ -206,173 +190,7 @@ WITH loProject.FILES
 	.ADD('..\3rdparty\xfrx\xfrx_22_2\xfrx\xfrxlib\xfrxtlbo.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
 	.ADD('..\3rdparty\xfrx\xfrx_22_2\xfrx\xfrxlib\xfrxtlbo.msk')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
 	.ADD('..\3rdparty\xfrx\xfrx_22_2\xfrx\xfrxproxy.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
-	.ADD('..\codeminenew\ampro_rv\graphics\_viewprop.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU1MWg==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\am.ico')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU1OVQ==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\amlogo.jpg')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU1QMQ==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\amlogo2.jpg')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU1TOQ==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\ampro.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU1OSQ==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\bld.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs2Sg==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\bullet.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs3NQ==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\calc.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUw2Ug==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\checkoff.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs3RQ==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\checkon.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtCWA==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\close.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtFMA==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\codeguy.ico')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtCNQ==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\codemine.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs5VA==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\color.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs2VA==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\commdwin.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtBMQ==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\commdwin.msk')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtBNA==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\copy.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs4NA==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\copy.msk')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs4Nw==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\copyrite.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU1NMw==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\crdfle01.ico')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs3SA==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\crdfle06.ico')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs3WA==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\crdfle07.ico')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs3VQ==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\crdfle13.ico')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs3Sw==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\ctr.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs2Wg==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\cut.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs4OQ==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\debug.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs5TQ==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\debugger.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtBVQ==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\delete.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs5MA==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\delete.msk')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs5Mw==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\design.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtBRA==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\dmpro.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU1OTQ==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\dmqb.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU1OUQ==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\drag1pg.ico')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU40VQ==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\dragmove.cur')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs2SA==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\edit.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs5Qg==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\edit.msk')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs5RQ==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\error.wav')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtCUw==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\findrec.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtEQg==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\findrec.msk')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtERQ==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\firstrec.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs4Tw==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\form.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs5SA==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\h_point.cur')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU1PSw==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\help.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="WQ==" DevInfo="XzVPUzEwTU1MSg==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\help.ico')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtCSA==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\inspect.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs5WA==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\ints.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs5UQ==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\itl.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs2TQ==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\lastrec.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs4Rg==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\lft.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs2Vw==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\listrec.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs4Qw==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\logo.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtBWg==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\logo.msk')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtCMg==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\logon.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs5NQ==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\logon.msk')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs5OQ==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\navdn.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs3Qg==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\navup.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs3OA==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\newrec.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtDWg==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\newrec.msk')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtEMg==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\nextrec.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs4SQ==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\paste.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs3Wg==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\paste.msk')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs4Mg==" />
 	.ADD('..\codeminenew\ampro_rv\graphics\pivoten.png')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
-	.ADD('..\codeminenew\ampro_rv\graphics\preview.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtOUg==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\preview.msk')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtOVQ==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\prevrec.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs4TA==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\print.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtDVA==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\print.msk')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtDVw==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\prop.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUxRMQ==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\prop.msk')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUxRNA==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\pump.ico')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs1OQ==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\redoedit.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtENQ==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\refresh.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUxQVQ==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\refresh.msk')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUxQWA==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\requery.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtESA==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\requery.msk')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtESw==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\revert2.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs4Ug==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\revert2.msk')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs4VQ==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\rt.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs3Mg==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\run.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtBRw==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\saveall.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs4WA==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\secur05.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs3Tg==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\secur05.msk')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs3UA==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\secur07.ico')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs3Uw==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\sherware logo small.gif')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUw5Mg==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\sherware-logo.jpg')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU5GTA==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\sherware-report-logo.jpg')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU5ORw==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\sherware-small.png')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU5NWQ==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\sherwareicon.ico')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU1XNA==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\splith.cur')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUxFUQ==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\stop.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs2RQ==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\sw_splash.jpg')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU5GRA==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\swicon.ico')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU1OWA==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\swlogo1.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU1QNg==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\swlogo2.gif')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU1QQQ==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\undoedit.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtEOA==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\undrln.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs2UA==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\uplevel.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtBTA==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\uplevel.msk')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtBUQ==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\view.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtBNw==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\view.msk')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtBQQ==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\voidlogo.gif')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU1YQQ==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\w95mbx1.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtDMQ==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\w95mbx1.msk')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtDRA==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\w95mbx2.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtDNA==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\w95mbx2.msk')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtDRw==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\w95mbx3.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtDNw==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\w95mbx3.msk')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtDSQ==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\w95mbx4.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtDQQ==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\w95mbx4.msk')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtDTA==" />
-	.ADD('..\codeminenew\ampro_rv\graphics\wrench.ico')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtBSQ==" />
-	.ADD('..\codeminenew\ampro_rv\source\apagecon1.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU5KVw==" />
-	.ADD('..\codeminenew\ampro_rv\source\apagecon2.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU5KWg==" />
-	.ADD('..\codeminenew\ampro_rv\source\apagecon2a.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU5LMg==" />
-	.ADD('..\codeminenew\ampro_rv\source\apagedcon.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
-	.ADD('..\codeminenew\ampro_rv\source\apagedcon.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU5KUA==" />
-	.ADD('..\codeminenew\ampro_rv\source\appdata.vcx')		&& *< FileMetadata: Type="V" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU1WRw==" />
-	.ADD('..\codeminenew\ampro_rv\source\appforms.vcx')		&& *< FileMetadata: Type="V" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTU1DVw==" />
-	.ADD('..\codeminenew\ampro_rv\source\apptools.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTUs2OA==" />
-	.ADD('..\codeminenew\ampro_rv\source\aprecur.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU1UVw==" />
-	.ADD('..\codeminenew\ampro_rv\source\arbillsum.frx')		&& *< FileMetadata: Type="R" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtLNQ==" />
-	.ADD('..\codeminenew\ampro_rv\source\arbillsum1.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTU1BVA==" />
-	.ADD('..\codeminenew\ampro_rv\source\arbillsum2.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTU1BVw==" />
-	.ADD('..\codeminenew\ampro_rv\source\arcust1.frx')		&& *< FileMetadata: Type="R" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtLWQ==" />
-	.ADD('..\codeminenew\ampro_rv\source\arcust2.frx')		&& *< FileMetadata: Type="R" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtMMQ==" />
-	.ADD('..\codeminenew\ampro_rv\source\arcuststm.frx')		&& *< FileMetadata: Type="R" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtMQQ==" />
-	.ADD('..\codeminenew\ampro_rv\source\calccoaparent.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
-	.ADD('..\codeminenew\ampro_rv\source\check_w2_errors.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
-	.ADD('..\codeminenew\ampro_rv\source\companystats.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU8zRw==" />
-	.ADD('..\codeminenew\ampro_rv\source\config.fpw')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtCRQ==" />
-	.ADD('..\codeminenew\ampro_rv\source\csdeposit.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU1VMw==" />
-	.ADD('..\codeminenew\ampro_rv\source\csdisb.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUw5SA==" />
-	.ADD('..\codeminenew\ampro_rv\source\csdisb.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU1UMg==" />
-	.ADD('..\codeminenew\ampro_rv\source\csdisbd.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU5IQg==" />
-	.ADD('..\codeminenew\ampro_rv\source\csreceipt.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU1VQQ==" />
-	.ADD('..\codeminenew\ampro_rv\source\fileunarchive.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU1WOQ==" />
-	.ADD('..\codeminenew\ampro_rv\source\pr941.frx')		&& *< FileMetadata: Type="R" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUw0Vg==" />
-	.ADD('..\codeminenew\ampro_rv\source\prchkreg.frx')		&& *< FileMetadata: Type="R" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUw0TQ==" />
-	.ADD('..\codeminenew\ampro_rv\source\prchkreg1.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTU02Tw==" />
-	.ADD('..\codeminenew\ampro_rv\source\premp1.frx')		&& *< FileMetadata: Type="R" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUw0Wg==" />
-	.ADD('..\codeminenew\ampro_rv\source\premp2.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU1YMQ==" />
-	.ADD('..\codeminenew\ampro_rv\source\princdedtot.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUxGTA==" />
-	.ADD('..\codeminenew\ampro_rv\source\princdedtot2.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUxGTw==" />
-	.ADD('..\codeminenew\ampro_rv\source\prlabor.frx')		&& *< FileMetadata: Type="R" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUw0UA==" />
-	.ADD('..\codeminenew\ampro_rv\source\prlabor1.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTU02TA==" />
-	.ADD('..\codeminenew\ampro_rv\source\prliabrpt.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUxMTg==" />
-	.ADD('..\codeminenew\ampro_rv\source\prpayopt.frx')		&& *< FileMetadata: Type="R" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtYVg==" />
-	.ADD('..\codeminenew\ampro_rv\source\prstubrpt.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTU02SQ==" />
-	.ADD('..\codeminenew\ampro_rv\source\prtaxtableupd.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
-	.ADD('..\codeminenew\ampro_rv\source\prtotrpt1.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUxNRA==" />
-	.ADD('..\codeminenew\ampro_rv\source\prtotrpt2.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUxNRw==" />
-	.ADD('..\codeminenew\ampro_rv\source\prtotrpt3.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUxNSg==" />
-	.ADD('..\codeminenew\ampro_rv\source\pruliab.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTU1JVw==" />
-	.ADD('..\codeminenew\ampro_rv\source\prw2sum.frx')		&& *< FileMetadata: Type="R" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUw0Uw==" />
-	.ADD('..\codeminenew\ampro_rv\source\w2errors.frx')		&& *< FileMetadata: Type="R" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU5BNg==" />
-	.ADD('..\codeminenew\ampro_rv\vfp2c.h')		&& *< FileMetadata: Type="T" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzZDUDBVVktMMw==" />
-	.ADD('..\wconnect6\classes\wwapi.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="AQApAC4uXGNvZGVtaW5lbmV3XGFtcHJvX3J2XGN1c3RvbVx3Y29ubmVjdC5ohpvNlEJK" />
-	.ADD('..\wconnect6\classes\wwcollections.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AQApAC4uXGNvZGVtaW5lbmV3XGFtcHJvX3J2XGN1c3RvbVx3Y29ubmVjdC5oHnvNlEJK" />
-	.ADD('..\wconnect6\classes\wwdotnetbridge.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
-	.ADD('..\wconnect6\classes\wwftp.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AQAXAC4uXHdjb25uZWN0Nlx3Y29ubmVjdC5o/gk7V3pT" />
-	.ADD('..\wconnect6\classes\wwhttp.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AQApAC4uXGNvZGVtaW5lbmV3XGFtcHJvX3J2XGN1c3RvbVx3Y29ubmVjdC5oHnvNlEJK" />
-	.ADD('..\wconnect6\classes\wwjsonserializer.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AQApAC4uXGNvZGVtaW5lbmV3XGFtcHJvX3J2XGN1c3RvbVx3Y29ubmVjdC5o3qnNlEJK" />
-	.ADD('..\wconnect6\classes\wwregex.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
-	.ADD('..\wconnect6\classes\wwsmtp.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AQApAC4uXGNvZGVtaW5lbmV3XGFtcHJvX3J2XGN1c3RvbVx3Y29ubmVjdC5oHnvNlEJK" />
-	.ADD('..\wconnect6\classes\wwsoap.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AQApAC4uXGNvZGVtaW5lbmV3XGFtcHJvX3J2XGN1c3RvbVx3Y29ubmVjdC5obgjNlEJK" />
-	.ADD('..\wconnect6\classes\wwutils.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="AgA8AC4uXC4uXHByb2dyYW0gZmlsZXMgKHg4NilcbWljcm9zb2Z0IHZpc3VhbCBmb3hwcm8gOVxmb3hwcm8uaDZa9aBdVREAY3VzdG9tXHdjb25uZWN0Lmg+W82UQko=" />
-	.ADD('..\wconnect6\classes\wwxml.vcx')		&& *< FileMetadata: Type="V" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU5HSw==" />
-	.ADD('..\wconnect7\classes\wwsql.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AQApAC4uXGNvZGVtaW5lbmV3XGFtcHJvX3J2XGN1c3RvbVx3Y29ubmVjdC5oHnvNlEJK" />
 	.ADD('checks\apchekda.frx')		&& *< FileMetadata: Type="R" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUwxMA==" />
 	.ADD('checks\apchekdb.frx')		&& *< FileMetadata: Type="R" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUwxMw==" />
 	.ADD('checks\apchekdn.frx')		&& *< FileMetadata: Type="R" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUwxNg==" />
@@ -413,10 +231,10 @@ WITH loProject.FILES
 	.ADD('common\cmsetup.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU1NQQ==" />
 	.ADD('common\cmstate.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTUtCQg==" />
 	.ADD('common\cmtools.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTUs2Mw==" />
-	.ADD('common\cmutil.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="AgARAGNvbW1vblxjb2RlbWluZS5o9nnjfn5UDgBjb21tb25cd2luMzIuaP56jlG9Vg==" />
+	.ADD('common\cmutil.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="AgARAGNvbW1vblxjb2RlbWluZS5oHjf8chxXDgBjb21tb25cd2luMzIuaCY4/HIcVw==" />
 	.ADD('common\codemine.fll')		&& *< FileMetadata: Type="L" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs2Qg==" />
 	.ADD('common\codemine.h')		&& *< FileMetadata: Type="T" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU1SUQ==" />
-	.ADD('common\codemine.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="AgARAGNvbW1vblxjb2RlbWluZS5ofnfjfn5UDgBjb21tb25cd2luMzIuaIZ4jlG9Vg==" />
+	.ADD('common\codemine.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="AgARAGNvbW1vblxjb2RlbWluZS5oHjf8chxXDgBjb21tb25cd2luMzIuaCY4/HIcVw==" />
 	.ADD('common\codemine.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTUs1Qw==" />
 	.ADD('common\datadefs.h')		&& *< FileMetadata: Type="T" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU1SWg==" />
 	.ADD('commondata\appsec.dbf')		&& *< FileMetadata: Type="D" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="WQ==" DevInfo="XzVPUzEwTU1MTQ==" />
@@ -1062,6 +880,7 @@ WITH loProject.FILES
 	.ADD('custom\movercols.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
 	.ADD('custom\mwresize.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU44Nw==" />
 	.ADD('custom\pdf.h')		&& *< FileMetadata: Type="T" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU1aUA==" />
+	.ADD('custom\picklist.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
 	.ADD('custom\plugging.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
 	.ADD('custom\qbentity.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
 	.ADD('custom\registry.h')		&& *< FileMetadata: Type="T" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU4xUQ==" />
@@ -1120,23 +939,129 @@ WITH loProject.FILES
 	.ADD('custom\wlcbizobj.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
 	.ADD('custom\wlcsql.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
 	.ADD('custom\wlcutility.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
-	.ADD('custom\wzsave.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU5ENA==" />
-	.ADD('custom\wzundo.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU5EOA==" />
 	.ADD('database\appdata.dbc')		&& *< FileMetadata: Type="d" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
 	.ADD('database\coremeta.dbf')		&& *< FileMetadata: Type="D" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
 	.ADD('database\dbcxreg.dbf')		&& *< FileMetadata: Type="D" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
 	.ADD('database\newdbc.dbc')		&& *< FileMetadata: Type="d" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
 	.ADD('database\sdtmeta.dbf')		&& *< FileMetadata: Type="D" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
 	.ADD('database\sdtuser.dbf')		&& *< FileMetadata: Type="D" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
+	.ADD('database\swlaunch.dbf')		&& *< FileMetadata: Type="D" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU40QQ==" />
 	.ADD('datafiles\appreg02.dbf')		&& *< FileMetadata: Type="D" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtCOA==" />
 	.ADD('datafiles\bin\foxtools.fll')		&& *< FileMetadata: Type="L" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU5LRQ==" />
 	.ADD('datafiles\bin\vfp2c32.fll')		&& *< FileMetadata: Type="L" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU44Mg==" />
 	.ADD('datafiles\bin\vfpcompression.fll')		&& *< FileMetadata: Type="L" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU5NRA==" />
 	.ADD('datafiles\compmast.dbf')		&& *< FileMetadata: Type="D" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTU1HWQ==" />
+	.ADD('graphics\_viewprop.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU1MWg==" />
+	.ADD('graphics\am.ico')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU1OVQ==" />
+	.ADD('graphics\amlogo.jpg')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU1QMQ==" />
+	.ADD('graphics\amlogo2.jpg')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU1TOQ==" />
+	.ADD('graphics\bld.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs2Sg==" />
+	.ADD('graphics\bullet.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs3NQ==" />
+	.ADD('graphics\calc.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUw2Ug==" />
+	.ADD('graphics\checkoff.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs3RQ==" />
+	.ADD('graphics\checkon.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtCWA==" />
+	.ADD('graphics\close.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtFMA==" />
+	.ADD('graphics\codeguy.ico')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtCNQ==" />
+	.ADD('graphics\codemine.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs5VA==" />
+	.ADD('graphics\color.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs2VA==" />
+	.ADD('graphics\commdwin.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtBMQ==" />
+	.ADD('graphics\commdwin.msk')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtBNA==" />
+	.ADD('graphics\copy.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs4NA==" />
+	.ADD('graphics\copy.msk')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs4Nw==" />
+	.ADD('graphics\copyrite.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU1NMw==" />
+	.ADD('graphics\crdfle01.ico')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs3SA==" />
+	.ADD('graphics\crdfle06.ico')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs3WA==" />
+	.ADD('graphics\crdfle07.ico')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs3VQ==" />
+	.ADD('graphics\crdfle13.ico')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs3Sw==" />
+	.ADD('graphics\ctr.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs2Wg==" />
+	.ADD('graphics\cut.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs4OQ==" />
+	.ADD('graphics\debug.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs5TQ==" />
+	.ADD('graphics\debugger.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtBVQ==" />
+	.ADD('graphics\delete.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs5MA==" />
+	.ADD('graphics\delete.msk')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs5Mw==" />
+	.ADD('graphics\design.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtBRA==" />
+	.ADD('graphics\dmpro.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU1OTQ==" />
+	.ADD('graphics\dmqb.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU1OUQ==" />
+	.ADD('graphics\drag1pg.ico')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU40VQ==" />
+	.ADD('graphics\dragmove.cur')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs2SA==" />
+	.ADD('graphics\edit.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs5Qg==" />
+	.ADD('graphics\edit.msk')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs5RQ==" />
+	.ADD('graphics\error.wav')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtCUw==" />
+	.ADD('graphics\findrec.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtEQg==" />
+	.ADD('graphics\findrec.msk')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtERQ==" />
+	.ADD('graphics\firstrec.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs4Tw==" />
+	.ADD('graphics\form.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs5SA==" />
+	.ADD('graphics\h_point.cur')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU1PSw==" />
+	.ADD('graphics\help.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="WQ==" DevInfo="XzVPUzEwTU1MSg==" />
+	.ADD('graphics\help.ico')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtCSA==" />
+	.ADD('graphics\inspect.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs5WA==" />
+	.ADD('graphics\ints.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs5UQ==" />
+	.ADD('graphics\itl.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs2TQ==" />
+	.ADD('graphics\lastrec.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs4Rg==" />
+	.ADD('graphics\lft.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs2Vw==" />
+	.ADD('graphics\listrec.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs4Qw==" />
+	.ADD('graphics\logo.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtBWg==" />
+	.ADD('graphics\logo.msk')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtCMg==" />
+	.ADD('graphics\logon.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs5NQ==" />
+	.ADD('graphics\logon.msk')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs5OQ==" />
+	.ADD('graphics\navdn.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs3Qg==" />
+	.ADD('graphics\navup.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs3OA==" />
+	.ADD('graphics\newrec.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtDWg==" />
+	.ADD('graphics\newrec.msk')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtEMg==" />
+	.ADD('graphics\nextrec.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs4SQ==" />
+	.ADD('graphics\paste.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs3Wg==" />
+	.ADD('graphics\paste.msk')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs4Mg==" />
 	.ADD('graphics\pivoten-icon.ico')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
 	.ADD('graphics\pivoten-logon.png')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
+	.ADD('graphics\preview.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtOUg==" />
+	.ADD('graphics\preview.msk')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtOVQ==" />
+	.ADD('graphics\prevrec.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs4TA==" />
+	.ADD('graphics\print.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtDVA==" />
+	.ADD('graphics\print.msk')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtDVw==" />
+	.ADD('graphics\prop.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUxRMQ==" />
+	.ADD('graphics\prop.msk')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUxRNA==" />
+	.ADD('graphics\pump.ico')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs1OQ==" />
+	.ADD('graphics\redoedit.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtENQ==" />
+	.ADD('graphics\refresh.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUxQVQ==" />
+	.ADD('graphics\refresh.msk')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUxQWA==" />
+	.ADD('graphics\requery.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtESA==" />
+	.ADD('graphics\requery.msk')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtESw==" />
+	.ADD('graphics\revert2.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs4Ug==" />
+	.ADD('graphics\revert2.msk')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs4VQ==" />
+	.ADD('graphics\rt.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs3Mg==" />
+	.ADD('graphics\run.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtBRw==" />
+	.ADD('graphics\saveall.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs4WA==" />
+	.ADD('graphics\secur05.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs3Tg==" />
+	.ADD('graphics\secur05.msk')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs3UA==" />
+	.ADD('graphics\secur07.ico')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs3Uw==" />
+	.ADD('graphics\sherware logo small.gif')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUw5Mg==" />
+	.ADD('graphics\sherware-logo.jpg')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU5GTA==" />
+	.ADD('graphics\sherware-report-logo.jpg')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU5ORw==" />
+	.ADD('graphics\sherware-small.png')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU5NWQ==" />
 	.ADD('graphics\sherware.png')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
-	.ADD('newdbc\swlaunch.dbf')		&& *< FileMetadata: Type="D" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU40QQ==" />
+	.ADD('graphics\sherwareicon.ico')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU1XNA==" />
+	.ADD('graphics\splith.cur')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUxFUQ==" />
+	.ADD('graphics\stop.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs2RQ==" />
+	.ADD('graphics\sw_splash.jpg')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU5GRA==" />
+	.ADD('graphics\swicon.ico')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU1OWA==" />
+	.ADD('graphics\swlogo1.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU1QNg==" />
+	.ADD('graphics\swlogo2.gif')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU1QQQ==" />
+	.ADD('graphics\undoedit.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtEOA==" />
+	.ADD('graphics\undrln.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUs2UA==" />
+	.ADD('graphics\uplevel.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtBTA==" />
+	.ADD('graphics\uplevel.msk')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtBUQ==" />
+	.ADD('graphics\view.bmp')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtBNw==" />
+	.ADD('graphics\view.msk')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtBQQ==" />
+	.ADD('graphics\voidlogo.gif')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU1YQQ==" />
+	.ADD('graphics\w95mbx1.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtDMQ==" />
+	.ADD('graphics\w95mbx1.msk')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtDRA==" />
+	.ADD('graphics\w95mbx2.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtDNA==" />
+	.ADD('graphics\w95mbx2.msk')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtDRw==" />
+	.ADD('graphics\w95mbx3.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtDNw==" />
+	.ADD('graphics\w95mbx3.msk')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtDSQ==" />
+	.ADD('graphics\w95mbx4.bmp')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtDQQ==" />
+	.ADD('graphics\w95mbx4.msk')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtDTA==" />
+	.ADD('graphics\wrench.ico')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtBSQ==" />
 	.ADD('rpts\arinv1.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUxCQw==" />
 	.ADD('rpts\arinv2.frx')		&& *< FileMetadata: Type="R" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtNMA==" />
 	.ADD('rpts\bminv1.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUxESA==" />
@@ -1164,29 +1089,46 @@ WITH loProject.FILES
 	.ADD('rpts\ohform6s.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUxLWQ==" />
 	.ADD('rpts\paprod.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUxMMQ==" />
 	.ADD('rpts\prw2l.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU1YWg==" />
-	.ADD('rpts\wvannret.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUxFSQ==" />
-	.ADD('rpts\wvannret1.frx')		&& *< FileMetadata: Type="R" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUxFRw==" />
-	.ADD('rpts\wvinspect.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTU0wWg==" />
-	.ADD('rpts\wvinspect.jpg')		&& *< FileMetadata: Type="x" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzYxUTBMT1FaWg==" />
-	.ADD('rpts\wvrpt39.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUxNWA==" />
-	.ADD('rpts\wvwr99.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUxOMw==" />
-	.ADD('rpts\wyog-001.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUxOQg==" />
-	.ADD('rpts\wysevtax.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUxOWA==" />
 	.ADD('source\appdefs.h')		&& *< FileMetadata: Type="T" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
 	.ADD('source\cappmain.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
+	.ADD('source\config.fpw')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtCRQ==" />
+	.ADD('sourceam\apagecon1.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU5KVw==" />
+	.ADD('sourceam\apagecon2.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU5KWg==" />
+	.ADD('sourceam\apagecon2a.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU5LMg==" />
+	.ADD('sourceam\apagedcon.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
+	.ADD('sourceam\apagedcon.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU5KUA==" />
 	.ADD('sourceam\apbill.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
 	.ADD('sourceam\apbill2.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
 	.ADD('sourceam\apbillpay.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
 	.ADD('sourceam\apbillpayrpt.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
+	.ADD('sourceam\appdata.vcx')		&& *< FileMetadata: Type="V" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU1WRw==" />
+	.ADD('sourceam\appforms.vcx')		&& *< FileMetadata: Type="V" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTU1DVw==" />
 	.ADD('sourceam\appmain.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="AwAQAHNvdXJjZVxhcHBkZWZzLmhm0bw88VYRAGNvbW1vblxjb2RlbWluZS5obtLjfn5UDgBjb21tb25cd2luMzIuaHbTjlG9Vg==" />
+	.ADD('sourceam\apptools.vcx')		&& *< FileMetadata: Type="V" Cpid="0" Timestamp="0" ID="0" ObjRev="544" User="Tg==" DevInfo="XzVPUzEwTUs2OA==" />
+	.ADD('sourceam\aprecur.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU1UVw==" />
 	.ADD('sourceam\arbillcode.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
+	.ADD('sourceam\arbillsum.frx')		&& *< FileMetadata: Type="R" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtLNQ==" />
+	.ADD('sourceam\arbillsum1.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTU1BVA==" />
+	.ADD('sourceam\arbillsum2.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTU1BVw==" />
 	.ADD('sourceam\arcust.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
+	.ADD('sourceam\arcust1.frx')		&& *< FileMetadata: Type="R" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtLWQ==" />
+	.ADD('sourceam\arcust2.frx')		&& *< FileMetadata: Type="R" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtMMQ==" />
 	.ADD('sourceam\arcustlab.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
 	.ADD('sourceam\arcustrpt.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
+	.ADD('sourceam\arcuststm.frx')		&& *< FileMetadata: Type="R" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtMQQ==" />
 	.ADD('sourceam\arcuststm.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
 	.ADD('sourceam\arinvlist.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
 	.ADD('sourceam\arinvprint.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
 	.ADD('sourceam\arrecur.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
+	.ADD('sourceam\calccoaparent.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
+	.ADD('sourceam\check_w2_errors.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
+	.ADD('sourceam\companystats.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU8zRw==" />
+	.ADD('sourceam\csdeposit.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU1VMw==" />
+	.ADD('sourceam\csdisb.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUw5SA==" />
+	.ADD('sourceam\csdisb.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU1UMg==" />
+	.ADD('sourceam\csdisbd.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU5IQg==" />
+	.ADD('sourceam\csreceipt.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU1VQQ==" />
+	.ADD('sourceam\fileunarchive.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="XzVPUzEwTU1WOQ==" />
 	.ADD('sourceam\glacctactd.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
 	.ADD('sourceam\glacctactw.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
 	.ADD('sourceam\glacctyp.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
@@ -1256,8 +1198,27 @@ WITH loProject.FILES
 	.ADD('sourceam\gltrialbw.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
 	.ADD('sourceam\gltrialbwp.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="" />
 	.ADD('sourceam\gltrialcon.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
+	.ADD('sourceam\pr941.frx')		&& *< FileMetadata: Type="R" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUw0Vg==" />
+	.ADD('sourceam\prchkreg.frx')		&& *< FileMetadata: Type="R" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUw0TQ==" />
+	.ADD('sourceam\prchkreg1.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTU02Tw==" />
 	.ADD('sourceam\preferences.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
+	.ADD('sourceam\premp1.frx')		&& *< FileMetadata: Type="R" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUw0Wg==" />
+	.ADD('sourceam\premp2.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU1YMQ==" />
+	.ADD('sourceam\princdedtot.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUxGTA==" />
+	.ADD('sourceam\princdedtot2.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUxGTw==" />
+	.ADD('sourceam\prlabor.frx')		&& *< FileMetadata: Type="R" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUw0UA==" />
+	.ADD('sourceam\prlabor1.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTU02TA==" />
+	.ADD('sourceam\prliabrpt.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUxMTg==" />
+	.ADD('sourceam\prpayopt.frx')		&& *< FileMetadata: Type="R" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUtYVg==" />
+	.ADD('sourceam\prstubrpt.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTU02SQ==" />
+	.ADD('sourceam\prtaxtableupd.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
+	.ADD('sourceam\prtotrpt1.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUxNRA==" />
+	.ADD('sourceam\prtotrpt2.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUxNRw==" />
+	.ADD('sourceam\prtotrpt3.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUxNSg==" />
+	.ADD('sourceam\pruliab.frx')		&& *< FileMetadata: Type="R" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTU1JVw==" />
+	.ADD('sourceam\prw2sum.frx')		&& *< FileMetadata: Type="R" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="Tg==" DevInfo="XzVPUzEwTUw0Uw==" />
 	.ADD('sourceam\rptsgl.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
+	.ADD('sourceam\w2errors.frx')		&& *< FileMetadata: Type="R" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" DevInfo="XzVPUzEwTU5BNg==" />
 	.ADD('sourceqb\apbillqb.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
 	.ADD('sourceqb\apbillqbnew.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
 	.ADD('sourceqb\arrecpmtqb.scx')		&& *< FileMetadata: Type="K" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" DevInfo="" />
@@ -1292,9 +1253,6 @@ WITH loProject.FILES
 	.ITEM('__newproject.f2b').Remove()
 
 	*<FileComments>
-	.ITEM(lcCurdir + '..\codeminenew\ampro_rv\source\apptools.vcx').Description = 'Application-specific toolbar classes'
-	.ITEM(lcCurdir + '..\codeminenew\ampro_rv\source\csdeposit.scx').Description = 'Make Deposits'
-	.ITEM(lcCurdir + '..\codeminenew\ampro_rv\source\csdisb.scx').Description = 'Cash Disbursements'
 	.ITEM(lcCurdir + 'common\cmactivx.vcx').Description = 'CodeMine ActiveX control subclasses'
 	.ITEM(lcCurdir + 'common\cmapp.vcx').Description = 'Codemine application object foundation class'
 	.ITEM(lcCurdir + 'common\cmbutton.vcx').Description = 'CodeMine common dialog command buttons'
@@ -1509,6 +1467,9 @@ WITH loProject.FILES
 	.ITEM(lcCurdir + 'custom\cbutton.vcx').Description = 'Dialog buttons. Ok, Cancel, etc.'
 	.ITEM(lcCurdir + 'custom\ccontrol.vcx').Description = 'Developer specific common control subclasses'
 	.ITEM(lcCurdir + 'custom\command.scx').Description = 'Command Utility'
+	.ITEM(lcCurdir + 'sourceam\apptools.vcx').Description = 'Application-specific toolbar classes'
+	.ITEM(lcCurdir + 'sourceam\csdeposit.scx').Description = 'Make Deposits'
+	.ITEM(lcCurdir + 'sourceam\csdisb.scx').Description = 'Cash Disbursements'
 	*</FileComments>
 
 	*<ExcludedFiles>
@@ -1570,17 +1531,13 @@ WITH loProject.FILES
 	.ITEM(lcCurdir + 'rpts\ohform6s.frx').Exclude = .T.
 	.ITEM(lcCurdir + 'rpts\paprod.frx').Exclude = .T.
 	.ITEM(lcCurdir + 'rpts\prw2l.frx').Exclude = .T.
-	.ITEM(lcCurdir + 'rpts\wvannret.frx').Exclude = .T.
-	.ITEM(lcCurdir + 'rpts\wvannret1.frx').Exclude = .T.
-	.ITEM(lcCurdir + 'rpts\wyog-001.frx').Exclude = .T.
 	*</ExcludedFiles>
 
 	*<TextFiles>
 	.ITEM(lcCurdir + '..\..\program files (x86)\microsoft visual foxpro 9\ffc\reportlisteners.h').Type = 'T'
 	.ITEM(lcCurdir + '..\..\program files (x86)\microsoft visual foxpro 9\foxpro.h').Type = 'T'
 	.ITEM(lcCurdir + '..\3rdparty\stonefield9\sdt\source\sdt.h').Type = 'T'
-	.ITEM(lcCurdir + '..\codeminenew\ampro_rv\source\config.fpw').Type = 'T'
-	.ITEM(lcCurdir + '..\codeminenew\ampro_rv\vfp2c.h').Type = 'T'
+	.ITEM(lcCurdir + '..\3rdparty\vfp2c32\vfp2c32\vfp2c.h').Type = 'T'
 	.ITEM(lcCurdir + 'common\adodefs.h').Type = 'T'
 	.ITEM(lcCurdir + 'common\codemine.h').Type = 'T'
 	.ITEM(lcCurdir + 'common\datadefs.h').Type = 'T'
@@ -1590,13 +1547,14 @@ WITH loProject.FILES
 	.ITEM(lcCurdir + 'custom\vfpxworkbookxlsx.h').Type = 'T'
 	.ITEM(lcCurdir + 'custom\wconnect.h').Type = 'T'
 	.ITEM(lcCurdir + 'source\appdefs.h').Type = 'T'
+	.ITEM(lcCurdir + 'source\config.fpw').Type = 'T'
 	*</TextFiles>
 ENDWITH
 
 WITH loProject
 	*<ProjectProperties>
 	.SetMain(lcCurdir + 'sourceam\appmain.prg')
-	.Icon = lcCurdir + '..\codeminenew\ampro_rv\graphics\am.ico'
+	.Icon = lcCurdir + 'graphics\am.ico'
 	.Debug = .T.
 	.Encrypted = .F.
 	*<.CmntStyle = 1 />

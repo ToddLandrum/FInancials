@@ -47,6 +47,7 @@
 *.app
 *.exe
 
+*.dll
 *.fll 
 
 *.err
@@ -57,6 +58,7 @@
 # Some entire directories we can ignore
 ######################################################
 **/_sgbak/
+**/ACH/
 
 ######################################################
 # Specfic files that get added by right-click Ignore
@@ -69,3 +71,6 @@ Database/sdtmeta.cdx_unshelve_bak0
 Database/dbcxreg.fpt_unshelve_bak0
 Database/dbcxreg.dbf_unshelve_bak0
 Database/dbcxreg.cdx_unshelve_bak0
+DataFiles/Data/dupechk.txt
+DataFiles/Data/afefix.txt
+DataFiles/Data/achnumber.txt

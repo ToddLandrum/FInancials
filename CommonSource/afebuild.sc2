@@ -185,4 +185,9 @@ DEFINE CLASS formafebuild AS frmmodaldialogcustom OF "..\custom\cforms.vcx"
 		
 	ENDPROC
 
+	PROCEDURE Cntmoverlistpair1.Init
+		* Todd was here
+		DODEFAULT()
+	ENDPROC
+
 ENDDEFINE

@@ -1,0 +1,7 @@
+SET DEVELOPMENT OFF
+RESOURCE = OFF
+MVCOUNT = 12240
+SET SCREEN OFF
+_INCLUDE=c:\develop\codemine\ampro\source\appdefs.h
+TITLE=Oil & Gas Accounting Manager
+ALLOWEXTERNAL=ON
